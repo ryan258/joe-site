@@ -11,7 +11,7 @@ ritual: false
 prepared: true
 sculpt_spells: false
 potent_cantrip: false
-upcast_notes: "Automatically counters spells of equal or lower slot level."
+upcast_notes: "Upcast to a 4th-level slot or higher: the interrupted spell auto-fails (no save) if its level is ≤ the slot used."
 ---
 
-Trigger: You see a creature within 60 feet casting a spell. If the spell is 3rd level or lower, it fails with no effect. If 4th level or higher, make an Intelligence check (DC 10 + spell level) with Joe's +7 modifier.
+Trigger: You see a creature within 60 feet casting a spell. The caster makes a Constitution saving throw against Joe's spell save DC 15. On a failure, the spell fails (their slot is preserved if one was expended).

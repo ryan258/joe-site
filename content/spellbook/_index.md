@@ -68,7 +68,7 @@ description: "Canonical 23-spell grimoire, 11 prepared selections, 6 cantrips, a
       <span class="tag-badge tag-cyan">✓ Prepared</span>
     </div>
     <div style="font-size:0.85rem;color:var(--text-med);line-height:1.5;margin-bottom:12px;">
-      Trigger: You see a creature within 60 feet casting a spell. If the spell is 3rd level or lower, its effect fails. If 4th level or higher, make an Intelligence check (DC <code>10 + spell level</code>) with Joe's <strong>+7 modifier</strong>.
+      Trigger: You see a creature within 60 feet casting a spell. The caster makes a <strong>Constitution saving throw</strong> against Joe's spell save DC <code>15</code>. On a failure, the spell fails (slot preserved if one was used).
     </div>
   </div>
 
