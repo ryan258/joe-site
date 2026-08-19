@@ -4,11 +4,11 @@ description: "Canonical D&D 5.5e character sheet, personality traits, lore, back
 ---
 
 <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:28px;margin-bottom:32px;align-items:start;">
-  <div style="border-radius:var(--border-radius-lg);overflow:hidden;border:1px solid var(--border-subtle);box-shadow:0 8px 24px rgba(0,0,0,0.5);">
-    {{< img src="images/joe_hero.webp" alt="Joe the Evoker Wizard with glowing wooden toy Cow" style="width:100%;height:auto;display:block;" >}}
+  <div style="border-radius:var(--border-radius-lg);overflow:hidden;border:2px solid var(--border-leather);box-shadow:0 8px 24px rgba(0,0,0,0.5);">
+    {{< img src="images/joe.webp" alt="Joe the Evoker Wizard with notebook and toy Cow in pouch" style="width:100%;height:auto;display:block;" >}}
   </div>
   <div>
-    <span class="tag-badge tag-cyan" style="margin-bottom:8px;display:inline-block;">Level 7 Human Evoker Wizard</span>
+    <span class="tag-badge tag-forest" style="margin-bottom:8px;display:inline-block;">Level 7 Human Evoker Wizard</span>
     <h2 style="font-size:2rem;font-weight:800;color:var(--text-pure);margin-bottom:12px;">Joe, Keeper of the Cow</h2>
     <p style="font-size:0.95rem;color:var(--text-med);line-height:1.6;margin-bottom:16px;">
       A 42-year-old scholar-mage of quiet precision. Joe is 6'1", 185 lbs, with piercing gray eyes, neatly parted hair, and weather-beaten robes. He learned Goblin and Orc while tracing the earliest surviving records of an ancient Fey spirit that chose to reside in his childhood wooden toy cow, <em>Mr. Big</em>.
