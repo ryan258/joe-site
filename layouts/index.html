@@ -16,13 +16,13 @@
         The ultimate zero-latency tabletop flight deck. Execute turns in &lt;30s, sculpt danger-close evocation, deploy Cow's 60ft Flyby support, and arbitrate 2024 rules flawlessly.
       </p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="/plays/" class="filter-btn active" style="padding:8px 16px;font-size:0.9rem;">📖 Explore All 250 Tactical Plays</a>
-        <a href="/spellbook/" class="filter-btn" style="padding:8px 16px;font-size:0.9rem;">✨ Spellbook & Prepared Spells</a>
-        <a href="/investigation/" class="filter-btn" style="padding:8px 16px;font-size:0.9rem;">🔍 Investigation HUD</a>
+        <a href="{{ "plays/" | relURL }}" class="filter-btn active" style="padding:8px 16px;font-size:0.9rem;">📖 Explore All 250 Tactical Plays</a>
+        <a href="{{ "spellbook/" | relURL }}" class="filter-btn" style="padding:8px 16px;font-size:0.9rem;">✨ Spellbook & Prepared Spells</a>
+        <a href="{{ "investigation/" | relURL }}" class="filter-btn" style="padding:8px 16px;font-size:0.9rem;">🔍 Investigation HUD</a>
       </div>
     </div>
     <div>
-      <img src="/images/joe_hero.webp" alt="Joe, Keeper of the Cow with his floating wooden toy familiar" class="cockpit-hero-img">
+      <img src="{{ "images/joe_hero.webp" | relURL }}" alt="Joe, Keeper of the Cow with his floating wooden toy familiar" class="cockpit-hero-img">
     </div>
   </div>
 </section>
@@ -174,7 +174,7 @@
     <div class="hud-panel">
       <div class="panel-header">
         <h2 class="panel-title">🎯 Signature Table Plays</h2>
-        <a href="/plays/" style="font-size:0.8rem;font-weight:600;">View All 250 Plays →</a>
+        <a href="{{ "plays/" | relURL }}" style="font-size:0.8rem;font-weight:600;">View All 250 Plays →</a>
       </div>
 
       <!-- Play J-1 -->
@@ -281,10 +281,10 @@
     <div class="hud-panel">
       <div class="panel-header">
         <h2 class="panel-title">🦉 Cow (Mr. Big) Flight Deck</h2>
-        <a href="/familiar/" style="font-size:0.8rem;font-weight:600;">Full Manual →</a>
+        <a href="{{ "familiar/" | relURL }}" style="font-size:0.8rem;font-weight:600;">Full Manual →</a>
       </div>
       <div style="border-radius:var(--border-radius-md);overflow:hidden;margin-bottom:12px;border:1px solid var(--border-subtle);">
-        <img src="/images/cow_flight.webp" alt="Cow the Fey familiar flying over twilight ruins" style="width:100%;height:140px;object-fit:cover;display:block;">
+        <img src="{{ "images/cow_flight.webp" | relURL }}" alt="Cow the Fey familiar flying over twilight ruins" style="width:100%;height:140px;object-fit:cover;display:block;">
       </div>
       <div style="font-size:0.8rem;line-height:1.5;color:var(--text-med);">
         <p><strong>Statblock:</strong> Tiny Fey (Owl) • <strong>1 HP</strong> • AC 11 • Fly 60 ft • Darkvision 120 ft</p>

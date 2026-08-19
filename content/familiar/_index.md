@@ -17,7 +17,7 @@ description: "Operational flight manual, 2024 Owl statblock, Flyby touch deliver
     </div>
   </div>
   <div style="border-radius:var(--border-radius-lg);overflow:hidden;border:1px solid var(--border-subtle);box-shadow:0 8px 24px rgba(0,0,0,0.5);">
-    <img src="/images/cow_flight.webp" alt="Cow the Fey toy cow soaring over ruins with emerald fey fire" style="width:100%;height:auto;display:block;">
+    {{< img src="images/cow_flight.webp" alt="Cow the Fey toy cow soaring over ruins with emerald fey fire" style="width:100%;height:auto;display:block;" >}}
   </div>
 </div>
 

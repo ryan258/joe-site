@@ -5,7 +5,7 @@ description: "Canonical D&D 5.5e character sheet, personality traits, lore, back
 
 <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:28px;margin-bottom:32px;align-items:start;">
   <div style="border-radius:var(--border-radius-lg);overflow:hidden;border:1px solid var(--border-subtle);box-shadow:0 8px 24px rgba(0,0,0,0.5);">
-    <img src="/images/joe_hero.webp" alt="Joe the Evoker Wizard with glowing wooden toy Cow" style="width:100%;height:auto;display:block;">
+    {{< img src="images/joe_hero.webp" alt="Joe the Evoker Wizard with glowing wooden toy Cow" style="width:100%;height:auto;display:block;" >}}
   </div>
   <div>
     <span class="tag-badge tag-cyan" style="margin-bottom:8px;display:inline-block;">Level 7 Human Evoker Wizard</span>
