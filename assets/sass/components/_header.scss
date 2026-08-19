@@ -27,6 +27,7 @@
   .brand-badge {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     gap: 12px;
     text-decoration: none;
 
@@ -62,6 +63,7 @@
     font-weight: 700;
     color: $text-pure;
     letter-spacing: 0.03em;
+    white-space: nowrap;
   }
 
   &__subtitle,
@@ -71,12 +73,14 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
+    white-space: nowrap;
   }
 
   &__actions,
   .header-actions {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     gap: 12px;
   }
 
@@ -91,6 +95,7 @@
     border-radius: $radius-md;
     color: $text-muted;
     font-size: 0.85rem;
+    white-space: nowrap;
     cursor: pointer;
     transition: all $transition-fast;
 
@@ -125,6 +130,7 @@
 
   &__item {
     display: inline-block;
+    flex-shrink: 0;
   }
 
   &__link,
@@ -137,6 +143,7 @@
     color: $text-med;
     font-size: 0.88rem;
     font-weight: 500;
+    white-space: nowrap;
     transition: all $transition-fast;
     border: 1px solid transparent;
 
