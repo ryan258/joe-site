@@ -1,0 +1,42 @@
+// ==========================================================================
+// JOE, KEEPER OF THE COW - BEM SASS ROOT ENTRYPOINT
+// ==========================================================================
+
+// 1. Abstracts & Design Tokens
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+// 2. Base & Typography
+@import "base/reset";
+@import "base/typography";
+@import "base/layout";
+
+// 3. Components (BEM Architecture)
+@import "components/tag-badge";
+@import "components/header";
+@import "components/hud-dock";
+@import "components/cockpit-hero";
+@import "components/turn-pilot";
+@import "components/panels";
+@import "components/play-card";
+@import "components/spell-card";
+@import "components/investigation";
+@import "components/search-modal";
+
+// 4. Print Stylesheet
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 !important;
+  }
+  .site-header, .live-hud-dock, .quick-search-trigger, .turn-pilot-bar {
+    display: none !important;
+  }
+  .hud-panel, .play-card, .spell-card {
+    border: 1px solid #ccc !important;
+    background: none !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+}

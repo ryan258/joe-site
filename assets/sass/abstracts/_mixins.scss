@@ -1,0 +1,38 @@
+// ==========================================================================
+// SASS MIXINS
+// ==========================================================================
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'sm' {
+    @media (max-width: 640px) { @content; }
+  } @else if $breakpoint == 'md' {
+    @media (max-width: 840px) { @content; }
+  } @else if $breakpoint == 'lg' {
+    @media (max-width: 1100px) { @content; }
+  } @else if $breakpoint == 'xl' {
+    @media (max-width: 1440px) { @content; }
+  }
+}
+
+@mixin glass-panel($bg: $bg-glass, $blur: 16px) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+@mixin card-surface($border: $border-subtle, $radius: $radius-lg) {
+  background: $bg-surface-card;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+@mixin text-display {
+  font-family: $font-display;
+  letter-spacing: 0.02em;
+  color: $text-pure;
+}
+
+@mixin text-mono {
+  font-family: $font-mono;
+}

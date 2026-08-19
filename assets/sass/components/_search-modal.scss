@@ -1,0 +1,75 @@
+// ==========================================================================
+// SEARCH MODAL (BEM & GLOBAL SELECTORS)
+// ==========================================================================
+
+.search-modal-backdrop,
+.search-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 10, 8, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 200;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+
+  &.open,
+  &--open {
+    display: flex;
+  }
+}
+
+.search-modal-dialog,
+.search-modal__dialog {
+  background: $bg-surface-card;
+  border: 1px solid $border-active;
+  border-radius: $radius-lg;
+  width: 100%;
+  max-width: 680px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), $border-glow;
+  overflow: hidden;
+}
+
+.search-input-wrapper,
+.search-modal__input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid $border-subtle;
+  gap: 12px;
+}
+
+.search-input,
+.search-modal__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.1rem;
+  font-family: $font-body;
+  color: $text-pure;
+}
+
+.search-results-list,
+.search-modal__results {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 14px;
+  list-style: none;
+}
+
+.search-result-item,
+.search-modal__item {
+  padding: 12px 16px;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border: 1px solid transparent;
+
+  &:hover {
+    background: $bg-surface-elevated;
+    border-color: $border-subtle;
+  }
+}

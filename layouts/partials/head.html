@@ -12,12 +12,12 @@
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:image" content="{{ "images/joe_hero.webp" | absURL }}">
 
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Cinzel & Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- Core Stylesheet -->
-  {{ $css := resources.Get "css/main.css" }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  <!-- Core Stylesheet (BEM Sass Pipeline) -->
+  {{ $style := resources.Get "sass/main.scss" | toCSS (dict "outputStyle" "compressed") }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 </head>

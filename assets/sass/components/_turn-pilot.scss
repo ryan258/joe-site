@@ -1,0 +1,89 @@
+// ==========================================================================
+// TURN PILOT SPEEDRUNNER (BEM)
+// ==========================================================================
+
+.turn-pilot-bar {
+  background: $bg-surface-card;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  padding: 18px 24px;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+
+  &__header,
+  .pilot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__title,
+  .pilot-title {
+    font-family: $font-display;
+    font-size: 1.15rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $accent-gold;
+  }
+
+  &__steps,
+  .pilot-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+
+    @include respond-to('md') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__step,
+  .pilot-step-btn {
+    background: $bg-surface-elevated;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-md;
+    padding: 12px 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $bg-surface-hover;
+      border-color: $accent-gold;
+    }
+
+    &--active,
+    &.active {
+      background: rgba($accent-gold, 0.12);
+      border-color: $accent-gold;
+      box-shadow: 0 0 14px rgba($accent-gold, 0.2);
+    }
+
+    &-num,
+    .step-num {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: $accent-gold;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    &-name,
+    .step-name {
+      font-family: $font-display;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: $text-pure;
+    }
+
+    &-desc,
+    .step-desc {
+      font-size: 0.75rem;
+      color: $text-muted;
+      margin-top: 2px;
+    }
+  }
+}

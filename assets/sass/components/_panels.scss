@@ -1,0 +1,158 @@
+// ==========================================================================
+// HUD PANELS & MATRICES (BEM)
+// ==========================================================================
+
+.cockpit-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr 340px;
+  gap: 24px;
+  align-items: start;
+
+  @include respond-to('lg') {
+    grid-template-columns: 280px 1fr;
+
+    > .hud-panel:last-child {
+      grid-column: span 2;
+    }
+  }
+
+  @include respond-to('md') {
+    grid-template-columns: 1fr;
+
+    > .hud-panel:last-child {
+      grid-column: auto;
+    }
+  }
+}
+
+.hud-panel {
+  @include card-surface;
+  padding: 22px;
+  margin-bottom: 22px;
+
+  &__header,
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-subtle;
+  }
+
+  &__title,
+  .panel-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $text-pure;
+  }
+}
+
+// Stats Matrix
+.stats-matrix {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+
+  &__box,
+  .stat-box {
+    background: $bg-surface-elevated;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-sm;
+    padding: 8px;
+    text-align: center;
+  }
+
+  &__label,
+  .stat-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: $text-dim;
+    text-transform: uppercase;
+  }
+
+  &__val,
+  .stat-val {
+    @include text-mono;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: $text-pure;
+  }
+
+  &__mod,
+  .stat-mod {
+    font-size: 0.75rem;
+    font-weight: 600;
+    @include text-mono;
+    color: $accent-gold;
+  }
+}
+
+// AC Matrix
+.ac-matrix {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+
+  &__card,
+  .ac-card {
+    background: $bg-surface-elevated;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-sm;
+    padding: 10px;
+    text-align: center;
+
+    &--highlight,
+    &.highlight {
+      border-color: rgba($accent-gold, 0.45);
+      background: rgba($accent-gold, 0.08);
+    }
+  }
+
+  &__num,
+  .ac-num {
+    @include text-mono;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: $accent-gold;
+  }
+
+  &__name,
+  .ac-name {
+    font-size: 0.75rem;
+    color: $text-muted;
+    font-weight: 600;
+  }
+}
+
+// Reaction Radar Card
+.reaction-radar-card {
+  background: rgba($accent-fire, 0.08);
+  border: 1px solid rgba($accent-fire, 0.3);
+  border-radius: $radius-md;
+  padding: 12px;
+  margin-bottom: 12px;
+
+  &__title,
+  .reaction-title {
+    font-family: $font-display;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fda4af;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  &__trigger,
+  .reaction-trigger {
+    font-size: 0.8rem;
+    color: $text-med;
+  }
+}

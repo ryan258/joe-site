@@ -1,0 +1,52 @@
+// ==========================================================================
+// RESET & BASE STYLES
+// ==========================================================================
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: $font-body;
+  font-size: 15px;
+  line-height: 1.55;
+  color: $text-high;
+  background-color: $bg-core;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $bg-core;
+  background-image: 
+    radial-gradient(circle at 12% 18%, rgba($accent-gold, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 88% 15%, rgba($accent-forest, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba($accent-robe, 0.06) 0%, transparent 50%);
+  background-attachment: fixed;
+  padding-bottom: 74px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-core;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #233328;
+  border-radius: 4px;
+  border: 1px solid $border-subtle;
+
+  &:hover {
+    background: $accent-gold;
+  }
+}

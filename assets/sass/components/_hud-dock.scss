@@ -1,0 +1,156 @@
+// ==========================================================================
+// STICKY LIVE HUD DOCK & COUNTER BUTTON UTILITIES (BEM)
+// ==========================================================================
+
+// Global Counter & Action Button
+.counter-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid $border-subtle;
+  background: $bg-surface-elevated;
+  color: $text-high;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 11px;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $accent-gold;
+    color: #0c120e;
+    border-color: $accent-gold;
+  }
+}
+
+.live-hud-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  height: $hud-bar-height;
+  @include glass-panel($bg-glass-strong, 18px);
+  border-top: 1px solid $border-subtle;
+  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.6);
+
+  &__inner,
+  .hud-dock-inner {
+    max-width: $max-content-width;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__group,
+  .hud-stat-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__pill,
+  .hud-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    background: $bg-surface-card;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-md;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    &--highlight {
+      border-color: rgba($accent-gold, 0.4);
+    }
+  }
+
+  &__label,
+  .hud-pill-label {
+    font-weight: 700;
+    color: $text-dim;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+
+  &__val,
+  .hud-pill-val {
+    font-weight: 700;
+    @include text-mono;
+    color: $text-pure;
+  }
+
+  &__counter,
+  .hud-interactive-counter {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__btn {
+    @extend .counter-btn;
+  }
+
+  &__slots,
+  .hud-slots-cluster {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  &__slot,
+  .slot-circle {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1px solid $accent-gold;
+    background: $accent-gold;
+    cursor: pointer;
+    transition: all $transition-fast;
+    box-shadow: 0 0 6px $accent-gold-glow;
+
+    &--used,
+    &.used {
+      background: transparent;
+      border-color: $text-dim;
+      box-shadow: none;
+    }
+  }
+
+  &__concentration,
+  .concentration-hud-pill {
+    padding: 5px 14px;
+    border-radius: $radius-full;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: rgba($accent-purple, 0.15);
+    border: 1px solid rgba($accent-purple, 0.4);
+    color: #d8b4fe;
+    transition: all $transition-fast;
+
+    &--active,
+    &.active {
+      background: rgba($accent-fire, 0.2);
+      border-color: $accent-fire;
+      color: #fda4af;
+      animation: pulse-border 2s infinite;
+    }
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% { box-shadow: 0 0 5px $accent-fire-glow; }
+  50% { box-shadow: 0 0 15px $accent-fire-glow; }
+}

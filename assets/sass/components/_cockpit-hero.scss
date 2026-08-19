@@ -1,0 +1,86 @@
+// ==========================================================================
+// COMBAT COCKPIT HERO (BEM)
+// ==========================================================================
+
+.cockpit-hero {
+  position: relative;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  margin-bottom: 28px;
+  border: 1px solid $border-leather;
+  background: linear-gradient(135deg, rgba(24, 35, 28, 0.95) 0%, rgba(18, 26, 21, 0.98) 60%, rgba(12, 18, 14, 1) 100%);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba($accent-gold, 0.2);
+
+  &__grid,
+  .cockpit-banner-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+
+    @include respond-to('md') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__content,
+  .cockpit-hero-content {
+    padding: 36px 36px 36px 40px;
+  }
+
+  &__badges,
+  .badge-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  &__title,
+  .cockpit-title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    line-height: 1.18;
+    color: $text-pure;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  &__tagline,
+  .cockpit-tagline {
+    font-size: 1.02rem;
+    color: $text-med;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    max-width: 600px;
+  }
+
+  &__media,
+  .cockpit-hero-media {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: radial-gradient(circle at center, rgba($accent-gold, 0.12) 0%, transparent 70%);
+
+    @include respond-to('md') {
+      order: -1;
+    }
+  }
+
+  &__img,
+  .cockpit-hero-img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    border-radius: $radius-lg;
+    border: 2px solid $border-leather;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba($accent-gold, 0.15);
+    object-fit: cover;
+
+    @include respond-to('md') {
+      max-width: 260px;
+    }
+  }
+}

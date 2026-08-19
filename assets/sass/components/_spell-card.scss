@@ -1,0 +1,71 @@
+// ==========================================================================
+// SPELL ARSENAL & SPELL CARDS (BEM)
+// ==========================================================================
+
+.spells-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.spell-card {
+  @include card-surface;
+  padding: 22px;
+  transition: all $transition-smooth;
+
+  &:hover {
+    border-color: $accent-gold;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba($accent-gold, 0.15);
+  }
+
+  &__header,
+  .spell-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &__name,
+  .spell-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $text-pure;
+  }
+
+  &__level-badge,
+  .spell-level-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: $radius-sm;
+    background: rgba($accent-purple, 0.15);
+    color: #d8b4fe;
+    border: 1px solid rgba($accent-purple, 0.3);
+  }
+
+  &__meta,
+  .spell-meta-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: $text-muted;
+    margin-bottom: 12px;
+  }
+
+  &__sculpt-banner,
+  .sculpt-banner {
+    background: rgba($accent-gold, 0.12);
+    border: 1px solid rgba($accent-gold, 0.35);
+    border-radius: $radius-sm;
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    color: $accent-gold;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}

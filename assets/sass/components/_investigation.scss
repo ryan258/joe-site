@@ -1,0 +1,29 @@
+// ==========================================================================
+// INVESTIGATION FRAMEWORK (BEM)
+// ==========================================================================
+
+.investigation-step-card {
+  @include card-surface;
+  padding: 26px;
+  margin-bottom: 22px;
+
+  &__indicator,
+  .step-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: $accent-gold;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  &__title,
+  .investigation-step-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: $text-pure;
+    margin-bottom: 12px;
+  }
+}

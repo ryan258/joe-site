@@ -1,0 +1,125 @@
+// ==========================================================================
+// JOE, KEEPER OF THE COW - SASS DESIGN TOKENS & RUNTIME CUSTOM PROPERTIES
+// ==========================================================================
+
+// Typography
+$font-display: "Cinzel", Georgia, serif;
+$font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+// Woodland Foundations & Surface Colors
+$bg-core: #0c120e;
+$bg-surface: #121a15;
+$bg-surface-elevated: #18231c;
+$bg-surface-card: #152019;
+$bg-surface-hover: #202d24;
+$bg-glass: rgba(18, 26, 21, 0.88);
+$bg-glass-strong: rgba(12, 18, 14, 0.96);
+$bg-parchment-tint: rgba(237, 227, 207, 0.05);
+
+// Borders & Decorative Trims
+$border-subtle: rgba(212, 154, 61, 0.16);
+$border-leather: rgba(184, 115, 51, 0.28);
+$border-forest: rgba(82, 133, 94, 0.28);
+$border-active: rgba(212, 154, 61, 0.55);
+$border-glow: 0 0 16px rgba(212, 154, 61, 0.22);
+
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 16px;
+$radius-full: 9999px;
+
+// Typography & Warm Vellum Tones
+$text-pure: #fffdf8;
+$text-high: #f4ede0;
+$text-med: #cdc2ae;
+$text-muted: #968c7a;
+$text-dim: #6d6454;
+
+// Character Palette Accents (From joe.webp)
+$accent-gold: #d49a3d;
+$accent-gold-glow: rgba(212, 154, 61, 0.35);
+$accent-amber: #e5a83b;
+$accent-amber-glow: rgba(229, 168, 59, 0.35);
+$accent-forest: #52855e;
+$accent-forest-glow: rgba(82, 133, 94, 0.35);
+$accent-leather: #b87333;
+$accent-leather-glow: rgba(184, 115, 51, 0.35);
+$accent-robe: #4f6d8a;
+$accent-robe-glow: rgba(79, 109, 138, 0.35);
+$accent-fey: #48bb78;
+$accent-fey-glow: rgba(72, 187, 120, 0.35);
+$accent-fire: #e05638;
+$accent-fire-glow: rgba(224, 86, 56, 0.35);
+$accent-cyan: #38bdf8;
+$accent-cyan-glow: rgba(56, 189, 248, 0.3);
+$accent-purple: #9d65d8;
+$accent-purple-glow: rgba(157, 101, 216, 0.35);
+
+// Layout & Animation
+$header-height: 68px;
+$hud-bar-height: 56px;
+$max-content-width: 1440px;
+$transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+// ==========================================================================
+// RUNTIME CSS CUSTOM PROPERTIES (:root)
+// Emitted so templates & markdown inline styles with var(--...) resolve
+// ==========================================================================
+:root {
+  --font-display: #{$font-display};
+  --font-body: #{$font-body};
+  --font-mono: #{$font-mono};
+
+  --bg-core: #{$bg-core};
+  --bg-surface: #{$bg-surface};
+  --bg-surface-elevated: #{$bg-surface-elevated};
+  --bg-surface-card: #{$bg-surface-card};
+  --bg-surface-hover: #{$bg-surface-hover};
+  --bg-glass: #{$bg-glass};
+  --bg-glass-strong: #{$bg-glass-strong};
+  --bg-parchment-tint: #{$bg-parchment-tint};
+
+  --border-subtle: #{$border-subtle};
+  --border-leather: #{$border-leather};
+  --border-forest: #{$border-forest};
+  --border-active: #{$border-active};
+  --border-glow: #{$border-glow};
+
+  --border-radius-sm: #{$radius-sm};
+  --border-radius-md: #{$radius-md};
+  --border-radius-lg: #{$radius-lg};
+  --border-radius-full: #{$radius-full};
+
+  --text-pure: #{$text-pure};
+  --text-high: #{$text-high};
+  --text-med: #{$text-med};
+  --text-muted: #{$text-muted};
+  --text-dim: #{$text-dim};
+
+  --accent-gold: #{$accent-gold};
+  --accent-gold-glow: #{$accent-gold-glow};
+  --accent-amber: #{$accent-amber};
+  --accent-amber-glow: #{$accent-amber-glow};
+  --accent-forest: #{$accent-forest};
+  --accent-forest-glow: #{$accent-forest-glow};
+  --accent-leather: #{$accent-leather};
+  --accent-leather-glow: #{$accent-leather-glow};
+  --accent-robe: #{$accent-robe};
+  --accent-robe-glow: #{$accent-robe-glow};
+  --accent-fey: #{$accent-fey};
+  --accent-fey-glow: #{$accent-fey-glow};
+  --accent-fire: #{$accent-fire};
+  --accent-fire-glow: #{$accent-fire-glow};
+  --accent-cyan: #{$accent-cyan};
+  --accent-cyan-glow: #{$accent-cyan-glow};
+  --accent-purple: #{$accent-purple};
+  --accent-purple-glow: #{$accent-purple-glow};
+
+  --header-height: #{$header-height};
+  --hud-bar-height: #{$hud-bar-height};
+  --max-content-width: #{$max-content-width};
+  --transition-fast: #{$transition-fast};
+  --transition-smooth: #{$transition-smooth};
+}

@@ -1,0 +1,22 @@
+// ==========================================================================
+// TYPOGRAPHY & LINKS
+// ==========================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  @include text-display;
+}
+
+a {
+  color: $accent-gold;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: #f5c26b;
+    text-decoration: underline;
+  }
+}
+
+code, kbd, samp, pre {
+  font-family: $font-mono;
+}

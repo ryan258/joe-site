@@ -1,0 +1,63 @@
+// ==========================================================================
+// TAG BADGES (BEM)
+// ==========================================================================
+
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: $font-body;
+  line-height: 1;
+
+  &--gold,
+  &--amber,
+  &.tag-gold,
+  &.tag-amber {
+    background: rgba($accent-gold, 0.15);
+    color: $accent-gold;
+    border: 1px solid rgba($accent-gold, 0.35);
+  }
+
+  &--fey,
+  &--forest,
+  &.tag-fey,
+  &.tag-forest {
+    background: rgba($accent-forest, 0.18);
+    color: #78c28f;
+    border: 1px solid rgba($accent-forest, 0.38);
+  }
+
+  &--leather,
+  &.tag-leather {
+    background: rgba($accent-leather, 0.18);
+    color: #e59a58;
+    border: 1px solid rgba($accent-leather, 0.38);
+  }
+
+  &--fire,
+  &.tag-fire {
+    background: rgba($accent-fire, 0.15);
+    color: #f87171;
+    border: 1px solid rgba($accent-fire, 0.35);
+  }
+
+  &--cyan,
+  &.tag-cyan {
+    background: rgba($accent-cyan, 0.15);
+    color: $accent-cyan;
+    border: 1px solid rgba($accent-cyan, 0.35);
+  }
+
+  &--purple,
+  &.tag-purple {
+    background: rgba($accent-purple, 0.15);
+    color: #d8b4fe;
+    border: 1px solid rgba($accent-purple, 0.35);
+  }
+}
