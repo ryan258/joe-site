@@ -20,4 +20,12 @@
   <!-- Core Stylesheet (BEM Sass Pipeline) -->
   {{ $style := resources.Get "sass/main.scss" | toCSS (dict "outputStyle" "compressed") }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+  <!-- PWA: installable as a home-screen app (iPad / Android) -->
+  <link rel="manifest" href="{{ "manifest.json" | relURL }}">
+  <meta name="theme-color" content="#0c120e">
+  <link rel="apple-touch-icon" href="{{ "images/apple-touch-icon.png" | relURL }}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Joe's Cockpit">
 </head>
