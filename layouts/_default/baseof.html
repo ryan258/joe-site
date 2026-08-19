@@ -14,22 +14,23 @@
 
   <!-- Embed Search Index for zero-latency client fuzzy search -->
   <script>
+    const BASE_URL = "{{ "" | relURL }}".replace(/\/$/, "");
     window.JOE_SEARCH_INDEX = [
-      { title: "J-1: The Sculpted Fireball", category: "Tactical Play", summary: "Drop 8d6 Fireball centered on allies with Sculpt Spells protecting up to 4 friendlies.", url: "{{ "plays/#j-1" | relURL }}" },
-      { title: "J-2: The Flyby Touch Delivery", category: "Tactical Play", summary: "Cast Shocking Grasp or touch spell through Cow using her 60ft fly speed and Flyby.", url: "{{ "plays/#j-2" | relURL }}" },
-      { title: "J-3: The Wand of Magic Missiles Finisher", category: "Tactical Play", summary: "Use Magic Action to fire 3-7 force darts with no miss chance and no spell slot.", url: "{{ "plays/#j-3" | relURL }}" },
-      { title: "J-4: The Web Chokepoint & Potent Cantrip", category: "Tactical Play", summary: "Restrain enemies in 20ft cube, then blast with Ray of Frost or Frostbite.", url: "{{ "plays/#j-4" | relURL }}" },
-      { title: "J-5: Reaction Radar: Shield vs Counterspell", category: "Tactical Play", summary: "Instantly bump AC to 20 or shut down 3rd-level spells within 60ft.", url: "{{ "plays/#j-5" | relURL }}" },
-      { title: "C-1: The Perimeter Circuit", category: "Cow Play", summary: "Fly boundary at 60ft per round to scout layout and entrances before party entry.", url: "{{ "familiar/#c-1" | relURL }}" },
-      { title: "C-2: The High Perch & Constant Help", category: "Cow Play", summary: "Flyby swoop into enemy space, Help action for ally advantage, retreat without OA.", url: "{{ "familiar/#c-2" | relURL }}" },
-      { title: "C-3: Toy Cow In Plain Sight (Mr. Big Con)", category: "Cow Play", summary: "Feign inanimate wooden toy state while recording conversations and scouting.", url: "{{ "familiar/#c-3" | relURL }}" },
-      { title: "Fireball", category: "Spell", summary: "Level 3 Evocation: 8d6 Fire, 150ft range, 20ft radius, Sculpt Spells eligible (protects 4).", url: "{{ "spellbook/#fireball" | relURL }}" },
-      { title: "Web", category: "Spell", summary: "Level 2 Conjuration: Concentration 1 hour, 20ft cube difficult terrain and Restrained condition.", url: "{{ "spellbook/#web" | relURL }}" },
-      { title: "Counterspell", category: "Spell", summary: "Level 3 Abjuration: Reaction when a creature within 60ft casts a spell.", url: "{{ "spellbook/#counterspell" | relURL }}" },
-      { title: "Misty Step", category: "Spell", summary: "Level 2 Conjuration: Bonus Action 30ft teleport to unoccupied space you can see.", url: "{{ "spellbook/#misty-step" | relURL }}" },
-      { title: "Search vs. Study 2024 Rule", category: "Rules", summary: "Search uses Perception (+3) to find clues; Study uses Investigation (+10) to deduce mechanisms.", url: "{{ "investigation/" | relURL }}" },
-      { title: "Wand of Magic Missiles (2024 Magic Action)", category: "Rules", summary: "Activating uses Magic Action (not Utilize), requires no verbal, somatic, or material components.", url: "{{ "rules/#wand" | relURL }}" },
-      { title: "Heroic Inspiration (Resourceful)", category: "Rules", summary: "Reroll any d20 immediately after rolling; reset upon completing a Long Rest.", url: "{{ "rules/#inspiration" | relURL }}" }
+      { title: "J-1: The Sculpted Fireball", category: "Tactical Play", summary: "Drop 8d6 Fireball centered on allies with Sculpt Spells protecting up to 4 friendlies.", url: BASE_URL + "/plays/#j-1" },
+      { title: "J-2: The Flyby Touch Delivery", category: "Tactical Play", summary: "Cast Shocking Grasp or touch spell through Cow using her 60ft fly speed and Flyby.", url: BASE_URL + "/plays/#j-2" },
+      { title: "J-3: The Wand of Magic Missiles Finisher", category: "Tactical Play", summary: "Use Magic Action to fire 3-7 force darts with no miss chance and no spell slot.", url: BASE_URL + "/plays/#j-3" },
+      { title: "J-4: The Web Chokepoint & Potent Cantrip", category: "Tactical Play", summary: "Restrain enemies in 20ft cube, then blast with Ray of Frost or Frostbite.", url: BASE_URL + "/plays/#j-4" },
+      { title: "J-5: Reaction Radar: Shield vs Counterspell", category: "Tactical Play", summary: "Instantly bump AC to 20 or shut down 3rd-level spells within 60ft.", url: BASE_URL + "/plays/#j-5" },
+      { title: "C-1: The Perimeter Circuit", category: "Cow Play", summary: "Fly boundary at 60ft per round to scout layout and entrances before party entry.", url: BASE_URL + "/familiar/#c-1" },
+      { title: "C-2: The High Perch & Constant Help", category: "Cow Play", summary: "Flyby swoop into enemy space, Help action for ally advantage, retreat without OA.", url: BASE_URL + "/familiar/#c-2" },
+      { title: "C-3: Toy Cow In Plain Sight (Mr. Big Con)", category: "Cow Play", summary: "Feign inanimate wooden toy state while recording conversations and scouting.", url: BASE_URL + "/familiar/#c-3" },
+      { title: "Fireball", category: "Spell", summary: "Level 3 Evocation: 8d6 Fire, 150ft range, 20ft radius, Sculpt Spells eligible (protects 4).", url: BASE_URL + "/spellbook/#fireball" },
+      { title: "Web", category: "Spell", summary: "Level 2 Conjuration: Concentration 1 hour, 20ft cube difficult terrain and Restrained condition.", url: BASE_URL + "/spellbook/#web" },
+      { title: "Counterspell", category: "Spell", summary: "Level 3 Abjuration: Reaction when a creature within 60ft casts a spell.", url: BASE_URL + "/spellbook/#counterspell" },
+      { title: "Misty Step", category: "Spell", summary: "Level 2 Conjuration: Bonus Action 30ft teleport to unoccupied space you can see.", url: BASE_URL + "/spellbook/#misty-step" },
+      { title: "Search vs. Study 2024 Rule", category: "Rules", summary: "Search uses Perception (+3) to find clues; Study uses Investigation (+10) to deduce mechanisms.", url: BASE_URL + "/investigation/" },
+      { title: "Wand of Magic Missiles (2024 Magic Action)", category: "Rules", summary: "Activating uses Magic Action (not Utilize), requires no verbal, somatic, or material components.", url: BASE_URL + "/rules/#wand" },
+      { title: "Heroic Inspiration (Resourceful)", category: "Rules", summary: "Reroll any d20 immediately after rolling; reset upon completing a Long Rest.", url: BASE_URL + "/rules/#inspiration" }
     ];
   </script>
 
