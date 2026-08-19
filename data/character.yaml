@@ -1,0 +1,89 @@
+name: "Joe, Keeper of the Cow"
+player: "ryanleej"
+level: 7
+class: "Wizard"
+subclass: "Evoker"
+species: "Human"
+background: "Sage"
+alignment: "Neutral Good"
+hit_dice: "7d6"
+hp_max: 51
+speed: "30 ft"
+initiative: "+2"
+proficiency_bonus: 3
+
+abilities:
+  str: { score: 8, mod: -1, save: -1 }
+  dex: { score: 14, mod: +2, save: +2 }
+  con: { score: 16, mod: +3, save: +3 }
+  int: { score: 18, mod: +4, save: +7 }
+  wis: { score: 10, mod: +0, save: +3 }
+  cha: { score: 10, mod: +0, save: +0 }
+
+defenses:
+  ac_base: 12
+  ac_mage_armor: 15
+  ac_shield: 17
+  ac_full: 20
+  concentration_bonus: "+3"
+  concentration_dc_base: 10
+
+senses:
+  darkvision: "None (Relies on Light / Cow 120ft)"
+  passive_perception: 13
+  passive_investigation_dndbeyond: 20
+  investigation: "+10 (Expertise)"
+  perception: "+3"
+  arcana: "+7"
+  history: "+7"
+  insight: "+3"
+
+spellcasting:
+  dc: 15
+  attack_bonus: "+7"
+  evocation_savant: "Sculpt Spells protects 1 + Spell Level targets (auto-success, 0 damage)"
+  potent_cantrip: "Deals half damage on missed attack rolls (Fire Bolt, Ray of Frost) or successful saving throws"
+  slots:
+    level_1: 4
+    level_2: 3
+    level_3: 3
+    level_4: 1
+  magic_initiate_shield: "1 free cast / Long Rest (can also expend slots)"
+  arcane_recovery: "Restore up to 4 combined slot levels on Short Rest (1/LR)"
+
+equipment:
+  wand_of_magic_missiles:
+    max_charges: 7
+    action: "Magic Action"
+    range: "120 ft"
+    dart_damage: "1d4 + 1 Force per dart"
+    recharge: "1d6 + 1 at dawn"
+    destruction_risk: "If 7th charge is spent, roll 1d20; on a 1, wand is destroyed."
+    notes: "Requires no Verbal/Somatic/Material components. Never spend the 7th charge except to prevent a TPK."
+  weapon_mastery_note: "Joe lacks the Weapon Mastery feature; daggers/staff cannot use Nick or Topple."
+  costly_components:
+    - name: "Chromatic Orb Diamond"
+      value: "50 GP"
+      status: "Owned, Reusable (acquired July 28, 2026)"
+    - name: "Find Familiar Incense"
+      value: "10 GP each"
+      status: "2 portions owned (1 consumed per casting)"
+  focus: "Carved Arcane Quarterstaff (primary) or Spellbook (secondary)"
+
+familiar:
+  name: "Cow"
+  extra_name: "Mr. Big (Cow acting as Owl)*"
+  vessel: "Mr. Big (Fist-sized childhood toy cow)"
+  type: "Tiny Fey familiar (Owl stat block)"
+  ac: 11
+  hp: 1
+  speed: "5 ft land / 60 ft fly"
+  darkvision: "120 ft"
+  senses: "Darkvision 120ft, Passive Perception 13, Perception +3, Stealth +3 (Keen Sight & Hearing Advantage)"
+  dndbeyond_notes: "Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the complete Owl stat block. Its flight looks like magical levitation, but it has Flyby rather than Hover. Cow cannot attack. Within 100 feet, Cow communicates with Joe through simple emotions, images, remembered sensations, and intentions. Cow communicates with others through expressive movement and behavior. Complex memories are fragmentary clues provided or approved by the DM."
+  traits:
+    - "Flyby (Provokes no Opportunity Attacks when flying out of enemy reach)"
+    - "Keen Sight and Hearing (Advantage on Perception checks relying on sight/hearing)"
+    - "Telepathic bond (100 ft range: emotions, images, intentions)"
+    - "Touch spell delivery (Cow uses Reaction to deliver Joe's touch spell within 100 ft)"
+    - "Shared Senses (Joe Bonus Action to perceive through Cow, keeping his own senses under 2024 rules)"

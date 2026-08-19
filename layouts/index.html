@@ -1,0 +1,322 @@
+{{ define "main" }}
+{{ $char := hugo.Data.character }}
+
+<!-- Hero Cockpit Header -->
+<section class="cockpit-hero">
+  <div class="cockpit-banner-grid">
+    <div class="cockpit-hero-content">
+      <div class="badge-cluster">
+        <span class="tag-badge tag-cyan">Wizard (Evoker) Level 7</span>
+        <span class="tag-badge tag-fey">Fey Familiar: Cow (Mr. Big)</span>
+        <span class="tag-badge tag-fire">Sculpt Spells: 1 + Lvl Protected</span>
+        <span class="tag-badge tag-amber">2024 D&D 5.5e Rules</span>
+      </div>
+      <h1 class="cockpit-title">Live Combat Cockpit</h1>
+      <p class="cockpit-tagline">
+        The ultimate zero-latency tabletop flight deck. Execute turns in &lt;30s, sculpt danger-close evocation, deploy Cow's 60ft Flyby support, and arbitrate 2024 rules flawlessly.
+      </p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="/plays/" class="filter-btn active" style="padding:8px 16px;font-size:0.9rem;">📖 Explore All 250 Tactical Plays</a>
+        <a href="/spellbook/" class="filter-btn" style="padding:8px 16px;font-size:0.9rem;">✨ Spellbook & Prepared Spells</a>
+        <a href="/investigation/" class="filter-btn" style="padding:8px 16px;font-size:0.9rem;">🔍 Investigation HUD</a>
+      </div>
+    </div>
+    <div>
+      <img src="/images/joe_hero.webp" alt="Joe, Keeper of the Cow with his floating wooden toy familiar" class="cockpit-hero-img">
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Turn Pilot Step Bar -->
+<section class="turn-pilot-bar">
+  <div class="pilot-header">
+    <div class="pilot-title">
+      <span>⚡ Turn Pilot: 5-Phase Speedrunner</span>
+    </div>
+    <span style="font-size:0.8rem;color:var(--text-muted);">Click phase to view optimal actions & table advice</span>
+  </div>
+  <div class="pilot-steps">
+    <button type="button" class="pilot-step-btn active">
+      <div class="step-num">Phase 1</div>
+      <div class="step-name">Start & Conc.</div>
+      <div class="step-desc">Web / Fly / Cow 100ft</div>
+    </button>
+    <button type="button" class="pilot-step-btn">
+      <div class="step-num">Phase 2</div>
+      <div class="step-name">Movement</div>
+      <div class="step-desc">30 ft / Half Cover (+2)</div>
+    </button>
+    <button type="button" class="pilot-step-btn">
+      <div class="step-num">Phase 3</div>
+      <div class="step-name">Action / Cast</div>
+      <div class="step-desc">Fireball / Web / Wand</div>
+    </button>
+    <button type="button" class="pilot-step-btn">
+      <div class="step-num">Phase 4</div>
+      <div class="step-name">Bonus Action</div>
+      <div class="step-desc">Misty Step / Cow Sense</div>
+    </button>
+    <button type="button" class="pilot-step-btn">
+      <div class="step-num">Phase 5</div>
+      <div class="step-name">Cow & Reaction</div>
+      <div class="step-desc">Flyby Help / Shield DC</div>
+    </button>
+  </div>
+
+  <div style="margin-top:16px;padding:12px 16px;background:var(--bg-surface-elevated);border-left:3px solid var(--accent-cyan);border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;">
+    <strong id="pilot-phase-title" style="color:var(--accent-cyan);font-size:0.95rem;display:block;margin-bottom:4px;">1. Start of Turn & Concentration</strong>
+    <p id="pilot-phase-notes" style="font-size:0.85rem;color:var(--text-med);line-height:1.4;">
+      Check ongoing spell effects (<em>Web</em>, <em>Grease</em>, <em>Fly</em>). Verify Cow's position (within 100 ft). Confirm Heroic Inspiration is ready.
+    </p>
+  </div>
+</section>
+
+<!-- Cockpit 3-Column Tactical Grid -->
+<div class="cockpit-grid">
+
+  <!-- LEFT COLUMN: Character Scores & Defenses -->
+  <div>
+    <div class="hud-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">🛡️ Core Numbers & AC</h2>
+        <span class="tag-badge tag-cyan">DC 15</span>
+      </div>
+
+      <!-- AC Matrix -->
+      <div class="ac-matrix">
+        <div class="ac-card">
+          <div class="ac-num">12</div>
+          <div class="ac-name">Unarmored</div>
+        </div>
+        <div class="ac-card highlight">
+          <div class="ac-num">15</div>
+          <div class="ac-name">Mage Armor</div>
+        </div>
+        <div class="ac-card">
+          <div class="ac-num">17</div>
+          <div class="ac-name">Shield Only</div>
+        </div>
+        <div class="ac-card highlight" style="border-color:rgba(52,211,153,0.4);background:rgba(52,211,153,0.08);">
+          <div class="ac-num" style="color:var(--accent-fey);">20</div>
+          <div class="ac-name">Armor + Shield</div>
+        </div>
+      </div>
+
+      <!-- Ability Scores -->
+      <div class="stats-matrix">
+        <div class="stat-box">
+          <div class="stat-label">STR</div>
+          <div class="stat-val">8</div>
+          <div class="stat-mod">-1</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">DEX</div>
+          <div class="stat-val">14</div>
+          <div class="stat-mod">+2</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">CON</div>
+          <div class="stat-val">16</div>
+          <div class="stat-mod">+3 (Save +3)</div>
+        </div>
+        <div class="stat-box" style="border-color:var(--accent-cyan);background:rgba(56,189,248,0.08);">
+          <div class="stat-label" style="color:var(--accent-cyan);">INT</div>
+          <div class="stat-val" style="color:var(--accent-cyan);">18</div>
+          <div class="stat-mod">+4 (Save +7)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">WIS</div>
+          <div class="stat-val">10</div>
+          <div class="stat-mod">+0 (Save +3)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">CHA</div>
+          <div class="stat-val">10</div>
+          <div class="stat-mod">+0</div>
+        </div>
+      </div>
+
+      <!-- Senses & Investigation -->
+      <div style="font-size:0.8rem;background:var(--bg-surface-elevated);border-radius:var(--border-radius-sm);padding:10px;border:1px solid var(--border-subtle);">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="color:var(--text-muted);">Investigation:</span>
+          <strong style="color:var(--accent-cyan);">+10 (Expertise)</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="color:var(--text-muted);">Perception / Passive:</span>
+          <strong>+3 / Passive 13</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <span style="color:var(--text-muted);">Spell Attack / DC:</span>
+          <strong style="color:var(--accent-fey);">+7 to Hit / DC 15</strong>
+        </div>
+        <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border-subtle);color:var(--accent-amber);font-size:0.75rem;">
+          ⚠️ <strong>No Darkvision!</strong> Rely on torches, light, or Cow's 120ft Darkvision link.
+        </div>
+      </div>
+    </div>
+
+    <!-- Rest & Daily Setup -->
+    <div class="hud-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">🌙 Rest Doctrines</h2>
+      </div>
+      <ul style="font-size:0.82rem;color:var(--text-med);padding-left:18px;line-height:1.5;">
+        <li><strong>Long Rest:</strong> Reset HP to 51, all 11 prepared spells, 1 MI <em>Shield</em>, and restore <code>1d6 + 1</code> Wand charges. Gain <em>Heroic Inspiration</em>.</li>
+        <li><strong>Short Rest:</strong> <em>Arcane Recovery</em> restores up to <strong>4 combined slot levels</strong> (e.g. one 3rd + one 1st, or two 2nd).</li>
+        <li><strong>Memorize Spell:</strong> Swap 1 prepared spell for any spellbook spell after a Short Rest.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CENTER COLUMN: Signature Tactical Plays -->
+  <div>
+    <div class="hud-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">🎯 Signature Table Plays</h2>
+        <a href="/plays/" style="font-size:0.8rem;font-weight:600;">View All 250 Plays →</a>
+      </div>
+
+      <!-- Play J-1 -->
+      <div class="play-card" style="margin-bottom:16px;">
+        <div class="play-card-header">
+          <div>
+            <span class="play-id-tag">PLAY J-1</span>
+            <h3 class="play-title" style="margin-top:4px;">The Sculpted Fireball</h3>
+          </div>
+          <span class="tag-badge tag-fire">Action • 3rd Lvl</span>
+        </div>
+        <div class="play-trigger">
+          <strong>When to use:</strong> 3+ enemies clustered inside 20ft radius with allies mixed in.
+        </div>
+        <div class="play-mechanics">
+          <p>Cast <em>Fireball</em> (150ft range, 20ft radius sphere). <strong>Sculpt Spells</strong> protects up to <strong>4 allies</strong> (1 + 3rd level): they automatically succeed on their Dex save and take <strong>zero damage</strong>. Enemies take <code>8d6</code> Fire (half on DC 15 save).</p>
+        </div>
+        <div class="play-table-phrase">
+          <span class="table-phrase-label">Table Phrasing</span>
+          "I drop Fireball centered right on [Melee Ally]. Using Sculpt Spells, I designate [Ally 1], [Ally 2], and [Ally 3]—they automatically succeed and take zero damage. Enemies make a DC 15 Dex save vs 8d6 fire."
+          <button type="button" class="copy-phrase-btn counter-btn" data-phrase="I drop Fireball centered right on our melee allies. Using Sculpt Spells, I designate up to 4 allies as protected—they automatically succeed and take zero damage. Enemies make a DC 15 Dex save vs 8d6 fire." style="width:auto;margin-top:6px;padding:2px 8px;">📋 Copy Script</button>
+        </div>
+      </div>
+
+      <!-- Play J-2 -->
+      <div class="play-card" style="margin-bottom:16px;">
+        <div class="play-card-header">
+          <div>
+            <span class="play-id-tag">PLAY J-2</span>
+            <h3 class="play-title" style="margin-top:4px;">Flyby Touch Spell Delivery</h3>
+          </div>
+          <span class="tag-badge tag-fey">Action + Cow Reaction</span>
+        </div>
+        <div class="play-trigger">
+          <strong>When to use:</strong> Target is out of Joe's reach or high danger, but within Cow's 60ft fly range.
+        </div>
+        <div class="play-mechanics">
+          <p>Joe casts a touch-range spell. Cow (within 100ft) uses its Reaction to deliver the touch. With <strong>Flyby</strong>, Cow moves into reach, touches the target, and flies away without provoking Opportunity Attacks.</p>
+        </div>
+        <div class="play-table-phrase">
+          <span class="table-phrase-label">Table Phrasing</span>
+          "Cow swoops in with 60ft Flyby, uses its Reaction to deliver my touch spell, and circles back 30ft high without provoking opportunity attacks."
+          <button type="button" class="copy-phrase-btn counter-btn" data-phrase="Cow swoops in with 60ft Flyby, uses its Reaction to deliver my touch spell, and circles back 30ft high without provoking opportunity attacks." style="width:auto;margin-top:6px;padding:2px 8px;">📋 Copy Script</button>
+        </div>
+      </div>
+
+      <!-- Play J-3 -->
+      <div class="play-card">
+        <div class="play-card-header">
+          <div>
+            <span class="play-id-tag">PLAY J-3</span>
+            <h3 class="play-title" style="margin-top:4px;">Wand of Magic Missiles Finisher</h3>
+          </div>
+          <span class="tag-badge tag-amber">Magic Action • 1-7 Darts</span>
+        </div>
+        <div class="play-trigger">
+          <strong>When to use:</strong> Low-HP enemy or concentrating spellcaster needs guaranteed unmissable force damage without expending a spell slot.
+        </div>
+        <div class="play-mechanics">
+          <p>Activate Wand (120ft range). Costs <strong>Magic Action</strong> (requires no verbal/somatic/material components). Spends 1 charge for 3 darts (<code>1d4+1</code> each), up to 7 charges (9 darts). <em>Doctrine: never spend the 7th charge except to prevent a TPK!</em></p>
+        </div>
+        <div class="play-table-phrase">
+          <span class="table-phrase-label">Table Phrasing</span>
+          "I use the Magic Action to activate the Wand of Magic Missiles with 1 charge. Three force darts automatically strike [Target] for 3d4+3 force damage, forcing three separate concentration saves."
+          <button type="button" class="copy-phrase-btn counter-btn" data-phrase="I use the Magic Action to activate the Wand of Magic Missiles with 1 charge. Three force darts automatically strike the target for 3d4+3 force damage, forcing three separate concentration saves." style="width:auto;margin-top:6px;padding:2px 8px;">📋 Copy Script</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN: Reaction Radar & Cow Status -->
+  <div>
+    <!-- Reaction Radar -->
+    <div class="hud-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">⚡ Reaction Radar</h2>
+        <span class="tag-badge tag-fire">Reactions</span>
+      </div>
+
+      <div class="reaction-radar-card">
+        <div class="reaction-title">
+          <span>🛡️ Shield (+5 AC)</span>
+          <span style="font-size:0.75rem;font-weight:normal;">AC $\rightarrow$ 20</span>
+        </div>
+        <div class="reaction-trigger">
+          <strong>Trigger:</strong> You are hit by an attack roll or targeted by <em>Magic Missile</em>.
+          <p style="margin-top:4px;font-size:0.75rem;color:var(--text-muted);">Turns AC 15 into <strong>AC 20</strong> until start of your next turn. 1 Free cast/LR via Magic Initiate.</p>
+        </div>
+      </div>
+
+      <div class="reaction-radar-card" style="background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.3);">
+        <div class="reaction-title" style="color:#d8b4fe;">
+          <span>🚫 Counterspell (60 ft)</span>
+          <span style="font-size:0.75rem;font-weight:normal;">3rd Lvl</span>
+        </div>
+        <div class="reaction-trigger">
+          <strong>Trigger:</strong> You see a creature within 60 ft casting a spell.
+          <p style="margin-top:4px;font-size:0.75rem;color:var(--text-muted);">3rd level or lower spells fail automatically. 4th+ requires DC <code>10 + spell level</code> Int check (+7 mod).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cow Flight Deck Snapshot -->
+    <div class="hud-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">🦉 Cow (Mr. Big) Flight Deck</h2>
+        <a href="/familiar/" style="font-size:0.8rem;font-weight:600;">Full Manual →</a>
+      </div>
+      <div style="border-radius:var(--border-radius-md);overflow:hidden;margin-bottom:12px;border:1px solid var(--border-subtle);">
+        <img src="/images/cow_flight.webp" alt="Cow the Fey familiar flying over twilight ruins" style="width:100%;height:140px;object-fit:cover;display:block;">
+      </div>
+      <div style="font-size:0.8rem;line-height:1.5;color:var(--text-med);">
+        <p><strong>Statblock:</strong> Tiny Fey (Owl) • <strong>1 HP</strong> • AC 11 • Fly 60 ft • Darkvision 120 ft</p>
+        <p style="margin-top:4px;"><strong>Flyby Help Action:</strong> Swoop within 5 ft, grant advantage on next ally attack, egress 60 ft without OA.</p>
+        <p style="margin-top:4px;color:var(--accent-fey);"><strong>Shared Senses:</strong> Bonus Action to perceive through Cow (retains own senses under 2024 rules).</p>
+      </div>
+    </div>
+
+    <!-- Material Components Tracker -->
+    <div class="hud-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">💎 Costly Components</h2>
+      </div>
+      <ul style="font-size:0.8rem;color:var(--text-med);list-style:none;">
+        <li style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border-subtle);">
+          <div style="display:flex;justify-content:space-between;">
+            <strong style="color:var(--text-pure);">Chromatic Orb Diamond</strong>
+            <span class="tag-badge tag-cyan">50 GP</span>
+          </div>
+          <span style="font-size:0.75rem;color:var(--text-muted);">Status: Owned, Reusable (Not consumed).</span>
+        </li>
+        <li>
+          <div style="display:flex;justify-content:space-between;">
+            <strong style="color:var(--text-pure);">Find Familiar Incense</strong>
+            <span class="tag-badge tag-amber">2x 10 GP</span>
+          </div>
+          <span style="font-size:0.75rem;color:var(--text-muted);">Status: 2 portions owned. 1 consumed per cast.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+{{ end }}

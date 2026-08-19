@@ -1,0 +1,25 @@
+<div class="play-card" data-actor="{{ .Params.actor }}" data-type="{{ .Params.type }}" data-tags="{{ delimit .Params.threat_tags " " }}" id="{{ .Params.play_id | lower }}">
+  <div class="play-card-header">
+    <div>
+      <span class="play-id-tag">{{ .Params.play_id }}</span>
+      <h3 class="play-title" style="margin-top:6px;">{{ .Title }}</h3>
+    </div>
+    <span class="tag-badge {{ if eq .Params.actor "cow" }}tag-fey{{ else }}tag-cyan{{ end }}">{{ .Params.type }}</span>
+  </div>
+
+  <div class="play-trigger">
+    <strong>Trigger / Condition:</strong> {{ .Params.summary }}
+  </div>
+
+  <div class="play-mechanics">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.table_phrase }}
+  <div class="play-table-phrase">
+    <span class="table-phrase-label">Table Phrasing</span>
+    "{{ . }}"
+    <button type="button" class="copy-phrase-btn counter-btn" data-phrase="{{ . }}" style="width:auto;margin-top:6px;padding:2px 8px;">📋 Copy Script</button>
+  </div>
+  {{ end }}
+</div>

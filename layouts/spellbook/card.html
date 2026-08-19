@@ -1,0 +1,40 @@
+<div class="spell-card" id="{{ .Title | lower | urlize }}">
+  <div class="spell-card-header">
+    <div>
+      <h3 class="spell-name">{{ .Title }}</h3>
+      <span style="font-size:0.75rem;color:var(--text-muted);">{{ .Params.school }}</span>
+    </div>
+    <span class="spell-level-badge">{{ if eq .Params.level 0 }}Cantrip{{ else }}Level {{ .Params.level }}{{ end }}</span>
+  </div>
+
+  <div class="spell-meta-list">
+    <span>⏱️ {{ .Params.casting_time }}</span>
+    <span>📏 {{ .Params.range }}</span>
+    <span>⏳ {{ .Params.duration }}</span>
+    {{ if .Params.concentration }}<span class="tag-badge tag-fire">🧠 Concentration</span>{{ end }}
+    {{ if .Params.ritual }}<span class="tag-badge tag-fey">📜 Ritual (Spellbook)</span>{{ end }}
+    {{ if .Params.prepared }}<span class="tag-badge tag-cyan">✓ Prepared</span>{{ end }}
+  </div>
+
+  {{ if .Params.sculpt_spells }}
+  <div class="sculpt-banner">
+    <span>💥 Sculpt Spells: Protects up to <strong>{{ add 1 .Params.level }} allies</strong> (Auto-pass, 0 damage).</span>
+  </div>
+  {{ end }}
+
+  {{ if .Params.potent_cantrip }}
+  <div class="sculpt-banner" style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.3);color:var(--accent-fey);">
+    <span>⚡ Potent Cantrip: Target takes half damage on successful saving throw.</span>
+  </div>
+  {{ end }}
+
+  <div style="font-size:0.85rem;color:var(--text-med);line-height:1.5;margin-bottom:12px;">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.upcast_notes }}
+  <div style="font-size:0.75rem;background:var(--bg-surface-elevated);border-radius:var(--border-radius-sm);padding:8px;border:1px solid var(--border-subtle);color:var(--text-muted);">
+    <strong style="color:var(--accent-cyan);">Upcast Scaling:</strong> {{ . }}
+  </div>
+  {{ end }}
+</div>

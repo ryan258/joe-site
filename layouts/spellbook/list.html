@@ -1,0 +1,37 @@
+{{ define "main" }}
+{{ $spells := where site.RegularPages "Section" "spellbook" }}
+<section style="margin-bottom:28px;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:16px;">
+    <div>
+      <span class="tag-badge tag-purple" style="margin-bottom:8px;display:inline-block;">Grimoire & Prepared Arsenal</span>
+      <h1 style="font-size:2.2rem;font-weight:800;color:var(--text-pure);line-height:1.2;">Wizard Spellbook & Arsenal ({{ len $spells }})</h1>
+      <p style="color:var(--text-med);font-size:1rem;margin-top:6px;max-width:750px;">
+        Complete canonical spellbook containing <strong>23 spells + 6 cantrips</strong>. Includes automated <strong>Sculpt Spells</strong> target calculators, <strong>Potent Cantrip</strong> missed-attack/passed-save half-damage rules, and material component requirements.
+      </p>
+    </div>
+  </div>
+
+  <div style="background:var(--bg-surface-card);border:1px solid var(--border-subtle);border-radius:var(--border-radius-lg);padding:18px 24px;margin-bottom:24px;">
+    <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center;">
+      <div>
+        <strong style="color:var(--text-pure);display:block;margin-bottom:4px;">📋 Preparation Doctrine (11 Prepared + 1 MI Shield)</strong>
+        <span style="font-size:0.85rem;color:var(--text-muted);">
+          1. <em>Mage Armor</em>, 2. <em>Grease</em>, 3. <em>Misty Step</em>, 4. <em>Mirror Image</em>, 5. <em>Web</em>, 6. <em>Counterspell</em>, 7. <em>Dispel Magic</em>, 8. <em>Fly</em>, 9. <em>Fireball</em>, 10. <em>Arcane Eye</em>, 11. <em>Dimension Door</em>.
+        </span>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <span class="tag-badge tag-cyan">Save DC 15</span>
+        <span class="tag-badge tag-fey">Attack +7</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Spells Grid -->
+<div class="spells-grid">
+  {{ range $spells }}
+    {{ .Render "card" }}
+  {{ end }}
+</div>
+
+{{ end }}

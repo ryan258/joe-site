@@ -1,0 +1,63 @@
+baseURL: "https://joe-keeper.local/"
+defaultContentLanguage: "en"
+title: "Joe, Keeper of the Cow | D&D 5.5e Live Tabletop Pilot"
+theme: []
+
+params:
+  description: "The ultimate zero-latency live tabletop companion for piloting Joe (Level 7 Evoker Wizard) and Cow (Mr. Big) under D&D 5.5e / 2024 rules."
+  author: "Ryan Johnson (Player: ryanleej)"
+  version: "1.0.0"
+  dnd_edition: "D&D 5.5e (2024 Rules Revision)"
+  character:
+    name: "Joe, Keeper of the Cow"
+    class: "Wizard (Evoker) 7"
+    species: "Human"
+    background: "Sage"
+    alignment: "Neutral Good"
+    hp_max: 51
+    ac_base: 12
+    ac_mage_armor: 15
+    ac_shield: 17
+    ac_mage_armor_shield: 20
+    spell_dc: 15
+    spell_attack: "+7"
+    investigation: "+10"
+    perception: "+3"
+    passive_perception: 13
+    passive_investigation_display: 20
+    wand_max_charges: 7
+    familiar_name: "Cow (Mr. Big)"
+    familiar_form: "Owl stat block (Tiny Fey in toy cow vessel)"
+
+menu:
+  main:
+    - name: "⚡ Combat Cockpit"
+      url: "/"
+      weight: 1
+    - name: "📖 Tactical Plays"
+      url: "/plays/"
+      weight: 2
+    - name: "✨ Grimoire & Spells"
+      url: "/spellbook/"
+      weight: 3
+    - name: "🦉 Cow Flight Deck"
+      url: "/familiar/"
+      weight: 4
+    - name: "🔍 Investigation HUD"
+      url: "/investigation/"
+      weight: 5
+    - name: "⚖️ 2024 Rules Arbiter"
+      url: "/rules/"
+      weight: 6
+    - name: "📜 Dossier"
+      url: "/character/"
+      weight: 7
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+    ordered: false

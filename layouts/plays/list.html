@@ -1,0 +1,38 @@
+{{ define "main" }}
+{{ $plays := where site.RegularPages "Section" "plays" }}
+<section style="margin-bottom:28px;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:16px;">
+    <div>
+      <span class="tag-badge tag-cyan" style="margin-bottom:8px;display:inline-block;">Tactical Database</span>
+      <h1 style="font-size:2.2rem;font-weight:800;color:var(--text-pure);line-height:1.2;">Tactical Plays Directory ({{ len $plays }})</h1>
+      <p style="color:var(--text-med);font-size:1rem;margin-top:6px;max-width:700px;">
+        Comprehensive canonical playbook containing <strong>150 Joe Plays</strong> (J-1..J-150) and <strong>100 Cow Plays</strong> (C-1..C-100). Filterable by actor, action economy phase, resource cost, and threat type.
+      </p>
+    </div>
+    <div style="min-width:280px;">
+      <input type="text" id="plays-inline-search" class="search-input" placeholder="🔍 Filter 250 plays by keyword..." style="width:100%;padding:10px 16px;background:var(--bg-surface-card);border:1px solid var(--border-subtle);border-radius:var(--border-radius-md);color:var(--text-pure);">
+    </div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="plays-filter-bar">
+    <div class="filter-btn-group">
+      <button type="button" class="filter-btn active" data-filter="all">All Plays ({{ len $plays }})</button>
+      <button type="button" class="filter-btn" data-filter="joe">🧙‍♂️ Joe Plays (J-1..150)</button>
+      <button type="button" class="filter-btn" data-filter="cow">🦉 Cow Plays (C-1..100)</button>
+      <button type="button" class="filter-btn" data-filter="action">⚡ Actions</button>
+      <button type="button" class="filter-btn" data-filter="bonus">💨 Bonus Actions</button>
+      <button type="button" class="filter-btn" data-filter="reaction">🛡️ Reactions</button>
+      <button type="button" class="filter-btn" data-filter="sculpt">💥 Sculpt Spells</button>
+    </div>
+  </div>
+</section>
+
+<!-- Plays Grid -->
+<div class="plays-grid">
+  {{ range $plays }}
+    {{ .Render "card" }}
+  {{ end }}
+</div>
+
+{{ end }}

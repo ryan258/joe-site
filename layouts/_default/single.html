@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article class="hud-panel" style="max-width:960px;margin:0 auto 32px;padding:36px;">
+  <header style="margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border-subtle);">
+    <h1 style="font-size:2.4rem;font-weight:800;color:var(--text-pure);line-height:1.2;margin-bottom:8px;">{{ .Title }}</h1>
+    {{ with .Description }}
+    <p style="font-size:1.1rem;color:var(--text-med);">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <div class="content-prose" style="font-size:0.95rem;line-height:1.7;color:var(--text-med);">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

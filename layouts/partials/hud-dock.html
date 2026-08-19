@@ -1,0 +1,73 @@
+<aside class="live-hud-dock" aria-label="Tabletop Session Live HUD">
+  <div class="hud-dock-inner">
+    <!-- HP Tracker -->
+    <div class="hud-stat-group">
+      <div class="hud-pill">
+        <span class="hud-pill-label">HP</span>
+        <span class="hud-pill-val" id="hud-hp-val">51/51</span>
+        <div class="hud-interactive-counter">
+          <button type="button" class="counter-btn" id="hud-hp-minus" title="Damage">-</button>
+          <button type="button" class="counter-btn" id="hud-hp-plus" title="Heal">+</button>
+        </div>
+      </div>
+
+      <!-- AC Snapshot -->
+      <div class="hud-pill" title="AC: 12 Base / 15 Mage Armor / 17 Shield / 20 Full">
+        <span class="hud-pill-label">AC</span>
+        <span class="hud-pill-val" style="color:var(--accent-cyan);">15</span>
+        <span style="font-size:11px;color:var(--text-muted);">(20 Shield)</span>
+      </div>
+    </div>
+
+    <!-- Spell Slots Interactive Matrix -->
+    <div class="hud-stat-group">
+      <div class="hud-pill" title="Spell Slots: Level 1 (4), Level 2 (3), Level 3 (3), Level 4 (1)">
+        <span class="hud-pill-label">Slots</span>
+        <div class="hud-slots-cluster">
+          <span style="font-size:11px;color:var(--text-muted);">L1</span>
+          <span class="slot-circle slot-toggle-btn" data-level="l1" data-index="0" title="1st Slot"></span>
+          <span class="slot-circle slot-toggle-btn" data-level="l1" data-index="1" title="1st Slot"></span>
+          <span class="slot-circle slot-toggle-btn" data-level="l1" data-index="2" title="1st Slot"></span>
+          <span class="slot-circle slot-toggle-btn" data-level="l1" data-index="3" title="1st Slot"></span>
+          
+          <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">L2</span>
+          <span class="slot-circle slot-toggle-btn" data-level="l2" data-index="0" title="2nd Slot"></span>
+          <span class="slot-circle slot-toggle-btn" data-level="l2" data-index="1" title="2nd Slot"></span>
+          <span class="slot-circle slot-toggle-btn" data-level="l2" data-index="2" title="2nd Slot"></span>
+          
+          <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">L3</span>
+          <span class="slot-circle slot-toggle-btn" data-level="l3" data-index="0" title="3rd Slot"></span>
+          <span class="slot-circle slot-toggle-btn" data-level="l3" data-index="1" title="3rd Slot"></span>
+          <span class="slot-circle slot-toggle-btn" data-level="l3" data-index="2" title="3rd Slot"></span>
+          
+          <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">L4</span>
+          <span class="slot-circle slot-toggle-btn" data-level="l4" data-index="0" title="4th Slot"></span>
+
+          <span style="font-size:11px;color:#a855f7;margin-left:6px;font-weight:bold;">MI:</span>
+          <span class="slot-circle" id="slot-mi-shield" title="Magic Initiate Free Shield (1/LR)"></span>
+        </div>
+      </div>
+
+      <!-- Wand Charges -->
+      <div class="hud-pill" title="Wand of Magic Missiles (7 charges max, 120ft range)">
+        <span class="hud-pill-label">Wand</span>
+        <span class="hud-pill-val" id="hud-wand-val" style="color:var(--accent-amber);">7/7</span>
+        <div class="hud-interactive-counter">
+          <button type="button" class="counter-btn" id="hud-wand-minus" title="Expend Charge">-</button>
+          <button type="button" class="counter-btn" id="hud-wand-plus" title="Recharge Charge">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Concentration & Rest Controls -->
+    <div class="hud-stat-group">
+      <div class="concentration-hud-pill" id="hud-concentration-btn" title="Click to set or clear active concentration spell">
+        <span>🧠 Concentration:</span> <strong>None</strong>
+      </div>
+
+      <button type="button" id="hud-long-rest-btn" class="counter-btn" style="width:auto;padding:3px 8px;font-size:11px;" title="Reset resources after Long Rest">
+        🌙 Long Rest
+      </button>
+    </div>
+  </div>
+</aside>
