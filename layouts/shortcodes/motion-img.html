@@ -1,0 +1,11 @@
+<picture{{ with .Get "class" }} class="{{ . }}"{{ end }}>
+  <source media="(prefers-reduced-motion: reduce)" srcset="{{ .Get "poster" | relURL }}">
+  <img
+    src="{{ .Get "src" | relURL }}"
+    alt="{{ .Get "alt" }}"
+    {{ with .Get "width" }}width="{{ . }}"{{ end }}
+    {{ with .Get "height" }}height="{{ . }}"{{ end }}
+    {{ with .Get "loading" }}loading="{{ . }}"{{ end }}
+    decoding="async"
+    {{ with .Get "style" }}style="{{ . | safeCSS }}"{{ end }}>
+</picture>

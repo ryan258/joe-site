@@ -83,4 +83,18 @@
       max-width: 260px;
     }
   }
+
+  .cockpit-hero-picture {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+
+    @include respond-to('md') {
+      max-width: 260px;
+    }
+
+    .cockpit-hero-img {
+      max-width: none;
+    }
+  }
 }
