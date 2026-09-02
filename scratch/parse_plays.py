@@ -1,5 +1,6 @@
 import re
 import os
+import json
 
 def parse_plays(file_path, actor_prefix, output_dir):
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -19,14 +20,13 @@ def parse_plays(file_path, actor_prefix, output_dir):
         end_idx = matches[i+1].start() if i + 1 < len(matches) else len(content)
         
         body = content[start_idx:end_idx].strip()
+        # Remove any trailing Quick Reference table that was at the end of donor docs
+        body = re.sub(r'##\s+Quick Reference.*', '', body, flags=re.DOTALL).strip()
         
-        # Extract summary / when to use / table phrase
-        summary_match = re.search(r'### When to use it\s*\n(.*?)(?=\n###|\Z)', body, re.DOTALL)
-        summary = summary_match.group(1).strip() if summary_match else ""
-        summary = re.sub(r'\s+', ' ', summary).strip()
-        if len(summary) > 200:
-            summary = summary[:197] + "..."
-        summary = summary.replace('"', '\\"')
+        # Extract true lead pitch (the 1-2 sentence thesis before '###')
+        lead = body.split('###')[0].strip()
+        summary_clean = re.sub(r'\s+', ' ', lead).strip()
+        json_summary = json.dumps(summary_clean)
 
         table_phrase_match = re.search(r'### At the table\s*\n(.*?)(?=\n##|\Z)', body, re.DOTALL)
         table_phrase = ""
@@ -53,15 +53,17 @@ def parse_plays(file_path, actor_prefix, output_dir):
 
         actor = "joe" if actor_prefix == "J" else "cow"
         play_id = f"{actor_prefix}-{play_num}"
+        weight = int(play_num) if actor_prefix == "J" else 1000 + int(play_num)
 
         # Frontmatter
         frontmatter = f"""---
 title: "{play_title.replace('"', '\\"')}"
 play_id: "{play_id}"
+weight: {weight}
 actor: "{actor}"
 type: "{play_type}"
 threat_tags: ["Tactical", "{actor.capitalize()}"]
-summary: "{summary}"
+summary: {json_summary}
 table_phrase: "{table_phrase}"
 ---
 
@@ -71,10 +73,11 @@ table_phrase: "{table_phrase}"
         with open(os.path.join(output_dir, filename), 'w', encoding='utf-8') as out_f:
             out_f.write(frontmatter)
 
-# Parse Joe's 150 plays
-parse_plays('../joe/joes-greatest-hits.md', 'J', 'content/plays/joe')
+if __name__ == '__main__':
+    # Parse Joe's 150 plays
+    parse_plays('../joe/joes-greatest-hits.md', 'J', 'content/plays/joe')
 
-# Parse Cow's 100 plays
-parse_plays('../joe/mr-bigs-greatest-hits.md', 'C', 'content/plays/cow')
+    # Parse Cow's 100 plays
+    parse_plays('../joe/mr-bigs-greatest-hits.md', 'C', 'content/plays/cow')
 
-print("All plays re-parsed and sanitized successfully!")
+    print("All plays re-parsed and sanitized successfully!")
