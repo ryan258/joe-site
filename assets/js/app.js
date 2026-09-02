@@ -247,38 +247,47 @@
     const filterBtns = document.querySelectorAll('.filter-btn');
     const playCards = document.querySelectorAll('.play-card');
     const searchInput = document.getElementById('plays-inline-search');
+    const countEl = document.getElementById('plays-count-indicator');
 
     function applyFilters() {
       const activeBtn = document.querySelector('.filter-btn.active');
       const filterCategory = activeBtn ? activeBtn.dataset.filter : 'all';
       const term = searchInput ? searchInput.value.toLowerCase().trim() : '';
+      let visibleCount = 0;
 
       playCards.forEach(card => {
         const actor = card.dataset.actor || '';
         const type = card.dataset.type || '';
         const tags = card.dataset.tags || '';
         const title = card.querySelector('.play-title')?.textContent.toLowerCase() || '';
-        const body = card.textContent.toLowerCase();
+        const tmpl = card.querySelector('.play-modal-data');
+        const modalText = tmpl && tmpl.content ? tmpl.content.textContent.toLowerCase() : '';
+        const cardText = card.textContent.toLowerCase();
 
         let matchesCategory = true;
         if (filterCategory === 'joe') matchesCategory = actor.includes('joe');
         else if (filterCategory === 'cow') matchesCategory = actor.includes('cow');
-        else if (filterCategory === 'action') matchesCategory = type.toLowerCase().includes('action');
+        else if (filterCategory === 'action') matchesCategory = type.toLowerCase() === 'action';
         else if (filterCategory === 'bonus') matchesCategory = type.toLowerCase().includes('bonus');
         else if (filterCategory === 'reaction') matchesCategory = type.toLowerCase().includes('reaction');
-        else if (filterCategory === 'sculpt') matchesCategory = tags.toLowerCase().includes('sculpt') || body.includes('sculpt');
+        else if (filterCategory === 'sculpt') matchesCategory = tags.toLowerCase().includes('sculpt') || modalText.includes('sculpt');
 
         let matchesSearch = true;
         if (term) {
-          matchesSearch = title.includes(term) || body.includes(term) || tags.toLowerCase().includes(term);
+          matchesSearch = title.includes(term) || cardText.includes(term) || tags.toLowerCase().includes(term) || modalText.includes(term);
         }
 
         if (matchesCategory && matchesSearch) {
           card.style.display = 'flex';
+          visibleCount++;
         } else {
           card.style.display = 'none';
         }
       });
+
+      if (countEl) {
+        countEl.textContent = `Showing ${visibleCount} of ${playCards.length} plays`;
+      }
     }
 
     filterBtns.forEach(btn => {
@@ -292,6 +301,196 @@
     if (searchInput) {
       searchInput.addEventListener('input', applyFilters);
     }
+
+    if (countEl && playCards.length > 0) {
+      countEl.textContent = `Showing ${playCards.length} of ${playCards.length} plays`;
+    }
+  }
+
+  // Play Detail Modal Controller (<dialog> with light-dismiss & keyboard navigation)
+  function initPlayDetailModal() {
+    const modal = document.getElementById('play-detail-modal');
+    if (!modal) return;
+
+    // Feature test for HTMLDialogElement and showModal method
+    if (typeof HTMLDialogElement === 'undefined' || typeof modal.showModal !== 'function') {
+      console.warn('Native <dialog> not supported; falling back to direct page links.');
+      return;
+    }
+
+    const mount = document.getElementById('play-modal-mount');
+    const prevBtn = document.getElementById('play-modal-prev-btn');
+    const nextBtn = document.getElementById('play-modal-next-btn');
+    const counterEl = document.getElementById('play-modal-counter');
+    const closeBtn = document.getElementById('play-modal-close-btn');
+    const playsGrid = document.getElementById('plays-grid');
+
+    let currentCard = null;
+
+    function getVisibleCards() {
+      return Array.from(document.querySelectorAll('.play-card')).filter(c => c.style.display !== 'none');
+    }
+
+    function updateNav() {
+      const visible = getVisibleCards();
+      const idx = visible.indexOf(currentCard);
+
+      if (counterEl) {
+        counterEl.textContent = idx >= 0 ? `Play ${idx + 1} of ${visible.length}` : '';
+      }
+      if (prevBtn) {
+        prevBtn.disabled = (idx <= 0);
+      }
+      if (nextBtn) {
+        nextBtn.disabled = (idx < 0 || idx >= visible.length - 1);
+      }
+    }
+
+    function openPlayModal(card, updateHash = true) {
+      if (!card) return;
+      currentCard = card;
+
+      const tmpl = card.querySelector('.play-modal-data');
+      if (tmpl && mount) {
+        mount.innerHTML = '';
+        mount.appendChild(tmpl.content.cloneNode(true));
+      }
+
+      updateNav();
+
+      if (!modal.open) {
+        modal.showModal();
+      }
+
+      const playId = card.id;
+      if (updateHash && playId) {
+        history.replaceState(null, '', '#' + playId);
+      }
+    }
+
+    function closePlayModal() {
+      if (modal.open) {
+        modal.close();
+      }
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    }
+
+    // Prev / Next navigation
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const visible = getVisibleCards();
+        const idx = visible.indexOf(currentCard);
+        if (idx > 0) {
+          openPlayModal(visible[idx - 1]);
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const visible = getVisibleCards();
+        const idx = visible.indexOf(currentCard);
+        if (idx >= 0 && idx < visible.length - 1) {
+          openPlayModal(visible[idx + 1]);
+        }
+      });
+    }
+
+    // Close button
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closePlayModal);
+    }
+
+    // Keyboard navigation (Escape is native; arrow keys switch plays)
+    document.addEventListener('keydown', (e) => {
+      if (!modal.open) return;
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevBtn?.click();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextBtn?.click();
+      }
+    });
+
+    // Native closedby="any" fallback for backdrop click
+    if (typeof HTMLDialogElement !== 'undefined' && !('closedBy' in HTMLDialogElement.prototype)) {
+      modal.addEventListener('click', (event) => {
+        if (event.target !== modal) return;
+        const rect = modal.getBoundingClientRect();
+        const isDialogContent = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (!isDialogContent) {
+          closePlayModal();
+        }
+      });
+    }
+
+    // Clean hash on native dismiss (e.g. Esc key)
+    modal.addEventListener('close', () => {
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    });
+
+    // Card click & keyboard triggers via event delegation with progressive enhancement
+    if (playsGrid) {
+      playsGrid.addEventListener('click', (e) => {
+        // Do not intercept if clicking the copy phrase button
+        if (e.target.closest('.copy-phrase-btn')) return;
+
+        // If user holds modifier key (Cmd/Ctrl/Shift), allow default link navigation to single page
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        const card = e.target.closest('.play-card');
+        if (card) {
+          e.preventDefault();
+          openPlayModal(card);
+        }
+      });
+
+      playsGrid.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const card = e.target.closest('.play-card');
+          if (card && (e.target === card || e.target.closest('.play-title-link') || e.target.closest('.play-card-expand-cta'))) {
+            e.preventDefault();
+            openPlayModal(card);
+          }
+        }
+      });
+    }
+
+    // Deep link support from URL hash
+    function checkHashForPlay() {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (hash) {
+        const targetCard = document.getElementById(hash);
+        if (targetCard && targetCard.classList.contains('play-card')) {
+          if (targetCard.style.display === 'none') {
+            const searchInput = document.getElementById('plays-inline-search');
+            if (searchInput && searchInput.value) {
+              searchInput.value = '';
+            }
+            const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+            if (allBtn) {
+              allBtn.click();
+            } else if (searchInput) {
+              searchInput.dispatchEvent(new Event('input'));
+            }
+          }
+          openPlayModal(targetCard, false);
+        }
+      }
+    }
+
+    checkHashForPlay();
+    window.addEventListener('hashchange', checkHashForPlay);
   }
 
   // Search Modal Hotkey Controller
@@ -341,7 +540,6 @@
           resultsContainer.innerHTML = '<li style="padding:12px;color:var(--text-dim);text-align:center;">Type a spell name, play title, rule keyword, or stat...</li>';
           return;
         }
-        // Query matching against predefined index
         const matches = (window.JOE_SEARCH_INDEX || []).filter(item => {
           return item.title.toLowerCase().includes(query) || item.summary.toLowerCase().includes(query) || item.category.toLowerCase().includes(query);
         });
@@ -363,19 +561,23 @@
     }
   }
 
-  // Copy Phrasing to Clipboard
+  // Copy Phrasing to Clipboard (Delegated for static cards and dynamic modal content)
   function initCopyButtons() {
-    document.querySelectorAll('.copy-phrase-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const text = btn.dataset.phrase;
-        if (text) {
-          navigator.clipboard.writeText(text).then(() => {
-            const original = btn.textContent;
-            btn.textContent = '✓ Copied!';
-            setTimeout(() => { btn.textContent = original; }, 1500);
-          });
-        }
-      });
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.copy-phrase-btn');
+      if (!btn) return;
+      e.stopPropagation();
+
+      const text = btn.dataset.phrase;
+      if (text) {
+        navigator.clipboard.writeText(text).then(() => {
+          const original = btn.textContent;
+          btn.textContent = '✓ Copied!';
+          setTimeout(() => { btn.textContent = original; }, 1600);
+        }).catch(err => {
+          console.warn('Clipboard copy failed:', err);
+        });
+      }
     });
   }
 
@@ -386,6 +588,7 @@
     initHudHandlers();
     initTurnPilot();
     initPlaysFilter();
+    initPlayDetailModal();
     initSearchModal();
     initCopyButtons();
   });
