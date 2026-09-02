@@ -1,5 +1,5 @@
 // ==========================================================================
-// TACTICAL PLAYS DIRECTORY & PLAY CARDS (BEM)
+// TACTICAL PLAYS DIRECTORY, PLAY CARDS & DETAIL MODAL (BEM)
 // ==========================================================================
 
 .plays-filter-bar {
@@ -51,33 +51,51 @@
 
 .plays-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
+
+  .play-card {
+    cursor: pointer;
+
+    &:hover {
+      border-color: $accent-gold;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), 0 0 18px rgba($accent-gold, 0.2);
+      transform: translateY(-2px);
+    }
+
+    &:focus-within {
+      border-color: $accent-gold;
+    }
+  }
 }
+
+// --------------------------------------------------------------------------
+// Play Card Component (Base & Scoped Styles)
+// --------------------------------------------------------------------------
 
 .play-card {
   @include card-surface;
-  padding: 22px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: all $transition-smooth;
+  gap: 12px;
+  transition: transform $transition-fast, border-color $transition-fast, box-shadow $transition-fast;
   position: relative;
-  overflow: hidden;
-
-  &:hover {
-    border-color: $accent-gold;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba($accent-gold, 0.18);
-    transform: translateY(-2px);
-  }
+  border-radius: $radius-md;
 
   &__header,
   .play-card-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 8px;
+  }
+
+  .play-card-badges {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
   }
 
   &__id,
@@ -85,30 +103,138 @@
     font-size: 0.75rem;
     font-weight: 800;
     @include text-mono;
-    padding: 2px 8px;
+    padding: 2px 7px;
     border-radius: $radius-sm;
     background: $bg-surface-elevated;
     color: $accent-gold;
-    border: 1px solid $border-subtle;
+    border: 1px solid rgba($accent-gold, 0.35);
+
+    &--large {
+      font-size: 0.88rem;
+      padding: 3px 10px;
+    }
   }
 
   &__title,
   .play-title {
-    font-size: 1.18rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: $text-pure;
-    line-height: 1.3;
+    line-height: 1.35;
+    margin: 0;
+    font-family: $font-display;
+
+    a,
+    .play-title-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $accent-gold;
+      }
+    }
   }
+
+  .play-card-pitch {
+    font-size: 0.9rem;
+    color: $text-med;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .play-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba($border-subtle, 0.5);
+  }
+
+  .play-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .play-tag-chip {
+    font-size: 0.72rem;
+    @include text-mono;
+    color: $text-muted;
+    background: rgba($text-muted, 0.1);
+    padding: 2px 6px;
+    border-radius: $radius-sm;
+    border: 1px solid rgba($text-muted, 0.2);
+
+    &--modal {
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      color: $text-med;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: $border-subtle;
+    }
+  }
+
+  .play-card-copy-btn {
+    font-size: 0.75rem;
+    padding: 3px 9px;
+    cursor: pointer;
+    background: rgba($accent-forest, 0.15);
+    border: 1px solid rgba($accent-forest, 0.35);
+    color: #b7e8c3;
+    border-radius: $radius-sm;
+    transition: all $transition-fast;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba($accent-forest, 0.3);
+      color: #fff;
+    }
+  }
+
+  .play-card-expand-cta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $accent-gold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color $transition-fast, transform $transition-fast;
+
+    .play-card-expand-arrow {
+      transition: transform $transition-fast;
+    }
+  }
+
+  &:hover .play-card-expand-cta {
+    color: $text-pure;
+
+    .play-card-expand-arrow {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  // ------------------------------------------------------------------------
+  // Homepage Signature Play Card Elements (Preserved Hierarchy)
+  // ------------------------------------------------------------------------
 
   &__trigger,
   .play-trigger {
     font-size: 0.85rem;
     color: $text-med;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     padding: 10px 14px;
     background: $bg-surface-elevated;
     border-left: 3px solid $accent-gold;
     border-radius: 0 $radius-sm $radius-sm 0;
+
+    strong {
+      color: $accent-gold;
+      margin-right: 4px;
+    }
   }
 
   &__mechanics,
@@ -116,24 +242,40 @@
     font-size: 0.88rem;
     color: $text-med;
     line-height: 1.55;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 
-    ul {
-      padding-left: 18px;
+    p {
+      margin-bottom: 8px;
+    }
+
+    ul, ol {
+      padding-left: 20px;
       margin-top: 6px;
+    }
+
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: $radius-sm;
+      font-family: $font-mono;
+      font-size: 0.86em;
+      color: $accent-cyan;
     }
   }
 
   &__table-phrase,
   .play-table-phrase {
-    background: rgba($accent-forest, 0.12);
-    border: 1px solid rgba($accent-forest, 0.35);
+    background: rgba($accent-forest, 0.14);
+    border: 1px solid rgba($accent-forest, 0.38);
     border-radius: $radius-md;
-    padding: 12px 14px;
+    padding: 12px 16px;
     font-size: 0.88rem;
     color: #c7eed2;
     font-style: italic;
     margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   &__phrase-label,
@@ -143,7 +285,343 @@
     font-size: 0.7rem;
     color: #78c28f;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
     display: block;
-    margin-bottom: 4px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Play Detail Modal Dialog (Native <dialog> with Accessible Controls)
+// --------------------------------------------------------------------------
+
+.play-detail-modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  width: 94vw;
+  max-width: 860px;
+  max-height: 90vh;
+  outline: none;
+  z-index: 250;
+
+  &::backdrop {
+    background: rgba(6, 10, 8, 0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: playModalFadeIn 0.2s ease-out;
+  }
+
+  &[open] {
+    display: flex;
+    animation: playModalScaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &__inner {
+    background: $bg-surface-card;
+    border: 1px solid $border-active;
+    border-radius: $radius-lg;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 32px rgba($accent-gold, 0.25);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 24px;
+    background: $bg-surface-elevated;
+    border-bottom: 1px solid $border-subtle;
+    flex-shrink: 0;
+  }
+
+  .play-modal-nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .play-modal-nav-btn {
+    background: rgba($accent-gold, 0.1);
+    border: 1px solid $border-subtle;
+    color: $text-high;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &:hover:not(:disabled) {
+      background: $accent-gold;
+      color: #0c120e;
+      border-color: $accent-gold;
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+  }
+
+  .play-modal-counter {
+    font-size: 0.78rem;
+    @include text-mono;
+    color: $text-muted;
+  }
+
+  .play-modal-close-btn {
+    background: transparent;
+    border: 1px solid $border-subtle;
+    color: $text-muted;
+    font-size: 1.15rem;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $text-pure;
+      border-color: $accent-fire;
+      background: rgba($accent-fire, 0.16);
+    }
+  }
+
+  &__content {
+    overflow-y: auto;
+    padding: 28px 32px 36px;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Play Detail Modal Content Typography & Layout
+// --------------------------------------------------------------------------
+
+.play-modal-header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.play-modal-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.play-modal-anchor-link {
+  font-size: 0.82rem;
+  @include text-mono;
+  color: $text-muted;
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: $radius-sm;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $border-subtle;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $accent-gold;
+    border-color: $accent-gold;
+  }
+}
+
+.play-modal-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: $text-pure;
+  line-height: 1.25;
+  margin: 0 0 20px 0;
+  font-family: $font-display;
+  letter-spacing: 0.01em;
+}
+
+.play-modal-body-mechanics {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: $text-high;
+
+  // The lead premise paragraph
+  > p:first-of-type {
+    font-size: 1.12rem;
+    font-weight: 500;
+    color: $text-pure;
+    line-height: 1.6;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    background: rgba($accent-gold, 0.08);
+    border-left: 3px solid $accent-gold;
+    border-radius: 0 $radius-sm $radius-sm 0;
+  }
+
+  h3 {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: $accent-gold;
+    margin-top: 26px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba($accent-gold, 0.22);
+    font-family: $font-display;
+    letter-spacing: 0.02em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    margin-bottom: 14px;
+  }
+
+  ul, ol {
+    padding-left: 24px;
+    margin-bottom: 18px;
+  }
+
+  li {
+    margin-bottom: 10px;
+    line-height: 1.65;
+    color: $text-high;
+
+    &::marker {
+      color: $accent-gold;
+      font-weight: 700;
+    }
+  }
+
+  strong {
+    color: $text-pure;
+    font-weight: 700;
+  }
+
+  em {
+    color: #ecd7ba;
+  }
+
+  code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 7px;
+    border-radius: $radius-sm;
+    font-family: $font-mono;
+    font-size: 0.88em;
+    color: $accent-cyan;
+    border: 1px solid rgba($accent-cyan, 0.25);
+  }
+}
+
+.play-modal-table-phrase {
+  background: rgba($accent-forest, 0.14);
+  border: 1px solid rgba($accent-forest, 0.38);
+  border-radius: $radius-md;
+  padding: 18px 22px;
+  margin-top: 28px;
+
+  .play-modal-phrase-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .table-phrase-label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #78c28f;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .play-modal-copy-btn {
+    font-size: 0.82rem;
+    padding: 5px 14px;
+    background: rgba($accent-forest, 0.25);
+    border: 1px solid rgba($accent-forest, 0.5);
+    color: #d1f7db;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $accent-forest;
+      color: #0c120e;
+    }
+  }
+
+  .play-modal-quote {
+    margin: 0;
+    padding: 0;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: #d2f6dc;
+    line-height: 1.55;
+    border: none;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Modal Keyframe Animations
+// --------------------------------------------------------------------------
+
+@keyframes playModalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes playModalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Reduced Motion Accessibility Overrides
+// --------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  .plays-grid .play-card {
+    transition: none !important;
+    &:hover {
+      transform: none !important;
+    }
+  }
+
+  .play-card-expand-cta,
+  .play-card-expand-arrow {
+    transition: none !important;
+  }
+
+  .play-detail-modal {
+    &[open],
+    &::backdrop {
+      animation: none !important;
+    }
   }
 }

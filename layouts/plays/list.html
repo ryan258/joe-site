@@ -1,16 +1,16 @@
 {{ define "main" }}
-{{ $plays := where site.RegularPages "Section" "plays" }}
-<section style="margin-bottom:28px;">
+{{ $plays := (where site.RegularPages "Section" "plays").ByWeight }}
+<section style="margin-bottom:24px;">
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:16px;">
     <div>
       <span class="tag-badge tag-cyan" style="margin-bottom:8px;display:inline-block;">Tactical Database</span>
       <h1 style="font-size:2.2rem;font-weight:800;color:var(--text-pure);line-height:1.2;">Tactical Plays Directory ({{ len $plays }})</h1>
-      <p style="color:var(--text-med);font-size:1rem;margin-top:6px;max-width:700px;">
-        Comprehensive canonical playbook containing <strong>150 Joe Plays</strong> (J-1..J-150) and <strong>100 Cow Plays</strong> (C-1..C-100). Filterable by actor, action economy phase, resource cost, and threat type.
+      <p style="color:var(--text-med);font-size:0.95rem;margin-top:6px;max-width:720px;line-height:1.5;">
+        Canonical tactical playbook containing <strong>150 Joe Plays</strong> (J-1..J-150) and <strong>100 Cow Plays</strong> (C-1..C-100). Browse at-a-glance summaries below or click any card to expand full mechanical steps and verbal scripts.
       </p>
     </div>
     <div style="min-width:280px;">
-      <input type="text" id="plays-inline-search" class="search-input" placeholder="🔍 Filter 250 plays by keyword..." style="width:100%;padding:10px 16px;background:var(--bg-surface-card);border:1px solid var(--border-subtle);border-radius:var(--border-radius-md);color:var(--text-pure);">
+      <input type="text" id="plays-inline-search" class="search-input" placeholder="🔍 Search plays by keyword or tag..." style="width:100%;padding:10px 16px;background:var(--bg-surface-card);border:1px solid var(--border-subtle);border-radius:var(--border-radius-md);color:var(--text-pure);">
     </div>
   </div>
 
@@ -25,14 +25,41 @@
       <button type="button" class="filter-btn" data-filter="reaction">🛡️ Reactions</button>
       <button type="button" class="filter-btn" data-filter="sculpt">💥 Sculpt Spells</button>
     </div>
+    <div id="plays-count-indicator" style="font-size:0.82rem;color:var(--text-muted);font-weight:600;">
+      Showing {{ len $plays }} plays
+    </div>
   </div>
 </section>
 
 <!-- Plays Grid -->
-<div class="plays-grid">
+<div class="plays-grid" id="plays-grid">
   {{ range $plays }}
     {{ .Render "card" }}
   {{ end }}
 </div>
+
+<!-- Accessible Native Detail Modal Dialog -->
+<dialog id="play-detail-modal" class="play-detail-modal" closedby="any" aria-labelledby="play-modal-title">
+  <div class="play-detail-modal__inner">
+    <div class="play-detail-modal__top-nav">
+      <div class="play-modal-nav-controls">
+        <button type="button" id="play-modal-prev-btn" class="play-modal-nav-btn" aria-label="Previous play (or left arrow)">
+          <span aria-hidden="true">←</span> Prev
+        </button>
+        <span id="play-modal-counter" class="play-modal-counter">Play 1 of 250</span>
+        <button type="button" id="play-modal-next-btn" class="play-modal-nav-btn" aria-label="Next play (or right arrow)">
+          Next <span aria-hidden="true">→</span>
+        </button>
+      </div>
+      <button type="button" id="play-modal-close-btn" class="play-modal-close-btn" aria-label="Close dialog (Esc)">
+        ✕
+      </button>
+    </div>
+
+    <div id="play-modal-mount" class="play-detail-modal__content">
+      <!-- Injected from the active card's template -->
+    </div>
+  </div>
+</dialog>
 
 {{ end }}
