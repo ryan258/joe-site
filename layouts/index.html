@@ -3,6 +3,11 @@
 
 <!-- Hero Cockpit Header -->
 <section class="cockpit-hero">
+  <span class="hero-corner hero-corner--tl" aria-hidden="true">◇</span>
+  <span class="hero-corner hero-corner--tr" aria-hidden="true">◇</span>
+  <span class="hero-corner hero-corner--bl" aria-hidden="true">◇</span>
+  <span class="hero-corner hero-corner--br" aria-hidden="true">◇</span>
+
   <div class="cockpit-banner-grid">
     <div class="cockpit-hero-content">
       <div class="badge-cluster">
@@ -15,10 +20,10 @@
       <p class="cockpit-tagline">
         The ultimate zero-latency tabletop flight deck. Execute turns in &lt;30s, sculpt danger-close evocation, deploy Cow's 60ft Flyby support, and arbitrate 2024 rules flawlessly.
       </p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="{{ "plays/" | relURL }}" class="filter-btn active" style="padding:8px 16px;font-size:0.9rem;">📖 Explore All 250 Tactical Plays</a>
-        <a href="{{ "spellbook/" | relURL }}" class="filter-btn" style="padding:8px 16px;font-size:0.9rem;">✨ Spellbook & Prepared Spells</a>
-        <a href="{{ "investigation/" | relURL }}" class="filter-btn" style="padding:8px 16px;font-size:0.9rem;">🔍 Investigation HUD</a>
+      <div class="cockpit-cta-group">
+        <a href="{{ "plays/" | relURL }}" class="filter-btn active">📖 Explore All 250 Tactical Plays</a>
+        <a href="{{ "spellbook/" | relURL }}" class="filter-btn">✨ Spellbook & Prepared Spells</a>
+        <a href="{{ "investigation/" | relURL }}" class="filter-btn">🔍 Investigation HUD</a>
       </div>
     </div>
     <div class="cockpit-hero-media">

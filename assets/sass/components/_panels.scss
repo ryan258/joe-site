@@ -27,27 +27,32 @@
 
 .hud-panel {
   @include card-surface;
-  padding: 22px;
-  margin-bottom: 22px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 16px;
 
   &__header,
   .panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $border-subtle;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    gap: 10px;
   }
 
   &__title,
   .panel-title {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-family: $font-display;
+    font-size: 1.05rem;
+    font-weight: 800;
     display: flex;
     align-items: center;
     gap: 8px;
-    color: $text-pure;
+    color: #d4af37;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 }
 
@@ -55,10 +60,13 @@
   display: block;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  margin-bottom: 14px;
-  border: 1px solid $border-subtle;
-  border-radius: $radius-md;
+  margin-bottom: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  outline: 1px solid rgba(212, 175, 55, 0.2);
+  outline-offset: 3px;
+  border-radius: 12px;
   background: $bg-surface-elevated;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(52, 211, 153, 0.15);
 }
 
 .motion-art {
@@ -72,40 +80,47 @@
 .stats-matrix {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 18px;
 
   &__box,
   .stat-box {
-    background: $bg-surface-elevated;
-    border: 1px solid $border-subtle;
-    border-radius: $radius-sm;
-    padding: 8px;
+    background: rgba(13, 37, 31, 0.5);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: 8px;
+    padding: 10px 8px;
     text-align: center;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: rgba(212, 175, 55, 0.45);
+      background: rgba(212, 175, 55, 0.08);
+    }
   }
 
   &__label,
   .stat-label {
     font-size: 0.68rem;
     font-weight: 700;
-    color: $text-dim;
+    color: #889d93;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   &__val,
   .stat-val {
     @include text-mono;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 800;
-    color: $text-pure;
+    color: #f1f5f3;
   }
 
   &__mod,
   .stat-mod {
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     @include text-mono;
-    color: $accent-gold;
+    color: #d4af37;
   }
 }
 
@@ -113,63 +128,141 @@
 .ac-matrix {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 18px;
 
   &__card,
   .ac-card {
-    background: $bg-surface-elevated;
-    border: 1px solid $border-subtle;
-    border-radius: $radius-sm;
-    padding: 10px;
+    background: rgba(13, 37, 31, 0.5);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: 10px;
+    padding: 12px 10px;
     text-align: center;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: rgba(212, 175, 55, 0.45);
+    }
 
     &--highlight,
     &.highlight {
-      border-color: rgba($accent-gold, 0.45);
-      background: rgba($accent-gold, 0.08);
+      border-color: rgba(212, 175, 55, 0.55);
+      background: rgba(212, 175, 55, 0.12);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.2);
     }
   }
 
   &__num,
   .ac-num {
     @include text-mono;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 900;
-    color: $accent-gold;
+    color: #d4af37;
+    line-height: 1.1;
   }
 
   &__name,
   .ac-name {
-    font-size: 0.75rem;
-    color: $text-muted;
+    font-size: 0.74rem;
+    color: #cbd5e1;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
   }
 }
 
 // Reaction Radar Card
 .reaction-radar-card {
-  background: rgba($accent-fire, 0.08);
-  border: 1px solid rgba($accent-fire, 0.3);
-  border-radius: $radius-md;
-  padding: 12px;
-  margin-bottom: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: rgba(239, 68, 68, 0.55);
+    box-shadow: 0 0 14px rgba(239, 68, 68, 0.2);
+  }
 
   &__title,
   .reaction-title {
     font-family: $font-display;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     font-weight: 700;
-    color: #fda4af;
+    color: #fca5a5;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   &__trigger,
   .reaction-trigger {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
+    color: #cbd5e1;
+    line-height: 1.45;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Standalone Article Card (.single-article-card)
+// --------------------------------------------------------------------------
+
+.single-article-card {
+  max-width: 960px;
+  margin: 0 auto 36px;
+  padding: 36px 40px;
+  position: relative;
+
+  @media (max-width: 640px) {
+    padding: 24px 18px;
+    margin-bottom: 24px;
+  }
+
+  .single-article-header {
+    margin-bottom: 32px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+
+    @media (max-width: 640px) {
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+    }
+  }
+
+  .single-article-title {
+    font-size: 2.35rem;
+    font-weight: 800;
+    color: #f1f5f3;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    font-family: $font-display;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    @media (max-width: 640px) {
+      font-size: 1.55rem;
+      line-height: 1.22;
+    }
+
+    @media (max-width: 400px) {
+      font-size: 1.3rem;
+    }
+  }
+
+  .single-article-desc {
+    font-size: 1.05rem;
     color: $text-med;
+    line-height: 1.6;
+
+    @media (max-width: 640px) {
+      font-size: 0.95rem;
+    }
   }
 }

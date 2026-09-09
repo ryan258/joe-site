@@ -6,22 +6,23 @@
 .counter-btn {
   width: 22px;
   height: 22px;
-  border-radius: 4px;
-  border: 1px solid $border-subtle;
-  background: $bg-surface-elevated;
+  border-radius: $radius-full;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(255, 255, 255, 0.06);
   color: $text-high;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 11px;
   transition: all $transition-fast;
 
   &:hover {
     background: $accent-gold;
-    color: #0c120e;
+    color: #06110e;
     border-color: $accent-gold;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
   }
 }
 
@@ -32,16 +33,18 @@
   right: 0;
   z-index: 90;
   height: $hud-bar-height;
-  @include glass-panel($bg-glass-strong, 18px);
-  border-top: 1px solid $border-subtle;
-  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.6);
+  background: rgba(6, 14, 11, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(13, 37, 31, 0.5);
 
   &__inner,
   .hud-dock-inner {
     max-width: $max-content-width;
     height: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,32 +63,38 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 12px;
-    background: $bg-surface-card;
-    border: 1px solid $border-subtle;
-    border-radius: $radius-md;
-    font-size: 0.85rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 4px 14px;
+    background: rgba(13, 37, 31, 0.65);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: $radius-full;
+    font-size: 0.84rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: rgba(212, 175, 55, 0.45);
+    }
 
     &--highlight {
-      border-color: rgba($accent-gold, 0.4);
+      border-color: rgba($accent-gold, 0.5);
+      background: rgba($accent-gold, 0.1);
     }
   }
 
   &__label,
   .hud-pill-label {
     font-weight: 700;
-    color: $text-dim;
+    color: #889d93;
     text-transform: uppercase;
     font-size: 0.7rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
   }
 
   &__val,
   .hud-pill-val {
     font-weight: 700;
     @include text-mono;
-    color: $text-pure;
+    color: #f1f5f3;
   }
 
   &__counter,
@@ -115,19 +124,23 @@
     background: $accent-gold;
     cursor: pointer;
     transition: all $transition-fast;
-    box-shadow: 0 0 6px $accent-gold-glow;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 
     &--used,
     &.used {
       background: transparent;
-      border-color: $text-dim;
+      border-color: rgba(212, 175, 55, 0.25);
       box-shadow: none;
+    }
+
+    &:hover {
+      transform: scale(1.15);
     }
   }
 
   &__concentration,
   .concentration-hud-pill {
-    padding: 5px 14px;
+    padding: 4px 14px;
     border-radius: $radius-full;
     font-size: 0.8rem;
     font-weight: 600;
@@ -135,15 +148,20 @@
     align-items: center;
     gap: 6px;
     cursor: pointer;
-    background: rgba($accent-purple, 0.15);
-    border: 1px solid rgba($accent-purple, 0.4);
+    background: rgba(192, 132, 252, 0.12);
+    border: 1px solid rgba(192, 132, 252, 0.35);
     color: #d8b4fe;
     transition: all $transition-fast;
 
+    &:hover {
+      background: rgba(192, 132, 252, 0.2);
+      border-color: rgba(192, 132, 252, 0.5);
+    }
+
     &--active,
     &.active {
-      background: rgba($accent-fire, 0.2);
-      border-color: $accent-fire;
+      background: rgba(239, 68, 68, 0.18);
+      border-color: #ef4444;
       color: #fda4af;
       animation: pulse-border 2s infinite;
     }
@@ -151,6 +169,6 @@
 }
 
 @keyframes pulse-border {
-  0%, 100% { box-shadow: 0 0 5px $accent-fire-glow; }
-  50% { box-shadow: 0 0 15px $accent-fire-glow; }
+  0%, 100% { box-shadow: 0 0 6px rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 16px rgba(239, 68, 68, 0.7); }
 }
