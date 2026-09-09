@@ -24,28 +24,30 @@
 }
 
 .filter-btn {
-  padding: 6px 16px;
+  padding: 8px 18px;
+  min-height: 40px;
   border-radius: $radius-full;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(212, 175, 55, 0.22);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(212, 175, 55, 0.28);
   color: #cbd5e1;
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
   transition: all $transition-fast;
+  touch-action: manipulation;
 
   &:hover {
-    background: rgba(212, 175, 55, 0.12);
-    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(212, 175, 55, 0.14);
+    border-color: rgba(212, 175, 55, 0.6);
     color: #fff;
   }
 
   &--active,
   &.active {
-    background: rgba(212, 175, 55, 0.2);
+    background: rgba(212, 175, 55, 0.22);
     color: #d4af37;
     border-color: #d4af37;
-    box-shadow: 0 0 14px rgba(212, 175, 55, 0.25);
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
     font-weight: 700;
   }
 }
@@ -101,25 +103,25 @@
 
   &__id,
   .play-id-tag {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 800;
     @include text-mono;
-    padding: 2px 7px;
+    padding: 3px 9px;
     border-radius: $radius-sm;
     background: $bg-surface-elevated;
     color: $accent-gold;
-    border: 1px solid rgba($accent-gold, 0.35);
+    border: 1px solid rgba($accent-gold, 0.4);
 
     &--large {
-      font-size: 0.88rem;
-      padding: 3px 10px;
+      font-size: 0.95rem;
+      padding: 4px 12px;
     }
   }
 
   &__title,
   .play-title {
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.28rem;
+    font-weight: 800;
     color: $text-pure;
     line-height: 1.35;
     margin: 0;
@@ -138,9 +140,9 @@
   }
 
   .play-card-pitch {
-    font-size: 0.9rem;
-    color: $text-med;
-    line-height: 1.5;
+    font-size: 0.96rem;
+    color: #e2e8f0;
+    line-height: 1.55;
     margin: 0;
   }
 
@@ -150,7 +152,7 @@
     justify-content: space-between;
     gap: 12px;
     margin-top: auto;
-    padding-top: 10px;
+    padding-top: 12px;
     border-top: 1px solid rgba($border-subtle, 0.5);
   }
 
@@ -161,19 +163,19 @@
   }
 
   .play-tag-chip {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     @include text-mono;
-    color: $text-muted;
-    background: rgba($text-muted, 0.1);
-    padding: 2px 6px;
+    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px 8px;
     border-radius: $radius-sm;
-    border: 1px solid rgba($text-muted, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.25);
 
     &--modal {
-      font-size: 0.78rem;
-      padding: 3px 8px;
-      color: $text-med;
-      background: rgba(255, 255, 255, 0.05);
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      color: $text-high;
+      background: rgba(255, 255, 255, 0.08);
       border-color: $border-subtle;
     }
   }

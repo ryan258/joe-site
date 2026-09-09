@@ -4,7 +4,7 @@
 
 .turn-pilot-bar {
   @include card-surface;
-  padding: 22px 28px;
+  padding: 24px 28px;
   margin-bottom: 28px;
 
   &__header,
@@ -13,14 +13,14 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
 
   &__title,
   .pilot-title {
     font-family: $font-display;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -36,48 +36,52 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 12px;
 
-    @include respond-to('md') {
-      grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 960px) {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
     }
   }
 
   &__step,
   .pilot-step-btn {
-    background: rgba(13, 37, 31, 0.5);
-    border: 1px solid rgba(212, 175, 55, 0.22);
-    border-radius: 12px;
-    padding: 14px 16px;
+    background: rgba(13, 37, 31, 0.6);
+    border: 1.5px solid rgba(212, 175, 55, 0.28);
+    border-radius: 14px;
+    padding: 16px 18px;
     text-align: left;
     cursor: pointer;
     transition: all $transition-fast;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
 
     &:hover {
-      background: rgba(212, 175, 55, 0.08);
-      border-color: rgba(212, 175, 55, 0.5);
+      background: rgba(212, 175, 55, 0.12);
+      border-color: rgba(212, 175, 55, 0.6);
       transform: translateY(-1px);
     }
 
     &--active,
     &.active {
-      background: rgba(212, 175, 55, 0.16);
+      background: rgba(212, 175, 55, 0.2);
       border-color: #d4af37;
-      box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
     }
 
     &-num,
     .step-num {
-      font-size: 0.72rem;
+      font-size: 0.82rem;
       font-weight: 800;
       color: #d4af37;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
     }
 
     &-name,
     .step-name {
       font-family: $font-display;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #f1f5f3;
       letter-spacing: 0.02em;
@@ -85,10 +89,10 @@
 
     &-desc,
     .step-desc {
-      font-size: 0.76rem;
-      color: #889d93;
-      margin-top: 3px;
-      line-height: 1.35;
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      margin-top: 4px;
+      line-height: 1.4;
     }
   }
 }

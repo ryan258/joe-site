@@ -79,8 +79,9 @@
     flex-wrap: wrap;
 
     .filter-btn {
-      padding: 8px 18px;
-      font-size: 0.85rem;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      min-height: 42px;
       border-radius: $radius-full;
     }
   }

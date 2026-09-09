@@ -8,7 +8,15 @@
       </div>
     </a>
 
-    <nav>
+    <div class="header-actions">
+      <button class="quick-search-trigger" type="button" aria-label="Search">
+        <span class="search-label-full">🔍 Search Plays, Spells & Rules</span>
+        <span class="search-label-short">🔍 Search</span>
+        <span class="kbd-badge">/</span>
+      </button>
+    </div>
+
+    <nav class="header-nav">
       <ul class="main-nav">
         {{ $currentPage := . }}
         {{ range site.Menus.main }}
@@ -20,12 +28,5 @@
         {{ end }}
       </ul>
     </nav>
-
-    <div class="header-actions">
-      <button class="quick-search-trigger" type="button" aria-label="Search">
-        <span>🔍 Search Plays, Spells & Rules</span>
-        <span class="kbd-badge">/</span>
-      </button>
-    </div>
   </div>
 </header>

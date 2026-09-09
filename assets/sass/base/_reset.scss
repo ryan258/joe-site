@@ -10,13 +10,21 @@
 
 html {
   font-family: $font-body;
-  font-size: 15px;
+  font-size: 16.5px;
   line-height: 1.55;
   color: $text-high;
   background-color: $bg-core;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (min-width: 768px) {
+    font-size: 17.5px;
+  }
+
+  @media (min-width: 1400px) {
+    font-size: 17px;
+  }
 }
 
 body {
@@ -30,7 +38,17 @@ body {
     radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
     radial-gradient(circle at 50% 80%, rgba(6, 17, 14, 0.9) 0%, transparent 70%);
   background-attachment: fixed;
-  padding-bottom: 74px;
+  padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+}
+
+button, a, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, .counter-btn, .slot-circle, .pilot-step-btn, .hud-pill, .tag-badge {
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 ::-webkit-scrollbar {

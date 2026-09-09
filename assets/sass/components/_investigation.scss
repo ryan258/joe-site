@@ -19,19 +19,19 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     font-weight: 800;
     color: #d4af37;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     margin-bottom: 8px;
   }
 
   &__title,
   .investigation-step-title {
     font-family: $font-display;
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 1.35rem;
+    font-weight: 800;
     color: #f1f5f3;
     letter-spacing: 0.03em;
     text-transform: uppercase;

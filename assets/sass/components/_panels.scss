@@ -8,18 +8,18 @@
   gap: 24px;
   align-items: start;
 
-  @include respond-to('lg') {
-    grid-template-columns: 280px 1fr;
+  @media (max-width: 1200px) {
+    grid-template-columns: 300px 1fr;
 
-    > .hud-panel:last-child {
+    > div:last-child {
       grid-column: span 2;
     }
   }
 
-  @include respond-to('md') {
+  @media (max-width: 860px) {
     grid-template-columns: 1fr;
 
-    > .hud-panel:last-child {
+    > div:last-child {
       grid-column: auto;
     }
   }
@@ -45,7 +45,7 @@
   &__title,
   .panel-title {
     font-family: $font-display;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -85,40 +85,40 @@
 
   &__box,
   .stat-box {
-    background: rgba(13, 37, 31, 0.5);
-    border: 1px solid rgba(212, 175, 55, 0.22);
-    border-radius: 8px;
-    padding: 10px 8px;
+    background: rgba(13, 37, 31, 0.55);
+    border: 1.5px solid rgba(212, 175, 55, 0.25);
+    border-radius: 10px;
+    padding: 12px 8px;
     text-align: center;
     transition: all $transition-fast;
 
     &:hover {
-      border-color: rgba(212, 175, 55, 0.45);
-      background: rgba(212, 175, 55, 0.08);
+      border-color: rgba(212, 175, 55, 0.5);
+      background: rgba(212, 175, 55, 0.1);
     }
   }
 
   &__label,
   .stat-label {
-    font-size: 0.68rem;
-    font-weight: 700;
+    font-size: 0.78rem;
+    font-weight: 800;
     color: #889d93;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
   }
 
   &__val,
   .stat-val {
     @include text-mono;
-    font-size: 1.25rem;
+    font-size: 1.45rem;
     font-weight: 800;
     color: #f1f5f3;
   }
 
   &__mod,
   .stat-mod {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.88rem;
+    font-weight: 800;
     @include text-mono;
     color: #d4af37;
   }
@@ -128,34 +128,34 @@
 .ac-matrix {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 18px;
 
   &__card,
   .ac-card {
-    background: rgba(13, 37, 31, 0.5);
-    border: 1px solid rgba(212, 175, 55, 0.22);
-    border-radius: 10px;
-    padding: 12px 10px;
+    background: rgba(13, 37, 31, 0.55);
+    border: 1.5px solid rgba(212, 175, 55, 0.25);
+    border-radius: 12px;
+    padding: 14px 10px;
     text-align: center;
     transition: all $transition-fast;
 
     &:hover {
-      border-color: rgba(212, 175, 55, 0.45);
+      border-color: rgba(212, 175, 55, 0.5);
     }
 
     &--highlight,
     &.highlight {
-      border-color: rgba(212, 175, 55, 0.55);
-      background: rgba(212, 175, 55, 0.12);
-      box-shadow: 0 0 14px rgba(212, 175, 55, 0.2);
+      border-color: rgba(212, 175, 55, 0.6);
+      background: rgba(212, 175, 55, 0.14);
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
     }
   }
 
   &__num,
   .ac-num {
     @include text-mono;
-    font-size: 1.6rem;
+    font-size: 1.95rem;
     font-weight: 900;
     color: #d4af37;
     line-height: 1.1;
@@ -163,33 +163,33 @@
 
   &__name,
   .ac-name {
-    font-size: 0.74rem;
+    font-size: 0.82rem;
     color: #cbd5e1;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-top: 4px;
+    letter-spacing: 0.05em;
+    margin-top: 5px;
   }
 }
 
 // Reaction Radar Card
 .reaction-radar-card {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.35);
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin-bottom: 14px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1.5px solid rgba(239, 68, 68, 0.4);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
   transition: all $transition-fast;
 
   &:hover {
-    border-color: rgba(239, 68, 68, 0.55);
-    box-shadow: 0 0 14px rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.65);
+    box-shadow: 0 0 16px rgba(239, 68, 68, 0.25);
   }
 
   &__title,
   .reaction-title {
     font-family: $font-display;
-    font-size: 0.92rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: #fca5a5;
     letter-spacing: 0.03em;
@@ -197,14 +197,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   &__trigger,
   .reaction-trigger {
-    font-size: 0.82rem;
-    color: #cbd5e1;
-    line-height: 1.45;
+    font-size: 0.92rem;
+    color: #e2e8f0;
+    line-height: 1.55;
   }
 }
 

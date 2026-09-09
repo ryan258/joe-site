@@ -31,8 +31,8 @@
   &__name,
   .spell-name {
     font-family: $font-display;
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 1.35rem;
+    font-weight: 800;
     color: #f1f5f3;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -40,15 +40,15 @@
 
   &__level-badge,
   .spell-level-badge {
-    font-size: 0.74rem;
-    font-weight: 700;
-    padding: 3px 12px;
+    font-size: 0.84rem;
+    font-weight: 800;
+    padding: 4px 14px;
     border-radius: $radius-full;
-    background: rgba(192, 132, 252, 0.14);
+    background: rgba(192, 132, 252, 0.16);
     color: #d8b4fe;
-    border: 1px solid rgba(192, 132, 252, 0.4);
+    border: 1px solid rgba(192, 132, 252, 0.45);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     white-space: nowrap;
   }
 
@@ -57,24 +57,24 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    color: #889d93;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: #cbd5e1;
     margin-bottom: 14px;
   }
 
   &__sculpt-banner,
   .sculpt-banner {
-    background: rgba(212, 175, 55, 0.12);
-    border: 1px solid rgba(212, 175, 55, 0.38);
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: 0.82rem;
+    background: rgba(212, 175, 55, 0.14);
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.92rem;
     color: #d4af37;
-    font-weight: 600;
-    margin-bottom: 12px;
+    font-weight: 700;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
   }
 }

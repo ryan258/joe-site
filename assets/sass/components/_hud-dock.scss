@@ -4,25 +4,35 @@
 
 // Global Counter & Action Button
 .counter-btn {
-  width: 22px;
-  height: 22px;
+  width: 38px;
+  height: 38px;
   border-radius: $radius-full;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  background: rgba(255, 255, 255, 0.08);
   color: $text-high;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-weight: 700;
-  font-size: 11px;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
   transition: all $transition-fast;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 
   &:hover {
     background: $accent-gold;
     color: #06110e;
     border-color: $accent-gold;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
+  }
+
+  &:active {
+    transform: scale(0.92);
+    background: $accent-gold;
+    color: #06110e;
   }
 }
 
@@ -32,68 +42,80 @@
   left: 0;
   right: 0;
   z-index: 90;
-  height: $hud-bar-height;
-  background: rgba(6, 14, 11, 0.92);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-top: 1px solid rgba(212, 175, 55, 0.35);
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(13, 37, 31, 0.5);
+  min-height: $hud-bar-height;
+  height: auto;
+  padding: 6px 0 env(safe-area-inset-bottom, 8px);
+  background: rgba(6, 14, 11, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1.5px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.85), 0 0 24px rgba(13, 37, 31, 0.6);
 
   &__inner,
   .hud-dock-inner {
     max-width: $max-content-width;
-    height: 100%;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 14px;
+
+    @media (max-width: 960px) {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      &::-webkit-scrollbar { display: none; }
+      justify-content: flex-start;
+      padding: 2px 16px;
+    }
   }
 
   &__group,
   .hud-stat-group {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    flex-shrink: 0;
   }
 
   &__pill,
   .hud-pill {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 4px 14px;
-    background: rgba(13, 37, 31, 0.65);
-    border: 1px solid rgba(212, 175, 55, 0.28);
+    gap: 10px;
+    padding: 6px 14px;
+    background: rgba(13, 37, 31, 0.75);
+    border: 1px solid rgba(212, 175, 55, 0.32);
     border-radius: $radius-full;
-    font-size: 0.84rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    font-size: 0.95rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
     transition: all $transition-fast;
 
     &:hover {
-      border-color: rgba(212, 175, 55, 0.45);
+      border-color: rgba(212, 175, 55, 0.55);
     }
 
     &--highlight {
-      border-color: rgba($accent-gold, 0.5);
-      background: rgba($accent-gold, 0.1);
+      border-color: rgba($accent-gold, 0.6);
+      background: rgba($accent-gold, 0.12);
     }
   }
 
   &__label,
   .hud-pill-label {
-    font-weight: 700;
+    font-weight: 800;
     color: #889d93;
     text-transform: uppercase;
-    font-size: 0.7rem;
+    font-size: 0.78rem;
     letter-spacing: 0.06em;
   }
 
   &__val,
   .hud-pill-val {
-    font-weight: 700;
+    font-weight: 800;
     @include text-mono;
+    font-size: 1.05rem;
     color: #f1f5f3;
   }
 
@@ -101,7 +123,7 @@
   .hud-interactive-counter {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
   }
 
   &__btn {
@@ -117,50 +139,67 @@
 
   &__slot,
   .slot-circle {
-    width: 13px;
-    height: 13px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    border: 1px solid $accent-gold;
+    border: 2px solid $accent-gold;
     background: $accent-gold;
     cursor: pointer;
-    transition: all $transition-fast;
-    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+    transition: transform $transition-fast, background $transition-fast, box-shadow $transition-fast;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.55);
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    flex-shrink: 0;
 
     &--used,
     &.used {
-      background: transparent;
-      border-color: rgba(212, 175, 55, 0.25);
+      background: rgba(0, 0, 0, 0.45);
+      border: 2px dashed rgba(212, 175, 55, 0.35);
       box-shadow: none;
     }
 
     &:hover {
       transform: scale(1.15);
     }
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 
   &__concentration,
   .concentration-hud-pill {
-    padding: 4px 14px;
+    padding: 6px 16px;
+    min-height: 38px;
     border-radius: $radius-full;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     cursor: pointer;
-    background: rgba(192, 132, 252, 0.12);
-    border: 1px solid rgba(192, 132, 252, 0.35);
+    background: rgba(192, 132, 252, 0.15);
+    border: 1px solid rgba(192, 132, 252, 0.4);
     color: #d8b4fe;
     transition: all $transition-fast;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    white-space: nowrap;
 
     &:hover {
-      background: rgba(192, 132, 252, 0.2);
-      border-color: rgba(192, 132, 252, 0.5);
+      background: rgba(192, 132, 252, 0.25);
+      border-color: rgba(192, 132, 252, 0.6);
+    }
+
+    &:active {
+      transform: scale(0.97);
     }
 
     &--active,
     &.active {
-      background: rgba(239, 68, 68, 0.18);
+      background: rgba(239, 68, 68, 0.22);
       border-color: #ef4444;
       color: #fda4af;
       animation: pulse-border 2s infinite;
