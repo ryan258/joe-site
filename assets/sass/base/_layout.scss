@@ -9,3 +9,91 @@
   margin: 0 auto;
   padding: 28px 20px;
 }
+
+// ==========================================================================
+// SITE FOOTER
+// ==========================================================================
+
+.site-footer {
+  margin-top: auto;
+  padding: 40px 20px 88px; // clearance for sticky live-hud-dock
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  background: radial-gradient(ellipse at 50% 0%, #0d251f 0%, #081714 60%, #030907 100%);
+  box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.15);
+  color: $text-dim;
+  font-size: 0.8rem;
+  position: relative;
+
+  .footer-inner {
+    max-width: $max-content-width;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-title {
+    font-family: $font-display;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: $accent-gold;
+  }
+
+  .footer-meta {
+    color: $text-med;
+    font-size: 0.78rem;
+  }
+
+  .footer-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-link {
+    color: $accent-cyan;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $accent-gold;
+      text-decoration: underline;
+    }
+  }
+
+  .footer-motto-bar {
+    max-width: $max-content-width;
+    margin: 20px auto 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 0.75rem;
+    color: rgba(212, 175, 55, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: $font-display;
+
+    .footer-motto-rule {
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+    }
+  }
+}

@@ -23,11 +23,12 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: $bg-core;
+  background-color: #040c09;
   background-image: 
-    radial-gradient(circle at 12% 18%, rgba($accent-gold, 0.07) 0%, transparent 45%),
-    radial-gradient(circle at 88% 15%, rgba($accent-forest, 0.08) 0%, transparent 45%),
-    radial-gradient(circle at 50% 85%, rgba($accent-robe, 0.06) 0%, transparent 50%);
+    radial-gradient(circle at 50% 0%, rgba(13, 37, 31, 0.7) 0%, transparent 60%),
+    radial-gradient(circle at 15% 25%, rgba(52, 211, 153, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(6, 17, 14, 0.9) 0%, transparent 70%);
   background-attachment: fixed;
   padding-bottom: 74px;
 }
@@ -38,15 +39,32 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: $bg-core;
+  background: #06110e;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #233328;
+  background: rgba(212, 175, 55, 0.25);
   border-radius: 4px;
-  border: 1px solid $border-subtle;
+  border: 1px solid rgba(212, 175, 55, 0.15);
 
   &:hover {
-    background: $accent-gold;
+    background: rgba(212, 175, 55, 0.5);
   }
+}
+
+// --------------------------------------------------------------------------
+// Accessible Screen Reader Utilities
+// --------------------------------------------------------------------------
+
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }

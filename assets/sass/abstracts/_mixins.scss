@@ -20,19 +20,38 @@
   -webkit-backdrop-filter: blur($blur);
 }
 
-@mixin card-surface($border: $border-subtle, $radius: $radius-lg) {
-  background: $bg-surface-card;
+@mixin card-surface($border: rgba(212, 175, 55, 0.35), $radius: $radius-lg) {
+  background: radial-gradient(ellipse at 50% 12%, #0d251f 0%, #081714 55%, #040d0a 100%);
   border: 1px solid $border;
   border-radius: $radius;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 24px rgba(20, 60, 40, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  position: relative;
 }
 
 @mixin text-display {
   font-family: $font-display;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: $text-pure;
 }
 
 @mixin text-mono {
   font-family: $font-mono;
+}
+
+@mixin section-rule-header($color: $accent-gold) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: $font-display;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color;
+
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.35), transparent);
+  }
 }

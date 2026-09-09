@@ -7,22 +7,29 @@ $font-display: "Cinzel", Georgia, serif;
 $font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 $font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-// Woodland Foundations & Surface Colors
-$bg-core: #0c120e;
-$bg-surface: #121a15;
-$bg-surface-elevated: #18231c;
-$bg-surface-card: #152019;
-$bg-surface-hover: #202d24;
-$bg-glass: rgba(18, 26, 21, 0.88);
-$bg-glass-strong: rgba(12, 18, 14, 0.96);
+// Woodland Foundations & Surface Colors (Deep Forest Night)
+$bg-core: #06110e;
+$bg-surface: #0a1814;
+$bg-surface-elevated: #0f241e;
+$bg-surface-card: #0c1d18;
+$bg-surface-hover: #143027;
+$bg-glass: rgba(8, 20, 16, 0.88);
+$bg-glass-strong: rgba(6, 14, 11, 0.95);
 $bg-parchment-tint: rgba(237, 227, 207, 0.05);
 
+// Gradients
+$gradient-forest-night: radial-gradient(ellipse at 50% 10%, #0d251f 0%, #081714 52%, #040d0a 100%);
+$gradient-emerald-card: linear-gradient(180deg, #092019 0%, #061712 100%);
+
 // Borders & Decorative Trims
-$border-subtle: rgba(212, 154, 61, 0.16);
-$border-leather: rgba(184, 115, 51, 0.28);
-$border-forest: rgba(82, 133, 94, 0.28);
-$border-active: rgba(212, 154, 61, 0.55);
-$border-glow: 0 0 16px rgba(212, 154, 61, 0.22);
+$border-subtle: rgba(212, 175, 55, 0.18);
+$border-leather: rgba(184, 115, 51, 0.32);
+$border-forest: rgba(52, 211, 153, 0.3);
+$border-active: rgba(212, 175, 55, 0.55);
+$border-gold: rgba(212, 175, 55, 0.38);
+$border-gold-subtle: rgba(212, 175, 55, 0.22);
+$border-gold-bright: rgba(212, 175, 55, 0.7);
+$border-glow: 0 0 20px rgba(212, 175, 55, 0.25);
 
 $radius-sm: 6px;
 $radius-md: 10px;
@@ -30,31 +37,31 @@ $radius-lg: 16px;
 $radius-full: 9999px;
 
 // Typography & Warm Vellum Tones
-$text-pure: #fffdf8;
-$text-high: #f4ede0;
-$text-med: #cdc2ae;
-$text-muted: #968c7a;
-$text-dim: #6d6454;
+$text-pure: #f1f5f3;
+$text-high: #e2e8f0;
+$text-med: #cbd5e1;
+$text-muted: #889d93;
+$text-dim: #5c746a;
 
-// Character Palette Accents (From joe.webp)
-$accent-gold: #d49a3d;
-$accent-gold-glow: rgba(212, 154, 61, 0.35);
-$accent-amber: #e5a83b;
-$accent-amber-glow: rgba(229, 168, 59, 0.35);
-$accent-forest: #52855e;
-$accent-forest-glow: rgba(82, 133, 94, 0.35);
-$accent-leather: #b87333;
-$accent-leather-glow: rgba(184, 115, 51, 0.35);
+// Character Palette Accents (From joe.webp & modal mockup)
+$accent-gold: #d4af37;
+$accent-gold-glow: rgba(212, 175, 55, 0.35);
+$accent-amber: #f59e0b;
+$accent-amber-glow: rgba(245, 158, 11, 0.35);
+$accent-forest: #34d399;
+$accent-forest-glow: rgba(52, 211, 153, 0.35);
+$accent-leather: #c89b3c;
+$accent-leather-glow: rgba(200, 155, 60, 0.35);
 $accent-robe: #4f6d8a;
 $accent-robe-glow: rgba(79, 109, 138, 0.35);
-$accent-fey: #48bb78;
-$accent-fey-glow: rgba(72, 187, 120, 0.35);
-$accent-fire: #e05638;
-$accent-fire-glow: rgba(224, 86, 56, 0.35);
+$accent-fey: #34d399;
+$accent-fey-glow: rgba(52, 211, 153, 0.35);
+$accent-fire: #ef4444;
+$accent-fire-glow: rgba(239, 68, 68, 0.35);
 $accent-cyan: #38bdf8;
 $accent-cyan-glow: rgba(56, 189, 248, 0.3);
-$accent-purple: #9d65d8;
-$accent-purple-glow: rgba(157, 101, 216, 0.35);
+$accent-purple: #c084fc;
+$accent-purple-glow: rgba(192, 132, 252, 0.35);
 
 // Layout & Animation
 $header-height: 68px;
@@ -85,7 +92,11 @@ $transition-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --border-leather: #{$border-leather};
   --border-forest: #{$border-forest};
   --border-active: #{$border-active};
+  --border-gold: #{$border-gold};
+  --border-gold-subtle: #{$border-gold-subtle};
+  --border-gold-bright: #{$border-gold-bright};
   --border-glow: #{$border-glow};
+  --gradient-forest-night: #{$gradient-forest-night};
 
   --border-radius-sm: #{$radius-sm};
   --border-radius-md: #{$radius-md};
