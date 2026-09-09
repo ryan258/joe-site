@@ -2,15 +2,15 @@
   <div class="spell-card-header">
     <div>
       <h3 class="spell-name">{{ .Title }}</h3>
-      <span style="font-size:0.75rem;color:var(--text-muted);">{{ .Params.school }}</span>
+      <span style="font-size:0.75rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">{{ .Params.school }}</span>
     </div>
     <span class="spell-level-badge">{{ if eq .Params.level 0 }}Cantrip{{ else }}Level {{ .Params.level }}{{ end }}</span>
   </div>
 
   <div class="spell-meta-list">
-    <span>⏱️ {{ .Params.casting_time }}</span>
-    <span>📏 {{ .Params.range }}</span>
-    <span>⏳ {{ .Params.duration }}</span>
+    <span class="tag-badge tag-subtle">⏱️ {{ .Params.casting_time }}</span>
+    <span class="tag-badge tag-subtle">📏 {{ .Params.range }}</span>
+    <span class="tag-badge tag-subtle">⏳ {{ .Params.duration }}</span>
     {{ if .Params.concentration }}<span class="tag-badge tag-fire">🧠 Concentration</span>{{ end }}
     {{ if .Params.ritual }}<span class="tag-badge tag-fey">📜 Ritual (Spellbook)</span>{{ end }}
     {{ if .Params.prepared }}<span class="tag-badge tag-cyan">✓ Prepared</span>{{ end }}

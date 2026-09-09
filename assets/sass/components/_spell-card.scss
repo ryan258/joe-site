@@ -5,17 +5,18 @@
 .spells-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 20px;
+  gap: 22px;
 }
 
 .spell-card {
   @include card-surface;
-  padding: 22px;
+  padding: 24px;
   transition: all $transition-smooth;
 
   &:hover {
-    border-color: $accent-gold;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba($accent-gold, 0.15);
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 22px rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
   }
 
   &__header,
@@ -23,45 +24,53 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    gap: 10px;
   }
 
   &__name,
   .spell-name {
-    font-size: 1.2rem;
+    font-family: $font-display;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: $text-pure;
+    color: #f1f5f3;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
   }
 
   &__level-badge,
   .spell-level-badge {
-    font-size: 0.75rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: $radius-sm;
-    background: rgba($accent-purple, 0.15);
+    padding: 3px 12px;
+    border-radius: $radius-full;
+    background: rgba(192, 132, 252, 0.14);
     color: #d8b4fe;
-    border: 1px solid rgba($accent-purple, 0.3);
+    border: 1px solid rgba(192, 132, 252, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
   }
 
   &__meta,
   .spell-meta-list {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
-    font-size: 0.78rem;
-    color: $text-muted;
-    margin-bottom: 12px;
+    font-size: 0.8rem;
+    color: #889d93;
+    margin-bottom: 14px;
   }
 
   &__sculpt-banner,
   .sculpt-banner {
-    background: rgba($accent-gold, 0.12);
-    border: 1px solid rgba($accent-gold, 0.35);
-    border-radius: $radius-sm;
-    padding: 6px 12px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.38);
+    border-radius: 8px;
+    padding: 8px 12px;
     font-size: 0.82rem;
-    color: $accent-gold;
+    color: #d4af37;
     font-weight: 600;
     margin-bottom: 12px;
     display: flex;

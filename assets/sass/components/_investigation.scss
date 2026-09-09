@@ -5,25 +5,36 @@
 .investigation-step-card {
   @include card-surface;
   padding: 26px;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
+  transition: all $transition-smooth;
+
+  &:hover {
+    border-color: rgba(212, 175, 55, 0.55);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.18);
+    transform: translateY(-2px);
+  }
 
   &__indicator,
   .step-indicator {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 800;
-    color: $accent-gold;
+    color: #d4af37;
     text-transform: uppercase;
+    letter-spacing: 0.06em;
     margin-bottom: 8px;
   }
 
   &__title,
   .investigation-step-title {
-    font-size: 1.35rem;
+    font-family: $font-display;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: $text-pure;
+    color: #f1f5f3;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     margin-bottom: 12px;
   }
 }
