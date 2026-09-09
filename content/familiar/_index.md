@@ -32,12 +32,12 @@ description: "Operational flight manual, 2024 Owl statblock, Flyby touch deliver
 | **Armor Class** | 11 | Unarmored natural defense. |
 | **Hit Points** | **1 / 1** | Instant destruction if dealt any damage. |
 | **Speed** | 5 ft ground, **60 ft Fly** | High tactical mobility for battlefield traversal. |
-| **Senses & Stealth** | **Darkvision 120 ft**<br>Passive Perception 13<br>Perception +3, Stealth +3 | Keen Sight and Hearing (Advantage on sight/hearing Perception checks). |
+| **Senses & Stealth** | **Darkvision 120 ft**<br>Passive Perception 15<br>Perception +5, Stealth +5 | Keen Sight and Hearing (Advantage on sight/hearing Perception checks). |
 | **Flyby Trait** | **Active** | *Provokes no Opportunity Attacks when flying out of an enemy's reach.* |
 
 > [!NOTE]
 > **Live D&D Beyond Extra Notes (Verbatim):**
-> *"Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the complete Owl stat block. Its flight looks like magical levitation, but it has Flyby rather than Hover. Cow cannot attack. Within 100 feet, Cow communicates with Joe through simple emotions, images, remembered sensations, and intentions. Cow communicates with others through expressive movement and behavior. Complex memories are fragmentary clues provided or approved by the DM."*
+> *"Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the complete Owl stat block. Its flight looks like magical levitation, but it has Flyby rather than Hover. Cow cannot attack. Within 100 feet, Cow and Joe communicate telepathically. This campaign characterizes that connection through simple emotions, images, remembered sensations, and intentions; complex memories remain DM-controlled fragmentary clues by table convention. Cow communicates with others through expressive movement and behavior."*
 
 ---
 
@@ -54,7 +54,7 @@ description: "Operational flight manual, 2024 Owl statblock, Flyby touch deliver
 * Because of Flyby, Cow never stays in melee threat range after granting Help.
 
 ### 3. Telepathic Bond & Shared Senses
-* **Telepathy (100 ft):** Cow communicates with Joe through simple emotions, images, remembered sensations, and intentions.
+* **Telepathy (100 ft):** Cow and Joe communicate telepathically. This campaign characterizes the connection through simple emotions, images, remembered sensations, and intentions rather than treating that as a default RAW limit.
 * **Shared Senses (2024 Rule):** Joe uses a **Bonus Action** to see through Cow's eyes and hear through its ears until the start of his next turn. 
 * *Key 2024 Improvement:* Joe **retains his own senses** during this time (he is **not** Blinded or Deafened as in 2014 rules).
 

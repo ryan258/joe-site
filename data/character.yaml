@@ -79,11 +79,11 @@ familiar:
   hp: 1
   speed: "5 ft land / 60 ft fly"
   darkvision: "120 ft"
-  senses: "Darkvision 120ft, Passive Perception 13, Perception +3, Stealth +3 (Keen Sight & Hearing Advantage)"
-  dndbeyond_notes: "Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the complete Owl stat block. Its flight looks like magical levitation, but it has Flyby rather than Hover. Cow cannot attack. Within 100 feet, Cow communicates with Joe through simple emotions, images, remembered sensations, and intentions. Cow communicates with others through expressive movement and behavior. Complex memories are fragmentary clues provided or approved by the DM."
+  senses: "Darkvision 120 ft, Passive Perception 15, Perception +5, Stealth +5 (Keen Sight & Hearing Advantage)"
+  dndbeyond_notes: "Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the complete Owl stat block. Its flight looks like magical levitation, but it has Flyby rather than Hover. Cow cannot attack. Within 100 feet, Cow and Joe communicate telepathically. This campaign characterizes that connection through simple emotions, images, remembered sensations, and intentions; complex memories remain DM-controlled fragmentary clues by table convention. Cow communicates with others through expressive movement and behavior."
   traits:
     - "Flyby (Provokes no Opportunity Attacks when flying out of enemy reach)"
     - "Keen Sight and Hearing (Advantage on Perception checks relying on sight/hearing)"
-    - "Telepathic bond (100 ft range: emotions, images, intentions)"
+    - "Telepathic communication (100 ft range; campaign convention uses emotions, images, and intentions)"
     - "Touch spell delivery (Cow uses Reaction to deliver Joe's touch spell within 100 ft)"
     - "Shared Senses (Joe Bonus Action to perceive through Cow, keeping his own senses under 2024 rules)"
