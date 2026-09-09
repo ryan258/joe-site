@@ -1,14 +1,23 @@
 {{ define "main" }}
-<article class="hud-panel" style="max-width:960px;margin:0 auto 32px;padding:36px;">
-  <header style="margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border-subtle);">
-    <h1 style="font-size:2.4rem;font-weight:800;color:var(--text-pure);line-height:1.2;margin-bottom:8px;">{{ .Title }}</h1>
+{{ if .Params.play_id }}
+{{ partial "play-single.html" . }}
+{{ else }}
+<article class="hud-panel single-article-card">
+  <span class="modal-corner modal-corner--tl" aria-hidden="true">◇</span>
+  <span class="modal-corner modal-corner--tr" aria-hidden="true">◇</span>
+  <span class="modal-corner modal-corner--bl" aria-hidden="true">◇</span>
+  <span class="modal-corner modal-corner--br" aria-hidden="true">◇</span>
+
+  <header class="single-article-header">
+    <h1 class="single-article-title">{{ .Title }}</h1>
     {{ with .Description }}
-    <p style="font-size:1.1rem;color:var(--text-med);">{{ . }}</p>
+    <p class="single-article-desc">{{ . }}</p>
     {{ end }}
   </header>
 
-  <div class="content-prose" style="font-size:0.95rem;line-height:1.7;color:var(--text-med);">
+  <div class="content-prose">
     {{ .Content }}
   </div>
 </article>
+{{ end }}
 {{ end }}

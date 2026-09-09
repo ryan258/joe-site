@@ -346,6 +346,41 @@
       }
     }
 
+    function formatPlayMechanics(container) {
+      if (!container) return;
+
+      container.querySelectorAll('h3').forEach(h3 => {
+        if (h3.classList.contains('play-section-header')) return;
+        const text = h3.textContent.trim().toLowerCase();
+        let iconSvg = '';
+
+        if (text.includes('when')) {
+          iconSvg = '<span class="play-section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14M5 2h14M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg></span>';
+        } else if (text.includes('mechanic')) {
+          iconSvg = '<span class="play-section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>';
+        } else if (text.includes('table')) {
+          iconSvg = '<span class="play-section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>';
+        }
+
+        if (iconSvg) {
+          const orig = h3.textContent.trim();
+          h3.className = 'play-section-header';
+          h3.innerHTML = `${iconSvg}<span class="play-section-title">${orig}</span><span class="play-section-rule" aria-hidden="true"></span>`;
+        }
+      });
+
+      container.querySelectorAll('.play-modal-body-mechanics p').forEach(p => {
+        const trimmed = p.innerHTML.trim();
+        if (trimmed.startsWith('Mechanically:')) {
+          p.classList.add('play-table-mechanics-row');
+          p.innerHTML = trimmed.replace(/^Mechanically:\s*/, '<span class="play-row-label">Mechanically:</span> ');
+        } else if (trimmed.startsWith('Verbally:')) {
+          p.classList.add('play-table-verbally-row');
+          p.innerHTML = trimmed.replace(/^Verbally:\s*/, '<span class="play-row-label">Verbally:</span> ');
+        }
+      });
+    }
+
     function openPlayModal(card, updateHash = true) {
       if (!card) return;
       currentCard = card;
@@ -354,6 +389,7 @@
       if (tmpl && mount) {
         mount.innerHTML = '';
         mount.appendChild(tmpl.content.cloneNode(true));
+        formatPlayMechanics(mount);
       }
 
       updateNav();
@@ -563,6 +599,23 @@
 
   // Copy Phrasing to Clipboard (Delegated for static cards and dynamic modal content)
   function initCopyButtons() {
+    function announceStatus(msg) {
+      let liveRegion = document.getElementById('a11y-live-region');
+      if (!liveRegion) {
+        liveRegion = document.createElement('div');
+        liveRegion.id = 'a11y-live-region';
+        liveRegion.className = 'sr-only';
+        liveRegion.setAttribute('role', 'status');
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.setAttribute('aria-atomic', 'true');
+        document.body.appendChild(liveRegion);
+      }
+      liveRegion.textContent = '';
+      setTimeout(() => {
+        liveRegion.textContent = msg;
+      }, 50);
+    }
+
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.copy-phrase-btn');
       if (!btn) return;
@@ -571,11 +624,40 @@
       const text = btn.dataset.phrase;
       if (text) {
         navigator.clipboard.writeText(text).then(() => {
-          const original = btn.textContent;
-          btn.textContent = '✓ Copied!';
-          setTimeout(() => { btn.textContent = original; }, 1600);
+          const originalHtml = btn.innerHTML;
+          const originalAriaLabel = btn.getAttribute('aria-label');
+          const originalTitle = btn.getAttribute('title');
+          const isIconOnly = btn.classList.contains('play-card-copy-btn');
+
+          if (isIconOnly) {
+            btn.classList.add('is-copied');
+            btn.setAttribute('aria-label', 'Copied table script');
+            btn.setAttribute('title', 'Copied table script');
+            btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+            setTimeout(() => {
+              btn.classList.remove('is-copied');
+              if (originalAriaLabel) {
+                btn.setAttribute('aria-label', originalAriaLabel);
+              } else {
+                btn.removeAttribute('aria-label');
+              }
+              if (originalTitle) {
+                btn.setAttribute('title', originalTitle);
+              } else {
+                btn.removeAttribute('title');
+              }
+              btn.innerHTML = originalHtml;
+            }, 1600);
+          } else {
+            btn.innerHTML = '<span style="color:#34d399;font-weight:700;">✓ Copied!</span>';
+            setTimeout(() => { btn.innerHTML = originalHtml; }, 1600);
+          }
+
+          announceStatus('Copied table script to clipboard');
         }).catch(err => {
           console.warn('Clipboard copy failed:', err);
+          announceStatus('Failed to copy to clipboard');
         });
       }
     });
@@ -591,6 +673,42 @@
     initPlayDetailModal();
     initSearchModal();
     initCopyButtons();
+
+    // Auto-format standalone play single pages if present
+    const singleWrap = document.querySelector('.play-single-card');
+    if (singleWrap) {
+      const headings = singleWrap.querySelectorAll('h3');
+      headings.forEach(h3 => {
+        if (h3.classList.contains('play-section-header')) return;
+        const text = h3.textContent.trim().toLowerCase();
+        let iconSvg = '';
+
+        if (text.includes('when')) {
+          iconSvg = '<span class="play-section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14M5 2h14M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg></span>';
+        } else if (text.includes('mechanic')) {
+          iconSvg = '<span class="play-section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>';
+        } else if (text.includes('table')) {
+          iconSvg = '<span class="play-section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>';
+        }
+
+        if (iconSvg) {
+          const orig = h3.textContent.trim();
+          h3.className = 'play-section-header';
+          h3.innerHTML = `${iconSvg}<span class="play-section-title">${orig}</span><span class="play-section-rule" aria-hidden="true"></span>`;
+        }
+      });
+
+      singleWrap.querySelectorAll('.play-modal-body-mechanics p').forEach(p => {
+        const trimmed = p.innerHTML.trim();
+        if (trimmed.startsWith('Mechanically:')) {
+          p.classList.add('play-table-mechanics-row');
+          p.innerHTML = trimmed.replace(/^Mechanically:\s*/, '<span class="play-row-label">Mechanically:</span> ');
+        } else if (trimmed.startsWith('Verbally:')) {
+          p.classList.add('play-table-verbally-row');
+          p.innerHTML = trimmed.replace(/^Verbally:\s*/, '<span class="play-row-label">Verbally:</span> ');
+        }
+      });
+    }
   });
 
 })();

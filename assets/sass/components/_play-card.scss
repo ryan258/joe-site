@@ -8,11 +8,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background: $bg-surface-card;
-  border: 1px solid $border-subtle;
-  border-radius: $radius-md;
-  padding: 14px 20px;
-  margin-bottom: 22px;
+  background: rgba(13, 37, 31, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 14px;
+  padding: 14px 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
   &__group,
   .filter-btn-group {
@@ -23,28 +24,28 @@
 }
 
 .filter-btn {
-  padding: 7px 14px;
+  padding: 6px 16px;
   border-radius: $radius-full;
-  background: $bg-surface-elevated;
-  border: 1px solid $border-subtle;
-  color: $text-med;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  color: #cbd5e1;
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   transition: all $transition-fast;
 
   &:hover {
-    background: $bg-surface-hover;
-    color: $text-pure;
-    border-color: $accent-gold;
+    background: rgba(212, 175, 55, 0.12);
+    border-color: rgba(212, 175, 55, 0.5);
+    color: #fff;
   }
 
   &--active,
   &.active {
-    background: $accent-gold;
-    color: #0c120e;
-    border-color: $accent-gold;
-    box-shadow: 0 0 12px $accent-gold-glow;
+    background: rgba(212, 175, 55, 0.2);
+    color: #d4af37;
+    border-color: #d4af37;
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.25);
     font-weight: 700;
   }
 }
@@ -178,19 +179,36 @@
   }
 
   .play-card-copy-btn {
-    font-size: 0.75rem;
-    padding: 3px 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
     cursor: pointer;
-    background: rgba($accent-forest, 0.15);
-    border: 1px solid rgba($accent-forest, 0.35);
-    color: #b7e8c3;
-    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    color: #cbd5e1;
+    border-radius: 9999px;
     transition: all $transition-fast;
-    white-space: nowrap;
+
+    svg {
+      transition: transform 0.15s ease, stroke 0.15s ease;
+    }
 
     &:hover {
-      background: rgba($accent-forest, 0.3);
-      color: #fff;
+      background: rgba(212, 175, 55, 0.15);
+      border-color: $accent-gold;
+      color: $accent-gold;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+      transform: scale(1.05);
+    }
+
+    &.is-copied {
+      border-color: #34d399;
+      background: rgba(52, 211, 153, 0.18);
+      color: #34d399;
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.35);
     }
   }
 
@@ -301,93 +319,109 @@
   padding: 0;
   border: none;
   background: transparent;
-  width: 94vw;
-  max-width: 860px;
-  max-height: 90vh;
+  width: 92vw;
+  max-width: 820px;
+  max-height: 92vh;
   outline: none;
   z-index: 250;
 
   &::backdrop {
-    background: rgba(6, 10, 8, 0.86);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(3, 8, 6, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     animation: playModalFadeIn 0.2s ease-out;
   }
 
   &[open] {
     display: flex;
-    animation: playModalScaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: playModalScaleIn 0.24s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   &__inner {
-    background: $bg-surface-card;
-    border: 1px solid $border-active;
-    border-radius: $radius-lg;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 32px rgba($accent-gold, 0.25);
+    position: relative;
+    background: radial-gradient(ellipse at 50% 8%, #0d251f 0%, #081714 52%, #040d0a 100%);
+    border: 1px solid rgba(212, 175, 55, 0.38);
+    border-radius: 18px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(20, 60, 40, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
     display: flex;
     flex-direction: column;
-    max-height: 90vh;
+    max-height: 92vh;
     width: 100%;
     overflow: hidden;
+  }
+
+  // Corner Diamond Flourishes
+  .modal-corner {
+    position: absolute;
+    color: rgba(212, 175, 55, 0.45);
+    font-size: 0.82rem;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 10;
+
+    &--tl { top: 10px; left: 10px; }
+    &--tr { top: 10px; right: 10px; }
+    &--bl { bottom: 10px; left: 10px; }
+    &--br { bottom: 10px; right: 10px; }
   }
 
   &__top-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 12px 24px;
-    background: $bg-surface-elevated;
-    border-bottom: 1px solid $border-subtle;
+    gap: 16px;
+    padding: 16px 28px 12px;
+    background: transparent;
     flex-shrink: 0;
   }
 
   .play-modal-nav-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
   }
 
   .play-modal-nav-btn {
-    background: rgba($accent-gold, 0.1);
-    border: 1px solid $border-subtle;
-    color: $text-high;
-    font-size: 0.82rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #e2e8f0;
+    font-size: 0.84rem;
     font-weight: 600;
-    padding: 6px 14px;
-    border-radius: $radius-sm;
+    padding: 7px 18px;
+    border-radius: $radius-full;
     cursor: pointer;
     transition: all $transition-fast;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 
     &:hover:not(:disabled) {
-      background: $accent-gold;
-      color: #0c120e;
-      border-color: $accent-gold;
+      background: rgba(212, 175, 55, 0.15);
+      border-color: rgba(212, 175, 55, 0.4);
+      color: #fff;
     }
 
     &:disabled {
-      opacity: 0.35;
+      opacity: 0.3;
       cursor: not-allowed;
     }
   }
 
   .play-modal-counter {
-    font-size: 0.78rem;
-    @include text-mono;
-    color: $text-muted;
+    font-size: 0.84rem;
+    color: #7b9287;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .play-modal-close-btn {
-    background: transparent;
-    border: 1px solid $border-subtle;
-    color: $text-muted;
-    font-size: 1.15rem;
-    width: 32px;
-    height: 32px;
-    border-radius: $radius-full;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #a0aec0;
+    font-size: 1.1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -395,16 +429,47 @@
     transition: all $transition-fast;
 
     &:hover {
-      color: $text-pure;
-      border-color: $accent-fire;
-      background: rgba($accent-fire, 0.16);
+      color: #fff;
+      border-color: rgba(212, 175, 55, 0.5);
+      background: rgba(212, 175, 55, 0.12);
+    }
+  }
+
+  .play-modal-top-divider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 28px;
+    gap: 12px;
+    opacity: 0.75;
+
+    .divider-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35) 20%, rgba(212, 175, 55, 0.35) 80%, transparent);
+    }
+
+    .divider-diamond {
+      color: rgba(212, 175, 55, 0.7);
+      font-size: 0.75rem;
+      line-height: 1;
     }
   }
 
   &__content {
     overflow-y: auto;
-    padding: 28px 32px 36px;
+    padding: 20px 36px 36px;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.3);
+      border-radius: 3px;
+    }
   }
 }
 
@@ -412,110 +477,291 @@
 // Play Detail Modal Content Typography & Layout
 // --------------------------------------------------------------------------
 
+.play-modal-content-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
 .play-modal-header-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 12px;
+  margin-bottom: 12px;
   flex-wrap: wrap;
 }
 
 .play-modal-badges {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.play-modal-anchor-link {
+.play-modal-meta-id {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #889d93;
+  @include text-mono;
+  letter-spacing: 0.04em;
+}
+
+.play-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: $radius-full;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  .actor-badge-icon {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &--cow {
+    background: #0d2e23;
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    color: #34d399;
+  }
+
+  &--joe {
+    background: #112836;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+  }
+
+  &--type {
+    background: rgba(217, 119, 6, 0.14);
+    border: 1px solid rgba(217, 119, 6, 0.45);
+    color: #f59e0b;
+  }
+}
+
+.play-modal-threat-tags {
+  font-size: 0.84rem;
+  color: #5c746a;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-left: 2px;
+}
+
+.play-modal-anchor-pill {
   font-size: 0.82rem;
   @include text-mono;
-  color: $text-muted;
+  color: #7e948a;
   text-decoration: none;
-  padding: 3px 8px;
-  border-radius: $radius-sm;
+  padding: 3px 12px;
+  border-radius: $radius-full;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid $border-subtle;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition: all $transition-fast;
 
   &:hover {
     color: $accent-gold;
-    border-color: $accent-gold;
+    border-color: rgba($accent-gold, 0.4);
   }
 }
 
 .play-modal-title {
-  font-size: 1.85rem;
+  font-size: 2.35rem;
   font-weight: 800;
-  color: $text-pure;
-  line-height: 1.25;
-  margin: 0 0 20px 0;
+  color: #f1f5f3;
+  line-height: 1.2;
+  margin: 14px 0 22px 0;
   font-family: $font-display;
-  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
+
+// --------------------------------------------------------------------------
+// Lead Premise Callout Box (Compass Rose Star & Summary)
+// --------------------------------------------------------------------------
+
+.play-modal-lead-box {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 22px;
+  background: rgba(20, 36, 28, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 10px;
+  margin-bottom: 26px;
+
+  .play-modal-lead-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37;
+    flex-shrink: 0;
+    padding-right: 18px;
+    border-right: 1px solid rgba(212, 175, 55, 0.3);
+  }
+
+  .play-modal-lead-text {
+    font-size: 1.02rem;
+    line-height: 1.55;
+    color: #d1d5db;
+    margin: 0;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mechanics Body & Section Badges
+// --------------------------------------------------------------------------
 
 .play-modal-body-mechanics {
   font-size: 0.98rem;
   line-height: 1.7;
-  color: $text-high;
+  color: #cbd5e1;
 
-  // The lead premise paragraph
+  // The lead premise paragraph in markdown is hidden since it's in the lead box
   > p:first-of-type {
-    font-size: 1.12rem;
-    font-weight: 500;
-    color: $text-pure;
-    line-height: 1.6;
-    padding: 14px 18px;
-    margin-bottom: 24px;
-    background: rgba($accent-gold, 0.08);
-    border-left: 3px solid $accent-gold;
-    border-radius: 0 $radius-sm $radius-sm 0;
+    display: none;
   }
 
-  h3 {
-    font-size: 1.18rem;
-    font-weight: 700;
-    color: $accent-gold;
-    margin-top: 26px;
-    margin-bottom: 12px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid rgba($accent-gold, 0.22);
-    font-family: $font-display;
-    letter-spacing: 0.02em;
+  .play-section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+    margin-bottom: 14px;
+    padding: 0;
+    border: none;
 
-    &:first-child {
+    &:first-of-type {
       margin-top: 0;
+    }
+
+    .play-section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      background: rgba(18, 28, 22, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d4af37;
+      flex-shrink: 0;
+    }
+
+    .play-section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #d4af37;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: $font-display;
+      white-space: nowrap;
+    }
+
+    .play-section-rule {
+      flex: 1;
+      height: 1px;
+      background: rgba(212, 175, 55, 0.25);
     }
   }
 
-  p {
-    margin-bottom: 14px;
+  // When to use it - Bulleted list
+  ul {
+    list-style: none;
+    padding-left: 50px;
+    margin: 10px 0 22px 0;
+
+    li {
+      position: relative;
+      margin-bottom: 10px;
+      line-height: 1.6;
+      color: #9cb0a4;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -18px;
+        top: 8px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #c89b3c;
+        box-shadow: 0 0 6px rgba(200, 155, 60, 0.4);
+      }
+    }
   }
 
-  ul, ol {
-    padding-left: 24px;
-    margin-bottom: 18px;
+  // Mechanics - Numbered list
+  ol {
+    list-style: none;
+    counter-reset: play-step-counter;
+    padding-left: 50px;
+    margin: 10px 0 24px 0;
+
+    li {
+      counter-increment: play-step-counter;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+      line-height: 1.6;
+      color: #cbd5e1;
+
+      &::before {
+        content: counter(play-step-counter);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid rgba(212, 175, 55, 0.55);
+        background: rgba(14, 22, 18, 0.9);
+        color: #d4af37;
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+    }
   }
 
-  li {
-    margin-bottom: 10px;
+  // At the table rows
+  .play-table-mechanics-row,
+  .play-table-verbally-row,
+  > p {
+    padding-left: 50px;
+    margin-bottom: 12px;
     line-height: 1.65;
-    color: $text-high;
+  }
 
-    &::marker {
-      color: $accent-gold;
-      font-weight: 700;
+  .play-row-label {
+    color: #d4af37;
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  .play-table-verbally-row {
+    color: #9cb0a4;
+    font-style: italic;
+
+    .play-row-label {
+      font-style: normal;
     }
   }
 
   strong {
-    color: $text-pure;
+    color: #fffdf8;
     font-weight: 700;
   }
 
   em {
-    color: #ecd7ba;
+    color: #9cb0a4;
   }
 
   code {
@@ -529,55 +775,282 @@
   }
 }
 
+// --------------------------------------------------------------------------
+// Table Phrasing & Verbal Script Callout Box
+// --------------------------------------------------------------------------
+
 .play-modal-table-phrase {
-  background: rgba($accent-forest, 0.14);
-  border: 1px solid rgba($accent-forest, 0.38);
-  border-radius: $radius-md;
-  padding: 18px 22px;
+  position: relative;
+  background: #071c15;
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  border-radius: 12px;
+  padding: 20px 24px 24px;
   margin-top: 28px;
+  overflow: hidden;
 
   .play-modal-phrase-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
+    gap: 14px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .table-phrase-label-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .table-phrase-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #34d399;
+    flex-shrink: 0;
   }
 
   .table-phrase-label {
-    font-size: 0.74rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: #78c28f;
+    color: #34d399;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
   }
 
   .play-modal-copy-btn {
-    font-size: 0.82rem;
-    padding: 5px 14px;
-    background: rgba($accent-forest, 0.25);
-    border: 1px solid rgba($accent-forest, 0.5);
-    color: #d1f7db;
-    border-radius: $radius-sm;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    color: #a7f3d0;
+    border-radius: $radius-full;
     cursor: pointer;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     transition: all $transition-fast;
 
     &:hover {
-      background: $accent-forest;
-      color: #0c120e;
+      background: rgba(52, 211, 153, 0.25);
+      border-color: #34d399;
+      color: #fff;
     }
   }
 
   .play-modal-quote {
+    position: relative;
+    z-index: 2;
     margin: 0;
     padding: 0;
     font-size: 1.05rem;
     font-style: italic;
-    color: #d2f6dc;
-    line-height: 1.55;
+    color: #d1fae5;
+    line-height: 1.6;
     border: none;
+  }
+
+  .table-phrase-mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Card Footer Motto
+// --------------------------------------------------------------------------
+
+.play-modal-footer-motto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 4px;
+  opacity: 0.65;
+
+  .motto-diamond {
+    color: rgba(212, 175, 55, 0.6);
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  .motto-rule {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35), transparent);
+  }
+
+  .motto-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #7e948a;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-family: $font-display;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Standalone Direct Play Route (.play-single-card)
+// --------------------------------------------------------------------------
+
+.play-single-container {
+  max-width: 860px;
+  margin: 24px auto 60px;
+  padding: 0 16px;
+
+  @media (max-width: 640px) {
+    margin: 12px auto 40px;
+    padding: 0 8px;
+  }
+}
+
+.play-single-card {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 32px rgba(212, 175, 55, 0.25);
+  max-height: none; // Standalone page is naturally full-height
+  overflow: visible; // Avoid clipping flourishes or content
+}
+
+// --------------------------------------------------------------------------
+// Responsive Overrides (Applied to both Modal Dialog and Standalone Page)
+// --------------------------------------------------------------------------
+
+@media (max-width: 640px) {
+  .play-detail-modal {
+    width: 96vw;
+  }
+
+  .play-detail-modal,
+  .play-single-card {
+    .play-detail-modal__top-nav {
+      padding: 12px 14px;
+    }
+
+    .play-detail-modal__content {
+      padding: 16px 14px 28px;
+    }
+
+    .play-modal-title {
+      font-size: 1.5rem;
+      line-height: 1.22;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+      margin: 10px 0 18px 0;
+    }
+
+    .play-modal-header-meta {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .play-modal-body-mechanics {
+      font-size: 0.92rem;
+
+      ul, ol, .play-table-mechanics-row, .play-table-verbally-row, > p {
+        padding-left: 0;
+      }
+
+      .play-section-header {
+        gap: 10px;
+        margin-top: 22px;
+
+        .play-section-icon {
+          width: 30px;
+          height: 30px;
+          svg {
+            width: 15px;
+            height: 15px;
+          }
+        }
+
+        .play-section-title {
+          font-size: 0.98rem;
+        }
+      }
+    }
+
+    .play-modal-lead-box {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+
+      .play-modal-lead-icon {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+        padding-bottom: 10px;
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .play-modal-lead-text {
+        font-size: 0.95rem;
+      }
+    }
+
+    .play-modal-table-phrase {
+      padding: 16px 14px 18px;
+
+      .play-modal-phrase-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .play-modal-quote {
+        font-size: 0.92rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .play-detail-modal,
+  .play-single-card {
+    .play-modal-title {
+      font-size: 1.28rem;
+    }
+
+    .play-modal-lead-box {
+      padding: 12px;
+    }
+
+    .play-modal-badges {
+      gap: 6px;
+    }
+
+    .play-modal-badge {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+    }
+
+    .play-modal-meta-id,
+    .play-modal-anchor-pill {
+      font-size: 0.72rem;
+    }
   }
 }
 

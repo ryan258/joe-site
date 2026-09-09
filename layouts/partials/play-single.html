@@ -1,0 +1,120 @@
+<section class="play-single-container">
+  <div class="play-detail-modal__inner play-single-card">
+    <!-- Ornate Corner Diamond Flourishes -->
+    <span class="modal-corner modal-corner--tl" aria-hidden="true">◇</span>
+    <span class="modal-corner modal-corner--tr" aria-hidden="true">◇</span>
+    <span class="modal-corner modal-corner--bl" aria-hidden="true">◇</span>
+    <span class="modal-corner modal-corner--br" aria-hidden="true">◇</span>
+
+    <div class="play-detail-modal__top-nav">
+      <div class="play-modal-nav-controls">
+        <a href="{{ "/plays/" | relURL }}" class="play-modal-nav-btn" style="text-decoration:none;">
+          <span aria-hidden="true">←</span> Tactical Directory
+        </a>
+      </div>
+      <a href="{{ "/plays/" | relURL }}" class="play-modal-close-btn" style="text-decoration:none;" aria-label="Back to plays directory">
+        ✕
+      </a>
+    </div>
+
+    <!-- Decorative Top Divider with Centered Diamond -->
+    <div class="play-modal-top-divider" aria-hidden="true">
+      <span class="divider-rule"></span>
+      <span class="divider-diamond">◇</span>
+      <span class="divider-rule"></span>
+    </div>
+
+    <div class="play-detail-modal__content">
+      <div class="play-modal-content-wrap">
+        <div class="play-modal-header-meta">
+          <div class="play-modal-badges">
+            <span class="play-modal-meta-id">{{ .Params.play_id }}</span>
+            {{ if eq .Params.actor "cow" }}
+              <span class="play-modal-badge play-modal-badge--cow">
+                <svg class="actor-badge-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                  <path d="M4 4c-.5 2 .2 4.2 1.3 5.4C6 9.8 6.7 10 7.3 10.1c.3 1.3 1.2 2.5 2.2 3.4v3.5c0 .6.4 1 1 1h3c.6 0 1-.4 1-1v-3.5c1.1-.9 1.9-2.1 2.2-3.4.6-.1 1.3-.3 2-.7C19.8 8.2 20.5 6 20 4c-1.6.4-3.6 1.4-4.7 2.8-.9-.3-2.1-.5-3.3-.5s-2.4.2-3.3.5C7.6 5.4 5.6 4.4 4 4zm5.5 8c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm5 0c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z"/>
+                </svg>
+                Cow Play
+              </span>
+            {{ else }}
+              <span class="play-modal-badge play-modal-badge--joe">
+                <svg class="actor-badge-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2L9.5 8.5 3 9.8l5 4.3-1.5 6.9L12 17.4l5.5 3.6-1.5-6.9 5-4.3-6.5-1.3z"/>
+                </svg>
+                Joe Play
+              </span>
+            {{ end }}
+            <span class="play-modal-badge play-modal-badge--type">{{ .Params.type | upper }}</span>
+            {{ with .Params.threat_tags }}
+              <span class="play-modal-threat-tags">{{ delimit . " " }}</span>
+            {{ end }}
+          </div>
+          <span class="play-modal-anchor-pill">#{{ .Params.play_id }}</span>
+        </div>
+
+        <h1 class="play-modal-title">{{ .Title }}</h1>
+
+        <!-- Lead Premise Box with Compass Rose -->
+        <div class="play-modal-lead-box">
+          <div class="play-modal-lead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+              <path d="M12 0l2.6 8.9L24 12l-9.4 3.1L12 24l-2.6-8.9L0 12l9.4-3.1z M12 5.6l-1.6 4.8-4.8 1.6 4.8 1.6 1.6 4.8 1.6-4.8 4.8-1.6-4.8-1.6z"/>
+            </svg>
+          </div>
+          <div class="play-modal-lead-text">
+            {{ .Params.summary | markdownify }}
+          </div>
+        </div>
+
+        <!-- Mechanics Body -->
+        <div class="play-modal-body-mechanics">
+          {{ .Content }}
+        </div>
+
+        <!-- Table Phrasing & Verbal Script Box -->
+        {{ with .Params.table_phrase }}
+        <div class="play-modal-table-phrase">
+          <div class="play-modal-phrase-header">
+            <div class="table-phrase-label-wrap">
+              <span class="table-phrase-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <line x1="10" y1="9" x2="8" y2="9"></line>
+                </svg>
+              </span>
+              <span class="table-phrase-label">Table Phrasing &amp; Verbal Script</span>
+            </div>
+            <button type="button" class="copy-phrase-btn play-card-copy-btn play-modal-copy-btn" data-phrase="{{ . }}" title="Copy table script" aria-label="Copy table script">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+          <blockquote class="play-modal-quote">
+            “{{ . }}”
+          </blockquote>
+          <div class="table-phrase-mountains" aria-hidden="true">
+            <svg viewBox="0 0 1000 120" preserveAspectRatio="none">
+              <path d="M0 120 L0 85 L90 40 L160 75 L250 20 L350 90 L440 32 L540 85 L650 15 L750 70 L860 28 L1000 80 L1000 120 Z" fill="rgba(8, 38, 28, 0.45)"/>
+              <path d="M0 120 L0 100 L120 60 L210 92 L310 45 L410 95 L510 50 L610 90 L710 38 L810 82 L910 55 L1000 70 L1000 120 Z" fill="rgba(14, 52, 38, 0.35)"/>
+            </svg>
+          </div>
+        </div>
+        {{ end }}
+
+        <!-- Card Footer Motto -->
+        <div class="play-modal-footer-motto" aria-hidden="true">
+          <span class="motto-diamond">◇</span>
+          <span class="motto-rule"></span>
+          <span class="motto-text">Small Moves Reveal Big Truths</span>
+          <span class="motto-rule"></span>
+          <span class="motto-diamond">◇</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

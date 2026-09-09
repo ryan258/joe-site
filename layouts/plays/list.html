@@ -41,12 +41,18 @@
 <!-- Accessible Native Detail Modal Dialog -->
 <dialog id="play-detail-modal" class="play-detail-modal" closedby="any" aria-labelledby="play-modal-title">
   <div class="play-detail-modal__inner">
+    <!-- Ornate Corner Diamond Flourishes -->
+    <span class="modal-corner modal-corner--tl" aria-hidden="true">◇</span>
+    <span class="modal-corner modal-corner--tr" aria-hidden="true">◇</span>
+    <span class="modal-corner modal-corner--bl" aria-hidden="true">◇</span>
+    <span class="modal-corner modal-corner--br" aria-hidden="true">◇</span>
+
     <div class="play-detail-modal__top-nav">
       <div class="play-modal-nav-controls">
         <button type="button" id="play-modal-prev-btn" class="play-modal-nav-btn" aria-label="Previous play (or left arrow)">
           <span aria-hidden="true">←</span> Prev
         </button>
-        <span id="play-modal-counter" class="play-modal-counter">Play 1 of 250</span>
+        <span id="play-modal-counter" class="play-modal-counter">Play 1 of 100</span>
         <button type="button" id="play-modal-next-btn" class="play-modal-nav-btn" aria-label="Next play (or right arrow)">
           Next <span aria-hidden="true">→</span>
         </button>
@@ -54,6 +60,13 @@
       <button type="button" id="play-modal-close-btn" class="play-modal-close-btn" aria-label="Close dialog (Esc)">
         ✕
       </button>
+    </div>
+
+    <!-- Decorative Top Divider with Centered Diamond -->
+    <div class="play-modal-top-divider" aria-hidden="true">
+      <span class="divider-rule"></span>
+      <span class="divider-diamond">◇</span>
+      <span class="divider-rule"></span>
     </div>
 
     <div id="play-modal-mount" class="play-detail-modal__content">
