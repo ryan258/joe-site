@@ -60,15 +60,16 @@ An indexed database of all 250 canonical plays generated from `joes-greatest-hit
 ### System 3: Spellbook & Evocation Arsenal (`/spellbook/`)
 Detailed reference for all 23 Wizard spells and 6 cantrips under 2024 D&D rules:
 * **Prepared Spells Status:** Highlights the 11 Prepared Spells, Magic Initiate *Shield*, and Ritual-Only Spells.
-* **Sculpt Spells Calculator:** Highlights Evocation spells with 1 + Spell Level protected creatures taking 0 damage.
+* **Sculpt Spells Calculator:** Highlights Evocation spells with 1 + Spell Level other visible creatures taking 0 damage on qualifying saves (excluding Joe and objects).
 * **Potent Cantrip Tagging:** Highlights cantrips dealing half damage on a missed attack roll (*Fire Bolt*, *Ray of Frost*) or successful saving throw.
 * **Component Tracker:** Explicitly marks costly components (50 GP reusable diamond for *Chromatic Orb*, 10 GP consumed incense for *Find Familiar*).
 
 ### System 4: Cow (Mr. Big) Flight Deck (`/familiar/`)
 Dedicated operational dashboard for Joe's Fey familiar:
-* **Canonical 2024 Owl Statblock:** AC 11, 1 HP, Speed 5 ft / Fly 60 ft, Darkvision 120 ft, Passive Perception 13 (or 15 with PB +3 scaling), Keen Sight & Hearing.
-* **Flyby Touch Delivery Matrix:** Pathing for delivering touch spells without opportunity attacks.
-* **Help Action Optimizer:** Guidelines for granting advantage on ally attack rolls.
+* **Canonical Revised Owl Statblock:** AC 11, 1 HP, Speed 5 ft / Fly 60 ft, Darkvision 120 ft, Perception +5, Stealth +5, Passive Perception 15, and no Keen Hearing and Sight trait.
+* **Flyby Touch Delivery Matrix:** Pathing for delivering touch spells without opportunity attacks (approach and exit share 60 ft total movement).
+* **Help Action Optimizer:** Guidelines for granting advantage on ally attack rolls with tactical exposure assessment.
+* **Staying Aloft:** Familiar remains airborne without Hover, but falls on Prone, Incapacitated, or 0 speed.
 * **Scouting & Sensory Link:** 100 ft telepathic command range, Bonus Action shared senses (retaining own sight).
 
 ### System 5: Investigation Playbook (`/investigation/`)
@@ -85,8 +86,11 @@ Operational implementation of Joe's 4-step Investigation Framework:
 
 ### System 6: 2024 Rules Arbiter & Edge-Case Engine (`/rules/`)
 Instant table dispute settler for 2024 D&D rules:
-* **Magic Action vs Utilize Action:** Wand of Magic Missiles activation requires Magic Action (no verbal, somatic, or material components).
-* **Wand of Magic Missiles Risk:** Expending the 7th charge forces a 1d20 roll; on a 1, the wand is permanently destroyed.
+* **One Spell Slot Per Turn:** Expending only one slot per turn (slotted *Fireball* + slotted *Counterspell* illegal on Joe's turn; slotted *Misty Step* allows only cantrips or non-slot actions).
+* **Magic Action vs Utilize Action:** Wand activation uses Magic Action; potion consumption is a Bonus Action; familiar cannot attack or douse with oil.
+* **Wand of Magic Missiles Limits:** Maximum 3 charges (5 darts) per casting; expending the 7th charge forces a 1d20 roll where a 1 destroys the wand.
+* **Counterspell Specifics:** Requires Verbal, Somatic, or Material components to trigger; DC 15 Constitution save; spell slot preserved on failure.
+* **Dimension Door Update:** Willing passenger within 5 ft arrives at destination with no passenger size restriction.
 * **Potent Cantrip:** Half damage on missed attack rolls and successful saves.
 * **Weapon Mastery Limitation:** Joe cannot use Nick or Topple without the Weapon Mastery feature.
 * **Cover Rules:** Half (+2), Three-Quarters (+5), Total Cover.
@@ -99,7 +103,8 @@ Instant table dispute settler for 2024 D&D rules:
 | Feature | Status | Acceptance Criteria |
 | :--- | :---: | :--- |
 | **All 250 Plays** | **Complete** | All 150 Joe plays and 100 Cow plays live as individual content files with canonical IDs (`J-1`..`150`, `C-1`..`100`). |
-| **All 29 Spells** | **Complete** | All 23 spells and 6 cantrips authored with exact 2024 rules, Sculpt Spells, Potent Cantrip, and component tags. |
+| **All 29 Spells** | **Complete** | All 23 spells and 6 cantrips authored with exact 2024 rules, Sculpt Spells other visible creatures rules, Potent Cantrip, and component tags. |
+| **Rules Arbiter** | **Complete** | Explicit adjudications for One Spell Slot Per Turn, Wand charge caps/destruction, Counterspell triggers, and Cow movement/staying aloft. |
 | **Search Speed** | **Complete** | Instant filtering across all 250 plays and 29 spells in `< 50ms`. |
 | **Rules Accuracy** | **Complete** | 100% compliant with 2024 PHB rules-as-written and canonical files in `../joe`. |
 | **State Persistence** | **Complete** | Session tracker persists HP, spell slots, wand charges, and concentration in `localStorage`. |
