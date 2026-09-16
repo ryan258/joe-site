@@ -21,7 +21,7 @@ description: "Canonical 23-spell grimoire, 11 prepared selections, 6 cantrips, a
       <span class="tag-badge tag-cyan">✓ Prepared</span>
     </div>
     <div class="sculpt-banner">
-      <span>💥 Sculpt Spells: Protects up to <strong>4 allies</strong> (Auto-pass, 0 damage).</span>
+      <span>💥 Sculpt Spells: A level 3 spell can protect up to <strong>4 other visible creatures</strong> (auto-pass; 0 damage when a successful save normally halves damage). Joe and objects cannot be selected.</span>
     </div>
     <div style="font-size:0.85rem;color:var(--text-med);line-height:1.5;margin-bottom:12px;">
       A bright streak flashes from your finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere makes a <strong>DC 15 Dexterity saving throw</strong>, taking <code>8d6</code> Fire damage on a failed save, or half on success. Ignites flammable objects.
@@ -68,7 +68,7 @@ description: "Canonical 23-spell grimoire, 11 prepared selections, 6 cantrips, a
       <span class="tag-badge tag-cyan">✓ Prepared</span>
     </div>
     <div style="font-size:0.85rem;color:var(--text-med);line-height:1.5;margin-bottom:12px;">
-      Trigger: You see a creature within 60 feet casting a spell. The caster makes a <strong>Constitution saving throw</strong> against Joe's spell save DC <code>15</code>. On a failure, the spell fails (slot preserved if one was used).
+      Trigger: You see a creature within 60 feet casting a spell with Verbal, Somatic, or Material components. The caster makes a <strong>Constitution saving throw</strong> against Joe's spell save DC <code>15</code>. On a failure, the spell fails (slot preserved if one was used).
     </div>
   </div>
 

@@ -11,7 +11,7 @@ ritual: false
 prepared: false
 sculpt_spells: true
 potent_cantrip: false
-upcast_notes: "Sculpt Spells protects up to 3 allies."
+upcast_notes: "Sculpt Spells can make up to 3 other visible creatures automatically succeed on the spell's saving throws."
 ---
 
 A line of strong wind 60 feet long and 10 feet wide blasts from you. Each creature starting turn in line makes DC 15 Strength save: pushed 15 feet away. Moving closer costs 2 extra feet of movement per foot. Disperses gas and vapors.

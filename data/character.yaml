@@ -41,7 +41,7 @@ senses:
 spellcasting:
   dc: 15
   attack_bonus: "+7"
-  evocation_savant: "Sculpt Spells protects 1 + Spell Level targets (auto-success, 0 damage)"
+  evocation_savant: "Sculpt Spells protects 1 + Spell Level other visible creatures (auto-success; 0 damage when a successful save normally halves damage)"
   potent_cantrip: "Deals half damage on missed attack rolls (Fire Bolt, Ray of Frost) or successful saving throws"
   slots:
     level_1: 4
@@ -79,11 +79,11 @@ familiar:
   hp: 1
   speed: "5 ft land / 60 ft fly"
   darkvision: "120 ft"
-  senses: "Darkvision 120 ft, Passive Perception 15, Perception +5, Stealth +5 (Keen Sight & Hearing Advantage)"
-  dndbeyond_notes: "Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the complete Owl stat block. Its flight looks like magical levitation, but it has Flyby rather than Hover. Cow cannot attack. Within 100 feet, Cow and Joe communicate telepathically. This campaign characterizes that connection through simple emotions, images, remembered sensations, and intentions; complex memories remain DM-controlled fragmentary clues by table convention. Cow communicates with others through expressive movement and behavior."
+  senses: "Darkvision 120 ft, Passive Perception 15, Perception +5, Stealth +5; no Keen Hearing and Sight trait"
+  dndbeyond_notes: "Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the revised Owl stat block. Its flight looks like magical levitation, but that appearance grants no mechanical benefit. Cow can stay aloft without moving; without Hover, it falls when Prone, Incapacitated, or its Fly Speed is reduced to 0. Cow cannot attack. Within 100 feet, Cow and Joe communicate telepathically. This campaign characterizes that connection through simple emotions, images, remembered sensations, and intentions; complex memories remain DM-controlled fragmentary clues by table convention. Cow communicates with others through expressive movement and behavior."
   traits:
-    - "Flyby (Provokes no Opportunity Attacks when flying out of enemy reach)"
-    - "Keen Sight and Hearing (Advantage on Perception checks relying on sight/hearing)"
+    - "Flyby (Provokes no Opportunity Attacks when flying out of enemy reach; does not prevent ranged, readied, or area attacks)"
+    - "60 ft total Fly movement shared by approach and exit; staying aloft does not require Hover"
     - "Telepathic communication (100 ft range; campaign convention uses emotions, images, and intentions)"
     - "Touch spell delivery (Cow uses Reaction to deliver Joe's touch spell within 100 ft)"
     - "Shared Senses (Joe Bonus Action to perceive through Cow, keeping his own senses under 2024 rules)"

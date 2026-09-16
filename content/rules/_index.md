@@ -25,14 +25,23 @@ description: "Instant tabletop dispute resolution for D&D 5.5e (2024 Revision) r
   <div class="hud-panel">
     <h3 style="font-size:1.1rem;font-weight:700;color:var(--accent-amber);margin-bottom:6px;">Utilize Action</h3>
     <p style="font-size:0.85rem;color:var(--text-med);line-height:1.5;">
-      Used to interact with a nonmagical object when that interaction requires an action (e.g. throwing oil, lighting a lantern, opening a stuck iron door, picking a lock with thieves' tools).
+      Used to interact with a nonmagical object when that interaction requires an action (e.g. pouring oil onto a 5-foot square of level ground within 5 feet, lighting a lantern, opening a stuck iron door, or picking a lock with thieves' tools). Dousing a creature or object with oil instead replaces an attack during the Attack action; Cow cannot do that because a familiar cannot attack. Drinking or administering a Potion of Healing is a Bonus Action.
     </p>
   </div>
 </div>
 
 ---
 
-## 🪄 2. Wand of Magic Missiles (2024 Rulings & Destruction Risk)
+## ⏱️ 2. One Spell Slot Per Turn
+
+* On any one turn, a creature can expend only **one spell slot** to cast a spell.
+* *Misty Step* plus *Fire Bolt* is legal; *Misty Step* plus slotted *Fireball* is not.
+* Wand activation does not expend a spell slot, so *Misty Step* plus Wand of Magic Missiles is legal.
+* A Reaction on another creature's turn is a different turn. On Joe's own turn, slotted *Fireball* followed by his slotted *Counterspell* is illegal. Joe can counter an interruption to an ally's spell on that ally's turn if his trigger, Reaction, and slot are available.
+
+---
+
+## 🪄 3. Wand of Magic Missiles (2024 Rulings & Destruction Risk)
 
 * **Action Type:** **Magic Action** (not an attack roll, not a spell cast from slots).
 * **Components:** **None**. You can fire the wand while silenced, holding a staff in the other hand, or immobilized (as long as you can hold and point the wand).
@@ -42,7 +51,7 @@ description: "Instant tabletop dispute resolution for D&D 5.5e (2024 Revision) r
   * 1 Charge = 3 Darts (Level 1 equivalent, $3 \times [1\text{d}4+1]$)
   * 2 Charges = 4 Darts (Level 2 equivalent)
   * 3 Charges = 5 Darts (Level 3 equivalent)
-  * Up to 7 Charges = 9 Darts ($9 \times [1\text{d}4+1]$)
+  * Maximum per casting: **3 charges = 5 darts**. The wand can hold 7 total charges, but it cannot spend all 7 in one casting.
 * **Dawn Recharge:** Regains `1d6 + 1` expended charges daily at dawn (max 7).
 * **Destruction Risk (Why Doctrine Mandates Preserving Charge 7):**
   > [!WARNING]
@@ -50,7 +59,7 @@ description: "Instant tabletop dispute resolution for D&D 5.5e (2024 Revision) r
 
 ---
 
-## 💥 3. Evoker Subclass Features (2024 Rules)
+## 💥 4. Evoker Subclass Features (2024 Rules)
 
 ### Potent Cantrip (Applies to Missed Attacks & Passed Saves)
 * **Exact 2024 PHB Rule:** *"If your d20 attack roll misses or the target succeeds on a saving throw against a cantrip you cast, the target takes half the cantrip's damage (if any), but suffers no additional effect from the cantrip."*
@@ -59,12 +68,12 @@ description: "Instant tabletop dispute resolution for D&D 5.5e (2024 Revision) r
 
 ### Sculpt Spells
 * **Eligibility:** Any Wizard **Evocation spell** that forces other creatures to make a saving throw (e.g. *Fireball*, *Thunderwave*, *Ice Storm*, *Burning Hands*, *Lightning Bolt*).
-* **Protected Targets:** You can choose up to **$1 + \text{Spell Level}$** creatures in the area (e.g. **4 creatures** for *Fireball* at 3rd level; **5 creatures** at 4th level).
-* **Effect:** Chosen creatures **automatically succeed** on their saving throw and **take NO damage** (not even half).
+* **Protected Targets:** You can choose up to **$1 + \text{Spell Level}$ other creatures Joe can see** in the area (e.g. **4 creatures** for *Fireball* at 3rd level; **5 creatures** at 4th level). Joe cannot choose himself or objects such as a wagon.
+* **Effect:** Chosen creatures automatically succeed on their saving throw and take no damage **when a successful save would normally deal half damage**. Sculpt does not protect the surrounding building, negate every spell effect, or apply to non-Evocation spells such as *Web*.
 
 ---
 
-## 🗡️ 4. Weapon Mastery & Unarmed Strike Limitation
+## 🗡️ 5. Weapon Mastery & Unarmed Strike Limitation
 
 * **D&D Beyond Display vs. Table Legality:** D&D Beyond displays Weapon Mastery properties on Joe's inventory (e.g. *Nick* on daggers, *Topple* on quarterstaffs).
 * **Rules Adjudication:** In the 2024 rules, Weapon Mastery properties can **only** be used by characters with the **Weapon Mastery class feature** (e.g. Fighters, Barbarians, Rogues, Paladins, Rangers) or the *Weapon Master* feat.
@@ -72,7 +81,7 @@ description: "Instant tabletop dispute resolution for D&D 5.5e (2024 Revision) r
 
 ---
 
-## 🛡️ 5. Cover & Tactical Positioning
+## 🛡️ 6. Cover & Tactical Positioning
 
 ```
 +-------------------------------------------------------------+
@@ -91,7 +100,7 @@ description: "Instant tabletop dispute resolution for D&D 5.5e (2024 Revision) r
 
 ---
 
-## 🎲 6. Heroic Inspiration & Memorize Spell
+## 🎲 7. Heroic Inspiration & Memorize Spell
 
 * **Heroic Inspiration (Resourceful Human Trait):** Joe gains Heroic Inspiration whenever he finishes a Long Rest. He can expend it to reroll **any d20 die roll** immediately after seeing the result, taking the new roll.
 * **Memorize Spell (Wizard 5+):** Whenever Joe finishes a Short Rest, he can study his spellbook to swap **one prepared level 1+ spell** for any other spell in his spellbook.

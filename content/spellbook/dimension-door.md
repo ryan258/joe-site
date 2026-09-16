@@ -14,4 +14,4 @@ potent_cantrip: false
 upcast_notes: ""
 ---
 
-You teleport yourself to any other spot within 500 feet. You arrive at exactly the spot desired. You can bring along objects and one willing creature of your size or smaller who is carrying gear up to its carrying capacity (must be within 5 feet of you).
+You teleport yourself to any other spot within 500 feet. You arrive at exactly the spot desired. You can bring objects you can carry and one willing creature within 5 feet; the revised spell has no passenger size restriction. The passenger arrives within 5 feet of your destination space.

@@ -14,4 +14,4 @@ potent_cantrip: false
 upcast_notes: "Upcast to a 4th-level slot or higher: the interrupted spell auto-fails (no save) if its level is ≤ the slot used."
 ---
 
-Trigger: You see a creature within 60 feet casting a spell. The caster makes a Constitution saving throw against Joe's spell save DC 15. On a failure, the spell fails (their slot is preserved if one was expended).
+Trigger: You see a creature within 60 feet casting a spell with Verbal, Somatic, or Material components. The caster makes a Constitution saving throw against Joe's spell save DC 15. On a failure, the spell fails (their slot is preserved if one was expended).

@@ -11,7 +11,7 @@ ritual: false
 prepared: false
 sculpt_spells: true
 potent_cantrip: false
-upcast_notes: "+1d6 fire damage per slot level above 1st. Sculpt Spells protects up to 2 allies."
+upcast_notes: "+1d6 fire damage per slot level above 1st. Sculpt Spells protects up to 2 other visible creatures."
 ---
 
-A thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone makes a DC 15 Dexterity save: 3d6 Fire damage on fail, half on pass. Sculpt Spells protects up to 2 allies (auto-success, 0 damage). Flammable objects ignite.
+A thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone makes a DC 15 Dexterity save: 3d6 Fire damage on fail, half on pass. Sculpt Spells protects up to 2 other visible creatures (auto-success, 0 damage). Joe cannot select himself or objects; flammable objects can ignite.
