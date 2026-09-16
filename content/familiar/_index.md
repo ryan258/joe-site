@@ -7,7 +7,7 @@ description: "Operational flight manual, 2024 Owl statblock, Flyby touch deliver
   <div>
     <h2 style="font-size:1.8rem;font-weight:800;color:var(--text-pure);margin-bottom:12px;">The 1 HP Fey Familiar</h2>
     <p style="font-size:1rem;color:var(--text-med);line-height:1.6;margin-bottom:16px;">
-      Cow is a Fey spirit housed in Joe's fist-sized childhood wooden toy cow, <em>Mr. Big</em>. Mechanically, Cow uses the complete <strong>2024 Owl stat block</strong> with Tiny Fey creature type. 
+      Cow is a Fey spirit that appears as Joe's fist-sized childhood wooden toy cow, <em>Mr. Big</em>. Mechanically, Cow uses the revised <strong>2024 Owl stat block</strong> with Tiny Fey creature type. What happens to the physical toy when Cow is dismissed or destroyed remains a pending DM ruling.
     </p>
     <div style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);border-radius:var(--border-radius-md);padding:14px;">
       <strong style="color:var(--accent-fey);display:block;margin-bottom:4px;">Standing Tabletop Doctrine:</strong>
@@ -25,19 +25,19 @@ description: "Operational flight manual, 2024 Owl statblock, Flyby touch deliver
 
 ## 🦉 Canonical 2024 Statblock (Owl Template)
 
-| Attribute | Value | Notes & Rules Mechanics (Live D&D Beyond Extra) |
+| Attribute | Value | Notes & Rules Mechanics |
 | :--- | :--- | :--- |
 | **Extra Name** | `Mr. Big (Cow acting as Owl)*` | Live D&D Beyond configured Extra name. |
-| **Creature Type** | Tiny Fey Familiar | Housed in wooden toy cow; no Hover trait; cannot attack. |
+| **Creature Type** | Tiny Fey Familiar | Appears as a wooden toy cow; no mechanical object benefits; cannot attack. |
 | **Armor Class** | 11 | Unarmored natural defense. |
 | **Hit Points** | **1 / 1** | Instant destruction if dealt any damage. |
 | **Speed** | 5 ft ground, **60 ft Fly** | High tactical mobility for battlefield traversal. |
-| **Senses & Stealth** | **Darkvision 120 ft**<br>Passive Perception 15<br>Perception +5, Stealth +5 | Keen Sight and Hearing (Advantage on sight/hearing Perception checks). |
-| **Flyby Trait** | **Active** | *Provokes no Opportunity Attacks when flying out of an enemy's reach.* |
+| **Senses & Stealth** | **Darkvision 120 ft**<br>Passive Perception 15<br>Perception +5, Stealth +5 | The revised Owl has no Keen Hearing and Sight trait. |
+| **Flyby Trait** | **Active** | Prevents Opportunity Attacks when flying out of reach; not ranged, readied, or area attacks. |
 
 > [!NOTE]
-> **Live D&D Beyond Extra Notes (Verbatim):**
-> *"Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the complete Owl stat block. Its flight looks like magical levitation, but it has Flyby rather than Hover. Cow cannot attack. Within 100 feet, Cow and Joe communicate telepathically. This campaign characterizes that connection through simple emotions, images, remembered sensations, and intentions; complex memories remain DM-controlled fragmentary clues by table convention. Cow communicates with others through expressive movement and behavior."*
+> **Canonical site notes (live D&D Beyond synchronization remains unconfirmed):**
+> *"Cow is a Fey familiar that appears as Joe's fist-sized childhood toy cow. Mechanically, Cow uses the revised Owl stat block. Its flight looks like magical levitation, but that appearance grants no mechanical benefit. Cow can stay aloft without moving; without Hover, it falls when Prone, Incapacitated, or its Fly Speed is reduced to 0. Cow cannot attack. Within 100 feet, Cow and Joe communicate telepathically. This campaign characterizes that connection through simple emotions, images, remembered sensations, and intentions; complex memories remain DM-controlled fragmentary clues by table convention. Cow communicates with others through expressive movement and behavior."*
 
 ---
 
@@ -46,12 +46,13 @@ description: "Operational flight manual, 2024 Owl statblock, Flyby touch deliver
 ### 1. Flyby Touch Spell Delivery
 * **Range:** Cow must be within **100 feet** of Joe.
 * **Action Economy:** Joe uses his Action to cast a touch-range spell (e.g. *Shocking Grasp*, *Light*, *Dragon's Breath*). Cow uses its **Reaction** to deliver the spell when touching the target.
-* **Flyby Egress:** Cow moves up to 60 ft, swoops into melee reach (5 ft), delivers the spell via reaction, and continues flying 30–50 ft into high cover or ceiling perches **without provoking opportunity attacks**.
+* **Flyby Egress:** Cow has **60 feet total movement** for approach and exit. A 25-foot approach leaves 35 feet to reach high cover or a perch. Flying out of reach provokes no Opportunity Attack, but ordinary ranged attacks, readied attacks, and area effects remain threats.
+* **Staying Aloft:** Cow can remain aloft without moving. Lacking Hover means Cow falls if it is Prone, Incapacitated, or its Fly Speed is reduced to 0.
 
 ### 2. Help Action Optimizer
 * Cow rolls its own initiative and takes its turn independently.
 * It can take the **Help** action on its turn to feint, screech, or flutter in front of a target, granting an ally **Advantage** on their next attack roll against that target before Cow's next turn.
-* Because of Flyby, Cow never stays in melee threat range after granting Help.
+* Flyby can remove the Opportunity Attack on exit, but Help is not compulsory. Use it only when the benefit is worth Cow's exposure and the remaining movement reaches a defensible position.
 
 ### 3. Telepathic Bond & Shared Senses
 * **Telepathy (100 ft):** Cow and Joe communicate telepathically. This campaign characterizes the connection through simple emotions, images, remembered sensations, and intentions rather than treating that as a default RAW limit.

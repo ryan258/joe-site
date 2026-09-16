@@ -209,7 +209,7 @@
     },
     {
       title: "5. Cow's Turn & Reaction Prep",
-      notes: "Cow rolls own initiative. Flyby Help action (60 ft fly, no opportunity attacks) to grant ally advantage on next attack, or position for touch spell delivery. Ready Reaction (*Shield* / *Counterspell*)."
+      notes: "Cow rolls own initiative. Approach and exit share 60 ft total movement; Flyby prevents only Opportunity Attacks on the flying exit. Help when the benefit is worth exposure. Ready Reaction (*Shield* / *Counterspell*)."
     }
   ];
 
