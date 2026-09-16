@@ -154,7 +154,7 @@ spells_data = [
         "prepared": False,
         "sculpt_spells": True,
         "potent_cantrip": False,
-        "upcast_notes": "+1d8 thunder damage per slot level above 1st. Sculpt Spells protects up to 2 allies.",
+        "upcast_notes": "+1d8 thunder damage per slot level above 1st. Sculpt Spells protects up to 2 other visible creatures.",
         "content": "A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you makes a DC 15 Constitution save. On a fail, takes 2d8 Thunder damage and is pushed 10 feet away. Unsecured objects are pushed 10 feet. Emits a thunderous boom audible up to 300 feet."
     },
     {
@@ -256,8 +256,8 @@ spells_data = [
         "prepared": False,
         "sculpt_spells": True,
         "potent_cantrip": False,
-        "upcast_notes": "+1d6 fire damage per slot level above 1st. Sculpt Spells protects up to 2 allies.",
-        "content": "A thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone makes a DC 15 Dexterity save: 3d6 Fire damage on fail, half on pass. Sculpt Spells protects up to 2 allies (auto-success, 0 damage). Flammable objects ignite."
+        "upcast_notes": "+1d6 fire damage per slot level above 1st. Sculpt Spells protects up to 2 other visible creatures.",
+        "content": "A thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone makes a DC 15 Dexterity save: 3d6 Fire damage on fail, half on pass. Sculpt Spells protects up to 2 other visible creatures (auto-success, 0 damage). Joe cannot select himself or objects; flammable objects can ignite."
     },
 
     # Level 2 Spells
@@ -360,7 +360,7 @@ spells_data = [
         "prepared": False,
         "sculpt_spells": True,
         "potent_cantrip": False,
-        "upcast_notes": "Sculpt Spells protects up to 3 allies.",
+        "upcast_notes": "Sculpt Spells can make up to 3 other visible creatures automatically succeed on the spell's saving throws.",
         "content": "A line of strong wind 60 feet long and 10 feet wide blasts from you. Each creature starting turn in line makes DC 15 Strength save: pushed 15 feet away. Moving closer costs 2 extra feet of movement per foot. Disperses gas and vapors."
     },
 
@@ -380,7 +380,7 @@ spells_data = [
         "sculpt_spells": True,
         "potent_cantrip": False,
         "upcast_notes": "+1d6 fire damage and +1 protected creature per slot level above 3rd.",
-        "content": "A bright streak flashes to a point within range and blossoms into an explosion of flame. 20-foot radius sphere. DC 15 Dexterity save: 8d6 Fire damage on fail, half on pass. Sculpt Spells protects up to 4 allies (auto-success, 0 damage). Ignites flammable objects."
+        "content": "A bright streak flashes to a point within range and blossoms into an explosion of flame. 20-foot radius sphere. DC 15 Dexterity save: 8d6 Fire damage on fail, half on pass. Sculpt Spells protects up to 4 other visible creatures (auto-success, 0 damage). Joe and objects cannot be selected; flammable objects can ignite."
     },
     {
         "title": "Lightning Bolt",
@@ -397,7 +397,7 @@ spells_data = [
         "sculpt_spells": True,
         "potent_cantrip": False,
         "upcast_notes": "+1d6 lightning damage and +1 protected creature per slot level above 3rd.",
-        "content": "A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you. Each creature in line makes a DC 15 Dexterity save: 8d6 Lightning damage on fail, half on pass. Sculpt Spells protects up to 4 allies (auto-success, 0 damage)."
+        "content": "A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you. Each creature in line makes a DC 15 Dexterity save: 8d6 Lightning damage on fail, half on pass. Sculpt Spells protects up to 4 other visible creatures (auto-success, 0 damage). Joe cannot select himself or objects."
     },
     {
         "title": "Counterspell",
@@ -413,8 +413,8 @@ spells_data = [
         "prepared": True,
         "sculpt_spells": False,
         "potent_cantrip": False,
-        "upcast_notes": "Automatically counters spells of equal or lower slot level.",
-        "content": "Trigger: You see a creature within 60 feet casting a spell. If the spell is 3rd level or lower, it fails with no effect. If 4th level or higher, make an Intelligence check (DC 10 + spell level) with Joe's +7 modifier."
+        "upcast_notes": "Upcast to a 4th-level slot or higher: the interrupted spell auto-fails (no save) if its level is no higher than the slot used.",
+        "content": "Trigger: You see a creature within 60 feet casting a spell with Verbal, Somatic, or Material components. The caster makes a Constitution saving throw against Joe's spell save DC 15. On a failure, the spell fails; its slot is preserved if one was expended."
     },
     {
         "title": "Dispel Magic",
@@ -467,7 +467,7 @@ spells_data = [
         "sculpt_spells": True,
         "potent_cantrip": False,
         "upcast_notes": "+1d8 bludgeoning damage and +1 protected creature per slot level above 4th.",
-        "content": "A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high cylinder. DC 15 Dexterity save: 2d8 Bludgeoning + 4d6 Cold damage on fail, half on pass. Sculpt Spells protects up to 5 allies (auto-success, 0 damage). Area becomes difficult terrain until end of your next turn."
+        "content": "A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high cylinder. DC 15 Dexterity save: 2d8 Bludgeoning + 4d6 Cold damage on fail, half on pass. Sculpt Spells protects up to 5 other visible creatures from the damage (auto-success, 0 damage), but not from the difficult terrain."
     },
     {
         "title": "Arcane Eye",
@@ -501,7 +501,7 @@ spells_data = [
         "sculpt_spells": False,
         "potent_cantrip": False,
         "upcast_notes": "",
-        "content": "You teleport yourself to any other spot within 500 feet. You arrive at exactly the spot desired. You can bring along objects and one willing creature of your size or smaller who is carrying gear up to its carrying capacity (must be within 5 feet of you)."
+        "content": "You teleport yourself to any other spot within 500 feet. You arrive at exactly the spot desired. You can bring objects you can carry and one willing creature within 5 feet; the revised spell has no passenger size restriction. The passenger arrives within 5 feet of your destination space."
     }
 ]
 

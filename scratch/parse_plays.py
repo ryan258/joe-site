@@ -54,10 +54,22 @@ def parse_plays(file_path, actor_prefix, output_dir):
         actor = "joe" if actor_prefix == "J" else "cow"
         play_id = f"{actor_prefix}-{play_num}"
         weight = int(play_num) if actor_prefix == "J" else 1000 + int(play_num)
+        escaped_title = play_title.replace('"', '\\"')
+        filename = f"{play_id.lower()}.md"
+
+        # Preserve any curated action category already assigned to this page.
+        existing_path = os.path.join(output_dir, filename)
+        if os.path.exists(existing_path):
+            with open(existing_path, 'r', encoding='utf-8') as existing_file:
+                existing_type = re.search(
+                    r'^type:\s*"([^"]+)"', existing_file.read(), re.MULTILINE
+                )
+            if existing_type:
+                play_type = existing_type.group(1)
 
         # Frontmatter
         frontmatter = f"""---
-title: "{play_title.replace('"', '\\"')}"
+title: "{escaped_title}"
 play_id: "{play_id}"
 weight: {weight}
 actor: "{actor}"
@@ -69,7 +81,6 @@ table_phrase: "{table_phrase}"
 
 {body}
 """
-        filename = f"{play_id.lower()}.md"
         with open(os.path.join(output_dir, filename), 'w', encoding='utf-8') as out_f:
             out_f.write(frontmatter)
 
