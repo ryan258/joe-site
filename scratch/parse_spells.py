@@ -413,7 +413,7 @@ spells_data = [
         "prepared": True,
         "sculpt_spells": False,
         "potent_cantrip": False,
-        "upcast_notes": "Upcast to a 4th-level slot or higher: the interrupted spell auto-fails (no save) if its level is no higher than the slot used.",
+        "upcast_notes": "No benefit from a higher-level slot. The 2024 version always uses the Constitution save.",
         "content": "Trigger: You see a creature within 60 feet casting a spell with Verbal, Somatic, or Material components. The caster makes a Constitution saving throw against Joe's spell save DC 15. On a failure, the spell fails; its slot is preserved if one was expended."
     },
     {

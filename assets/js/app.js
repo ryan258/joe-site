@@ -193,7 +193,7 @@
   const turnPhasesData = [
     {
       title: "1. Start of Turn & Concentration",
-      notes: "Check ongoing spell effects (*Web*, *Grease*, *Fly*). Verify Cow's position (within 100 ft). Confirm Heroic Inspiration is ready."
+      notes: "Check ongoing spell effects (<em>Web</em>, <em>Grease</em>, <em>Fly</em>). Verify Cow's position (within 100 ft). Confirm Heroic Inspiration is ready."
     },
     {
       title: "2. Movement (30 ft)",
@@ -201,15 +201,15 @@
     },
     {
       title: "3. Action (Cast Spell / Magic / Search / Study)",
-      notes: "Lead with Control (*Web*, *Grease*) or Clustered Evocation (*Fireball* + Sculpt Spells for up to 4 allies). Wand of Magic Missiles uses Magic Action (no components)."
+      notes: "Lead with Control (<em>Web</em>, <em>Grease</em>) or Clustered Evocation (<em>Fireball</em> + Sculpt Spells for up to 4 allies). Wand of Magic Missiles uses Magic Action (no components)."
     },
     {
-      title: "4. Bonus Action (*Misty Step* / Cow Link)",
-      notes: "Use *Misty Step* (30 ft bonus action teleport) to escape grapples or melee reach. Or use Bonus Action to share Cow's senses (Darkvision 120 ft) without losing own sight."
+      title: "4. Bonus Action (Misty Step / Cow Link)",
+      notes: "Use <em>Misty Step</em> (30 ft bonus action teleport) to escape grapples or melee reach. Or use Bonus Action to share Cow's senses (Darkvision 120 ft) without losing own sight."
     },
     {
       title: "5. Cow's Turn & Reaction Prep",
-      notes: "Cow rolls own initiative. Approach and exit share 60 ft total movement; Flyby prevents only Opportunity Attacks on the flying exit. Help when the benefit is worth exposure. Ready Reaction (*Shield* / *Counterspell*)."
+      notes: "Cow rolls own initiative. Approach and exit share 60 ft total movement; Flyby prevents only Opportunity Attacks on the flying exit. Help when the benefit is worth exposure. Ready Reaction (<em>Shield</em> / <em>Counterspell</em>)."
     }
   ];
 
@@ -505,6 +505,12 @@
     // Deep link support from URL hash
     function checkHashForPlay() {
       const hash = window.location.hash.replace('#', '').toLowerCase();
+      // Filter shortcuts such as /plays/#cow or /plays/#joe
+      const filterBtn = hash ? document.querySelector(`.plays-filter-bar .filter-btn[data-filter="${CSS.escape(hash)}"]`) : null;
+      if (filterBtn) {
+        filterBtn.click();
+        return;
+      }
       if (hash) {
         const targetCard = document.getElementById(hash);
         if (targetCard && targetCard.classList.contains('play-card')) {
@@ -529,25 +535,118 @@
     window.addEventListener('hashchange', checkHashForPlay);
   }
 
-  // Search Modal Hotkey Controller
+  // Search Modal Controller (generated index, keyboard navigation)
   function initSearchModal() {
     const modal = document.getElementById('global-search-modal');
     const triggers = document.querySelectorAll('.quick-search-trigger');
     const input = document.getElementById('global-search-input');
     const resultsContainer = document.getElementById('global-search-results');
+    const MAX_RESULTS = 12;
+    let indexed = null;
+    let activeIndex = -1;
+    let lastFocus = null;
+
+    // Lowercase haystacks are built once, on first search
+    function getIndex() {
+      if (!indexed) {
+        indexed = (window.JOE_SEARCH_INDEX || []).map(item => ({
+          item,
+          title: (item.title || '').toLowerCase(),
+          haystack: [item.title, item.category, item.summary, item.keywords].join(' ').toLowerCase()
+        }));
+      }
+      return indexed;
+    }
+
+    function search(query) {
+      const terms = query.split(/\s+/).filter(Boolean);
+      const scored = [];
+      getIndex().forEach((entry, order) => {
+        if (!terms.every(t => entry.haystack.includes(t))) return;
+        let score = 1;
+        if (terms.every(t => entry.title.includes(t))) score = 2;
+        if (entry.title.includes(query)) score = 3;
+        if (entry.title === query) score = 4;
+        scored.push({ entry, score, order });
+      });
+      scored.sort((a, b) => b.score - a.score || a.order - b.order);
+      return scored.slice(0, MAX_RESULTS).map(s => s.entry.item);
+    }
+
+    function showMessage(text) {
+      resultsContainer.replaceChildren();
+      const li = document.createElement('li');
+      li.className = 'search-hint';
+      li.textContent = text;
+      resultsContainer.appendChild(li);
+      activeIndex = -1;
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
+    }
+
+    function renderResults(matches) {
+      resultsContainer.replaceChildren();
+      matches.forEach((m, i) => {
+        const li = document.createElement('li');
+        li.setAttribute('role', 'presentation');
+
+        const link = document.createElement('a');
+        link.className = 'search-result-item';
+        link.id = 'search-result-' + i;
+        link.href = m.url;
+        link.setAttribute('role', 'option');
+        link.tabIndex = -1;
+
+        const head = document.createElement('div');
+        head.className = 'search-result-head';
+        const title = document.createElement('strong');
+        title.textContent = m.title;
+        const badge = document.createElement('span');
+        badge.className = 'tag-badge tag-cyan';
+        badge.textContent = m.category;
+        head.append(title, badge);
+
+        const summary = document.createElement('p');
+        summary.textContent = m.summary;
+
+        link.append(head, summary);
+        link.addEventListener('click', closeModal);
+        li.appendChild(link);
+        resultsContainer.appendChild(li);
+      });
+      input.setAttribute('aria-expanded', 'true');
+      setActive(0);
+    }
+
+    function setActive(index) {
+      const options = resultsContainer.querySelectorAll('.search-result-item');
+      if (!options.length) return;
+      activeIndex = (index + options.length) % options.length;
+      options.forEach((opt, i) => {
+        const on = i === activeIndex;
+        opt.classList.toggle('is-active', on);
+        opt.setAttribute('aria-selected', String(on));
+      });
+      const active = options[activeIndex];
+      input.setAttribute('aria-activedescendant', active.id);
+      active.scrollIntoView({ block: 'nearest' });
+    }
 
     function openModal() {
       if (!modal) return;
+      lastFocus = document.activeElement;
       modal.classList.add('open');
       if (input) {
         input.value = '';
+        showMessage('Type a spell name, play title, rule keyword, or stat. Use ↑ ↓ and Enter to pick.');
         input.focus();
       }
     }
 
     function closeModal() {
-      if (!modal) return;
+      if (!modal || !modal.classList.contains('open')) return;
       modal.classList.remove('open');
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
     }
 
     triggers.forEach(t => t.addEventListener('click', openModal));
@@ -558,9 +657,11 @@
       });
     }
 
-    // Keyboard Shortcuts
+    // Global shortcuts: "/" opens search, Escape closes it
     document.addEventListener('keydown', (e) => {
-      if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      const el = document.activeElement;
+      const typing = el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable);
+      if (e.key === '/' && !typing) {
         e.preventDefault();
         openModal();
       } else if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
@@ -568,30 +669,34 @@
       }
     });
 
-    // Quick Search Filtering
     if (input && resultsContainer) {
       input.addEventListener('input', () => {
         const query = input.value.toLowerCase().trim();
         if (!query) {
-          resultsContainer.innerHTML = '<li style="padding:12px;color:var(--text-dim);text-align:center;">Type a spell name, play title, rule keyword, or stat...</li>';
+          showMessage('Type a spell name, play title, rule keyword, or stat. Use ↑ ↓ and Enter to pick.');
           return;
         }
-        const matches = (window.JOE_SEARCH_INDEX || []).filter(item => {
-          return item.title.toLowerCase().includes(query) || item.summary.toLowerCase().includes(query) || item.category.toLowerCase().includes(query);
-        });
-
+        const matches = search(query);
         if (matches.length === 0) {
-          resultsContainer.innerHTML = `<li style="padding:12px;color:var(--text-dim);text-align:center;">No results found for "${query}".</li>`;
+          showMessage('No results found for "' + input.value.trim() + '".');
         } else {
-          resultsContainer.innerHTML = matches.slice(0, 10).map(m => `
-            <li class="search-result-item" onclick="window.location.href='${m.url}'">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <strong style="color:var(--text-pure);">${m.title}</strong>
-                <span class="tag-badge tag-cyan">${m.category}</span>
-              </div>
-              <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">${m.summary}</p>
-            </li>
-          `).join('');
+          renderResults(matches);
+        }
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setActive(activeIndex + 1);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setActive(activeIndex - 1);
+        } else if (e.key === 'Enter') {
+          const active = resultsContainer.querySelectorAll('.search-result-item')[activeIndex];
+          if (active) {
+            e.preventDefault();
+            active.click();
+          }
         }
       });
     }

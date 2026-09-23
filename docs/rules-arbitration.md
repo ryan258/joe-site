@@ -17,7 +17,7 @@ This document records the exact mechanical adjudications and 2024 Player's Handb
 * **Trigger:** You see a creature within 60 feet casting a spell that has **Verbal, Somatic, or Material components**. Spells or abilities lacking components cannot be perceived as casting and cannot be counterspelled.
 * **Saving Throw Mechanic:** The target makes a **Constitution saving throw** against Joe's spell save DC (DC 15). On a failure, the spell fails and has no effect.
 * **Slot Preservation:** If the interrupted spell required a spell slot, the caster does **not** lose the spell slot; only their action/bonus action/reaction is expended.
-* **Upcasting:** When cast using a 4th-level slot or higher, if the interrupted spell's level is less than or equal to the slot used, it fails automatically without requiring a saving throw.
+* **No Upcast Benefit:** The 2024 *Counterspell* has no higher-level effect. A 4th-level slot does not make lower-level spells fail automatically (that was the 2014 version). The target always makes the Constitution save.
 
 ### Dimension Door
 * **Passenger Capacity:** Joe can teleport himself and **one willing creature** within 5 feet.

@@ -1,0 +1,76 @@
+{{- /*
+  Builds the global search index from site content: every play, every spell,
+  and the reference pages with their section headings. Returns a fingerprinted
+  JS resource so the index is generated once and cached by the browser.
+  Call with partialCached so it is built once per site build.
+*/ -}}
+{{- $items := slice -}}
+
+{{- /* Tactical plays: link to the directory's modal deep link */ -}}
+{{- $playsList := site.GetPage "/plays" -}}
+{{- range (where site.RegularPages "Section" "plays").ByWeight -}}
+  {{- $category := cond (eq .Params.actor "cow") "Cow Play" "Joe Play" -}}
+  {{- $keywords := printf "%s %s %s" .Params.type (delimit (.Params.threat_tags | default slice) " ") .Params.table_phrase -}}
+  {{- $items = $items | append (dict
+      "title" (printf "%s: %s" .Params.play_id .Title)
+      "category" $category
+      "summary" (.Params.summary | markdownify | plainify | htmlUnescape)
+      "keywords" ($keywords | markdownify | plainify | htmlUnescape)
+      "url" (printf "%s#%s" $playsList.RelPermalink (lower .Params.play_id))
+    ) -}}
+{{- end -}}
+
+{{- /* Spells: link to the card anchor on the spellbook page */ -}}
+{{- $spellbook := site.GetPage "/spellbook" -}}
+{{- range sort (where site.RegularPages "Section" "spellbook") "Params.level" -}}
+  {{- $level := int .Params.level -}}
+  {{- $category := cond (eq $level 0) "Cantrip" (printf "Level %d Spell" $level) -}}
+  {{- $flags := slice .Params.school -}}
+  {{- if .Params.concentration }}{{ $flags = $flags | append "Concentration" }}{{ end -}}
+  {{- if .Params.ritual }}{{ $flags = $flags | append "Ritual" }}{{ end -}}
+  {{- if .Params.sculpt_spells }}{{ $flags = $flags | append "Sculpt Spells" }}{{ end -}}
+  {{- if .Params.potent_cantrip }}{{ $flags = $flags | append "Potent Cantrip" }}{{ end -}}
+  {{- if .Params.prepared }}{{ $flags = $flags | append "Prepared" }}{{ end -}}
+  {{- $items = $items | append (dict
+      "title" .Title
+      "category" $category
+      "summary" (printf "%s · %s · %s · %s" .Params.school .Params.casting_time .Params.range .Params.duration)
+      "keywords" (printf "%s %s %s" (delimit $flags " ") .Params.upcast_notes (.Content | plainify | htmlUnescape))
+      "url" (printf "%s#%s" $spellbook.RelPermalink (.Title | lower | urlize))
+    ) -}}
+{{- end -}}
+
+{{- /* Reference pages and their second-level sections */ -}}
+{{- $refPages := slice
+    (dict "path" "/character" "label" "Dossier")
+    (dict "path" "/familiar" "label" "Cow Flight Deck")
+    (dict "path" "/investigation" "label" "Investigation")
+    (dict "path" "/rules" "label" "Rules")
+-}}
+{{- range $refPages -}}
+  {{- $label := .label -}}
+  {{- with site.GetPage .path -}}
+    {{- $page := . -}}
+    {{- $items = $items | append (dict
+        "title" .Title
+        "category" $label
+        "summary" (.Description | default "")
+        "keywords" ""
+        "url" .RelPermalink
+      ) -}}
+    {{- range $id, $heading := .Fragments.HeadingsMap -}}
+      {{- if eq $heading.Level 2 -}}
+        {{- $items = $items | append (dict
+            "title" ($heading.Title | plainify | htmlUnescape)
+            "category" $label
+            "summary" $page.Title
+            "keywords" ""
+            "url" (printf "%s#%s" $page.RelPermalink $id)
+          ) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $js := printf "window.JOE_SEARCH_INDEX = %s;" (jsonify $items) | resources.FromString "js/search-index.js" | minify | fingerprint -}}
+{{- return $js -}}

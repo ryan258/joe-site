@@ -1,18 +1,20 @@
+{{- $playCount := len (where site.RegularPages "Section" "plays") -}}
+{{- $spellCount := len (where site.RegularPages "Section" "spellbook") -}}
 <div class="search-modal-backdrop" id="global-search-modal">
-  <div class="search-modal-dialog">
+  <div class="search-modal-dialog" role="dialog" aria-modal="true" aria-label="Search plays, spells, and rules">
     <span class="modal-corner modal-corner--tl" aria-hidden="true">◇</span>
     <span class="modal-corner modal-corner--tr" aria-hidden="true">◇</span>
     <span class="modal-corner modal-corner--bl" aria-hidden="true">◇</span>
     <span class="modal-corner modal-corner--br" aria-hidden="true">◇</span>
 
     <div class="search-input-wrapper">
-      <span style="font-size:1.2rem;color:var(--accent-gold);">🔍</span>
-      <input type="text" class="search-input" id="global-search-input" placeholder="Search 250 plays, 23 spells, 2024 rules, or stats..." autocomplete="off">
+      <span style="font-size:1.2rem;color:var(--accent-gold);" aria-hidden="true">🔍</span>
+      <input type="text" class="search-input" id="global-search-input" placeholder="Search {{ $playCount }} plays, {{ $spellCount }} spells, and 2024 rules..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="global-search-results" aria-autocomplete="list" aria-label="Search plays, spells, and rules">
       <span class="kbd-badge">ESC</span>
     </div>
-    <ul class="search-results-list" id="global-search-results">
-      <li style="padding:16px;color:var(--text-dim);text-align:center;">
-        Type keywords (e.g. <em>"sculpt"</em>, <em>"fireball"</em>, <em>"flyby"</em>, <em>"wand"</em>, <em>"investigation"</em>)...
+    <ul class="search-results-list" id="global-search-results" role="listbox" aria-label="Search results">
+      <li class="search-hint">
+        Type keywords (e.g. <em>"sculpt"</em>, <em>"fireball"</em>, <em>"flyby"</em>, <em>"wand"</em>, <em>"investigation"</em>). Use ↑ ↓ and Enter to pick.
       </li>
     </ul>
   </div>
