@@ -43,10 +43,15 @@ description: "Operational flight manual, 2024 Owl statblock, Flyby touch deliver
 
 ## ⚡ Core 2024 Familiar Mechanics
 
-### 1. Flyby Touch Spell Delivery
-* **Range:** Cow must be within **100 feet** of Joe.
-* **Action Economy:** Joe uses his Action to cast a touch-range spell (e.g. *Shocking Grasp*, *Light*, *Dragon's Breath*). Cow uses its **Reaction** to deliver the spell when touching the target.
-* **Flyby Egress:** Cow has **60 feet total movement** for approach and exit. A 25-foot approach leaves 35 feet to reach high cover or a perch. Flying out of reach provokes no Opportunity Attack, but ordinary ranged attacks, readied attacks, and area effects remain threats.
+### 1. Touch Spell Delivery
+* **Range:** Cow must be within **100 feet** of Joe when he casts.
+* **Action Economy:** Joe uses his Action to cast a touch-range spell. Cow uses its **Reaction** to deliver the touch. Joe's touch spells are *Mage Armor*, *Invisibility*, and *Fly*, so the target is usually an ally.
+* **No Movement During the Reaction:** A Reaction gives Cow no movement. Cow must already be within reach of the target when Joe casts.
+* **The Sequence:**
+  1. **Cow's turn:** fly next to (or onto) the target.
+  2. **Joe's turn:** cast the spell. Cow uses its Reaction to touch the target.
+  3. **Cow's next turn:** fly to cover.
+* **Flyby Exit:** Cow has **60 feet total movement** on its turn for approach and exit. A 25-foot approach leaves 35 feet to reach high cover or a perch. Flying out of reach provokes no Opportunity Attack, but ordinary ranged attacks, readied attacks, and area effects remain threats.
 * **Staying Aloft:** Cow can remain aloft without moving. Lacking Hover means Cow falls if it is Prone, Incapacitated, or its Fly Speed is reduced to 0.
 
 ### 2. Help Action Optimizer
@@ -63,9 +68,9 @@ description: "Operational flight manual, 2024 Owl statblock, Flyby touch deliver
 
 ## 🎯 Cow's Signature Tactical Plays (C-1 to C-4)
 
-The full 100-play Cow directory lives in [Tactical Plays](/plays/#actor=cow); these four are the reconnaissance staples referenced above.
+The full 100-play Cow directory lives in [Tactical Plays]({{< relref "/plays/_index.md#cow" >}}); these four are the reconnaissance staples referenced above.
 
-- [C-1: The Perimeter Circuit](/plays/cow/c-1/) — one slow lap of the exterior before anyone touches the inside.
-- [C-2: The Grid Sweep](/plays/cow/c-2/) — parallel-lane aerial survey of a large uncharted area.
-- [C-3: The Head Count](/plays/cow/c-3/) — perch-and-count on a known enemy position before committing.
-- [C-4: The High Perch](/plays/cow/c-4/) — elevated vantage for sustained overwatch.
+- [C-1: The Perimeter Circuit]({{< relref "/plays/cow/c-1.md" >}}) — one slow lap of the exterior before anyone touches the inside.
+- [C-2: The Grid Sweep]({{< relref "/plays/cow/c-2.md" >}}) — parallel-lane aerial survey of a large uncharted area.
+- [C-3: The Head Count]({{< relref "/plays/cow/c-3.md" >}}) — perch-and-count on a known enemy position before committing.
+- [C-4: The High Perch]({{< relref "/plays/cow/c-4.md" >}}) — elevated vantage for sustained overwatch.

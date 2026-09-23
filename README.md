@@ -21,7 +21,7 @@ Designed specifically for active gameplay at the tabletop—optimizing turn exec
 ## 🚀 Quick Start & Local Development
 
 ### Prerequisites
-* [Hugo Extended](https://gohugo.io/installation/) (v0.125.0 or later)
+* [Hugo Extended](https://gohugo.io/installation/) v0.156.0 or later (the homepage uses `hugo.Data`, which older versions lack). Deploys are pinned to v0.160.0 in `.github/workflows/deploy.yml`.
 
 ### Running Locally
 

@@ -67,7 +67,7 @@ Detailed reference for all 23 Wizard spells and 6 cantrips under 2024 D&D rules:
 ### System 4: Cow (Mr. Big) Flight Deck (`/familiar/`)
 Dedicated operational dashboard for Joe's Fey familiar:
 * **Canonical Revised Owl Statblock:** AC 11, 1 HP, Speed 5 ft / Fly 60 ft, Darkvision 120 ft, Perception +5, Stealth +5, Passive Perception 15, and no Keen Hearing and Sight trait.
-* **Flyby Touch Delivery Matrix:** Pathing for delivering touch spells without opportunity attacks (approach and exit share 60 ft total movement).
+* **Touch Delivery Sequence:** Cow moves beside the target on its own turn, delivers Joe's touch spell with its Reaction on Joe's turn (no movement during the Reaction), then exits with Flyby on its next turn (60 ft total movement per turn).
 * **Help Action Optimizer:** Guidelines for granting advantage on ally attack rolls with tactical exposure assessment.
 * **Staying Aloft:** Familiar remains airborne without Hover, but falls on Prone, Incapacitated, or 0 speed.
 * **Scouting & Sensory Link:** 100 ft telepathic command range, Bonus Action shared senses (retaining own sight).
