@@ -25,26 +25,26 @@
         <span class="hud-pill-label">Slots</span>
         <div class="hud-slots-cluster">
           <span style="font-size:11px;color:var(--text-muted);">L1</span>
-          <span class="slot-circle slot-toggle-btn" data-level="l1" data-index="0" title="1st Slot"></span>
-          <span class="slot-circle slot-toggle-btn" data-level="l1" data-index="1" title="1st Slot"></span>
-          <span class="slot-circle slot-toggle-btn" data-level="l1" data-index="2" title="1st Slot"></span>
-          <span class="slot-circle slot-toggle-btn" data-level="l1" data-index="3" title="1st Slot"></span>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l1" data-index="0" aria-label="Level 1 slot 1 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l1" data-index="1" aria-label="Level 1 slot 2 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l1" data-index="2" aria-label="Level 1 slot 3 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l1" data-index="3" aria-label="Level 1 slot 4 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
           
           <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">L2</span>
-          <span class="slot-circle slot-toggle-btn" data-level="l2" data-index="0" title="2nd Slot"></span>
-          <span class="slot-circle slot-toggle-btn" data-level="l2" data-index="1" title="2nd Slot"></span>
-          <span class="slot-circle slot-toggle-btn" data-level="l2" data-index="2" title="2nd Slot"></span>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l2" data-index="0" aria-label="Level 2 slot 1 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l2" data-index="1" aria-label="Level 2 slot 2 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l2" data-index="2" aria-label="Level 2 slot 3 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
           
           <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">L3</span>
-          <span class="slot-circle slot-toggle-btn" data-level="l3" data-index="0" title="3rd Slot"></span>
-          <span class="slot-circle slot-toggle-btn" data-level="l3" data-index="1" title="3rd Slot"></span>
-          <span class="slot-circle slot-toggle-btn" data-level="l3" data-index="2" title="3rd Slot"></span>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l3" data-index="0" aria-label="Level 3 slot 1 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l3" data-index="1" aria-label="Level 3 slot 2 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l3" data-index="2" aria-label="Level 3 slot 3 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
           
           <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">L4</span>
-          <span class="slot-circle slot-toggle-btn" data-level="l4" data-index="0" title="4th Slot"></span>
+          <button type="button" class="slot-circle slot-toggle-btn" data-level="l4" data-index="0" aria-label="Level 4 slot 1 used" aria-pressed="false" title="Toggle spell slot used" style="padding:0;"></button>
 
           <span style="font-size:11px;color:#a855f7;margin-left:6px;font-weight:bold;">MI:</span>
-          <span class="slot-circle" id="slot-mi-shield" title="Magic Initiate Free Shield (1/LR)"></span>
+          <button type="button" class="slot-circle" id="slot-mi-shield" aria-label="Magic Initiate Shield used" aria-pressed="false" title="Toggle Magic Initiate Shield used" style="padding:0;"></button>
         </div>
       </div>
 
@@ -61,13 +61,20 @@
 
     <!-- Concentration & Rest Controls -->
     <div class="hud-stat-group">
-      <div class="concentration-hud-pill" id="hud-concentration-btn" title="Click to set or clear active concentration spell">
+      <button type="button" class="concentration-hud-pill" id="hud-concentration-btn" title="Click to set or clear active concentration spell">
         <span>🧠 Concentration:</span> <strong>None</strong>
-      </div>
+      </button>
 
       <button type="button" id="hud-long-rest-btn" class="counter-btn" style="width:auto;padding:6px 14px;font-size:0.85rem;min-height:38px;" title="Reset resources after Long Rest">
         🌙 Long Rest
       </button>
     </div>
+    <div class="hud-stat-group" aria-label="Session backup and recovery">
+      <button type="button" id="hud-export-btn" class="counter-btn" style="width:auto;padding:6px 10px;">Export session</button>
+      <button type="button" id="hud-import-btn" class="counter-btn" style="width:auto;padding:6px 10px;">Import backup</button>
+      <button type="button" id="hud-download-stored-btn" class="counter-btn" style="width:auto;padding:6px 10px;" hidden>Download stored copy</button>
+      <input type="file" id="hud-import-file" accept="application/json,.json" hidden>
+    </div>
+    <p id="hud-save-status" role="status" aria-live="polite" aria-atomic="true" style="flex-basis:100%;font-size:.85rem;">Session storage status will appear here.</p>
   </div>
 </aside>

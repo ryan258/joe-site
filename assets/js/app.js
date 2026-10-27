@@ -27,28 +27,134 @@
     turnPhase: 0 // 0: Start, 1: Movement, 2: Action, 3: Bonus Action, 4: Cow Action
   };
 
-  let state = { ...defaultState };
+  const cloneDefaultState = () => JSON.parse(JSON.stringify(defaultState));
+  let state = cloneDefaultState();
+  let storedRaw = null;
+  let savedProtection = null;
 
-  // Load from LocalStorage
-  function loadState() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        state = { ...defaultState, ...JSON.parse(saved) };
+  function normalizeState(raw) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('Session must be an object.');
+    const next = cloneDefaultState();
+    for (const field of ['hp', 'hpMax', 'tempHp', 'wandCharges', 'wandMax', 'turnPhase']) {
+      if (Object.hasOwn(raw, field)) next[field] = raw[field];
+      if (!Number.isInteger(next[field])) throw new Error(`${field} must be an integer.`);
+    }
+    if (next.hpMax < 1 || next.hpMax > 10000 || next.hp < 0 || next.hp > next.hpMax || next.tempHp < 0 || next.tempHp > 10000) throw new Error('HP is outside the supported range.');
+    if (next.wandMax < 1 || next.wandMax > 100 || next.wandCharges < 0 || next.wandCharges > next.wandMax) throw new Error('Wand charges are outside the supported range.');
+    if (next.turnPhase < 0 || next.turnPhase > 4) throw new Error('Turn phase is invalid.');
+    if (Object.hasOwn(raw, 'acMode')) next.acMode = raw.acMode;
+    if (!['base', 'mage_armor', 'shield', 'full'].includes(next.acMode)) throw new Error('AC mode is invalid.');
+    if (Object.hasOwn(raw, 'concentrationSpell')) next.concentrationSpell = raw.concentrationSpell;
+    if (next.concentrationSpell !== null && (typeof next.concentrationSpell !== 'string' || next.concentrationSpell.length > 200)) throw new Error('Concentration must be text or null.');
+    if (Object.hasOwn(raw, 'slots')) {
+      if (!raw.slots || typeof raw.slots !== 'object' || Array.isArray(raw.slots)) throw new Error('Slots must be an object.');
+      for (const level of ['l1', 'l2', 'l3', 'l4']) {
+        if (!Object.hasOwn(raw.slots, level)) continue;
+        const slots = raw.slots[level];
+        if (!Array.isArray(slots) || slots.length !== defaultState.slots[level].length || slots.some(value => typeof value !== 'boolean')) throw new Error(`${level} slots are invalid.`);
+        next.slots[level] = slots.slice();
       }
-    } catch (e) {
-      console.warn('Could not parse saved state, using defaults.', e);
+      if (Object.hasOwn(raw.slots, 'magic_initiate_shield')) {
+        if (typeof raw.slots.magic_initiate_shield !== 'boolean') throw new Error('Magic Initiate slot is invalid.');
+        next.slots.magic_initiate_shield = raw.slots.magic_initiate_shield;
+      }
+    }
+    return next;
+  }
+
+  function setSaveStatus(message) {
+    const status = document.getElementById('hud-save-status');
+    if (status) status.textContent = message;
+    const storedButton = document.getElementById('hud-download-stored-btn');
+    if (storedButton) storedButton.hidden = storedRaw === null;
+  }
+
+  function loadState() {
+    state = cloneDefaultState();
+    savedProtection = null;
+    try {
+      storedRaw = localStorage.getItem(STORAGE_KEY);
+      if (storedRaw !== null) state = normalizeState(JSON.parse(storedRaw));
+      setSaveStatus(storedRaw === null ? 'New session. Export a backup when you want to keep it elsewhere.' : 'Stored session restored. Export a backup before clearing this browser.');
+    } catch (error) {
+      savedProtection = storedRaw === null ? 'unavailable' : 'recovery';
+      setSaveStatus(savedProtection === 'recovery' ? 'Saved text needs recovery and was kept. This session is temporary; download the stored copy before replacing it.' : 'Browser storage is unavailable. This session is temporary; export a backup to keep it.');
     }
   }
 
-  // Save to LocalStorage
   function saveState() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      renderHud();
-    } catch (e) {
-      console.error('Failed to save HUD state.', e);
+    renderHud();
+    if (savedProtection) {
+      setSaveStatus('Temporary session: stored data needs recovery or storage is unavailable. Export this session to keep it.');
+      return false;
     }
+    try {
+      const raw = JSON.stringify(normalizeState(state));
+      localStorage.setItem(STORAGE_KEY, raw);
+      storedRaw = raw;
+      setSaveStatus('Saved in this browser. Export a backup before clearing browser data.');
+      return true;
+    } catch (error) {
+      setSaveStatus('Not saved: browser storage failed. This HUD still works; export this session to keep changes.');
+      return false;
+    }
+  }
+
+  function validateBackup(raw) {
+    if (raw && Object.hasOwn(raw, 'format')) {
+      if (raw.format !== 'joe-hud-backup' || raw.version !== 1) throw new Error('Unsupported backup format or version.');
+      return normalizeState(raw.state);
+    }
+    if (!raw || typeof raw !== 'object' || !Object.keys(defaultState).some(field => Object.hasOwn(raw, field))) throw new Error('This file does not contain a Joe session.');
+    return normalizeState(raw); // Existing unwrapped session exports remain importable.
+  }
+
+  function serializeBackup() {
+    return JSON.stringify({ format: 'joe-hud-backup', version: 1, exportedAt: new Date().toISOString(), state: normalizeState(state) }, null, 2);
+  }
+
+  function applyImport(raw) {
+    let next;
+    try { next = validateBackup(JSON.parse(raw)); }
+    catch (error) { setSaveStatus(`Backup not imported: ${error.message} Existing session was kept.`); return false; }
+    const encoded = JSON.stringify(next);
+    try { localStorage.setItem(STORAGE_KEY, encoded); }
+    catch (error) { setSaveStatus('Backup not imported: browser storage failed. Existing session was kept.'); return false; }
+    state = next; storedRaw = encoded; savedProtection = null;
+    renderHud(); setSaveStatus('Backup imported and saved in this browser.');
+    return true;
+  }
+
+  function downloadSessionText(raw, name) {
+    const url = URL.createObjectURL(new Blob([raw], { type: 'application/json' }));
+    const link = document.createElement('a'); link.href = url; link.download = name;
+    document.body.appendChild(link);
+    try { link.click(); } finally { link.remove(); URL.revokeObjectURL(url); }
+  }
+
+  function initBackupHandlers() {
+    const exportButton = document.getElementById('hud-export-btn');
+    const storedButton = document.getElementById('hud-download-stored-btn');
+    const importButton = document.getElementById('hud-import-btn');
+    const input = document.getElementById('hud-import-file');
+    if (exportButton) exportButton.addEventListener('click', () => {
+      downloadSessionText(serializeBackup(), 'joe-session-backup.json');
+      setSaveStatus('Backup download started. Keep the file for recovery on another browser.');
+    });
+    if (storedButton) storedButton.addEventListener('click', () => {
+      if (storedRaw !== null) downloadSessionText(storedRaw, 'joe-stored-session-recovery.json');
+    });
+    if (importButton && input) importButton.addEventListener('click', () => input.click());
+    if (input) input.addEventListener('change', async () => {
+      const file = input.files && input.files[0]; input.value = '';
+      if (!file) return;
+      if (file.size > 1024 * 1024) { setSaveStatus('Backup not imported: file is larger than 1 MB.'); return; }
+      try {
+        const raw = await file.text();
+        validateBackup(JSON.parse(raw));
+        if (confirm('Replace this session with the checked backup? Export your current session or stored recovery copy first if you need to keep it.')) applyImport(raw);
+      } catch (error) { setSaveStatus(`Backup not imported: ${error.message} Existing session was kept.`); }
+    });
   }
 
   // Render HUD Elements across the page
@@ -66,7 +172,8 @@
     if (concBtn) {
       if (state.concentrationSpell) {
         concBtn.classList.add('active');
-        concBtn.innerHTML = `<span>🧠 Conc:</span> <strong>${state.concentrationSpell}</strong> <span style="font-size:10px;opacity:0.8;">(Click to Drop)</span>`;
+        concBtn.innerHTML = '<span>🧠 Conc:</span> <strong></strong> <span style="font-size:10px;opacity:0.8;">(Click to Drop)</span>';
+        concBtn.querySelector('strong').textContent = state.concentrationSpell;
       } else {
         concBtn.classList.remove('active');
         concBtn.innerHTML = `<span>🧠 Concentration:</span> <strong>None</strong>`;
@@ -78,6 +185,7 @@
       const level = btn.dataset.level;
       const index = parseInt(btn.dataset.index, 10);
       if (level && !isNaN(index) && state.slots[level]) {
+        btn.setAttribute('aria-pressed', String(!state.slots[level][index]));
         if (state.slots[level][index]) {
           btn.classList.remove('used');
         } else {
@@ -89,12 +197,14 @@
     // Render MI Shield Slot
     const miBtn = document.getElementById('slot-mi-shield');
     if (miBtn) {
+      miBtn.setAttribute('aria-pressed', String(!state.slots.magic_initiate_shield));
       if (state.slots.magic_initiate_shield) {
         miBtn.classList.remove('used');
       } else {
         miBtn.classList.add('used');
       }
     }
+    renderTurnPilot();
   }
 
   // Bind HUD Interactive Handlers
@@ -213,33 +323,24 @@
     }
   ];
 
-  function initTurnPilot() {
-    const stepBtns = document.querySelectorAll('.pilot-step-btn');
-    const adviceTitle = document.getElementById('pilot-phase-title');
-    const adviceBody = document.getElementById('pilot-phase-notes');
-
-    function selectPhase(index) {
-      state.turnPhase = index;
-      stepBtns.forEach((btn, idx) => {
-        if (idx === index) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-      if (adviceTitle && adviceBody && turnPhasesData[index]) {
-        adviceTitle.textContent = turnPhasesData[index].title;
-        adviceBody.innerHTML = turnPhasesData[index].notes;
-      }
-    }
-
-    stepBtns.forEach((btn, idx) => {
-      btn.addEventListener('click', () => selectPhase(idx));
+  function renderTurnPilot() {
+    document.querySelectorAll('.pilot-step-btn').forEach((button, index) => {
+      if (index === state.turnPhase) button.classList.add('active');
+      else button.classList.remove('active');
     });
-
-    if (stepBtns.length > 0) {
-      selectPhase(0);
+    const title = document.getElementById('pilot-phase-title');
+    const notes = document.getElementById('pilot-phase-notes');
+    if (title && notes) {
+      title.textContent = turnPhasesData[state.turnPhase].title;
+      notes.innerHTML = turnPhasesData[state.turnPhase].notes;
     }
+  }
+
+  function initTurnPilot() {
+    document.querySelectorAll('.pilot-step-btn').forEach((button, index) => {
+      button.addEventListener('click', () => { state.turnPhase = index; saveState(); });
+    });
+    renderTurnPilot();
   }
 
   // Filter Engine for Plays Page
@@ -663,11 +764,23 @@
     });
   }
 
+  // Keep document content clear of the fixed dock as controls/status wrap.
+  function initHudLayout() {
+    const dock = document.querySelector('.live-hud-dock');
+    if (!dock) return;
+    const update = () => document.documentElement.style.setProperty('--hud-dock-height', `${Math.ceil(dock.getBoundingClientRect().height)}px`);
+    update();
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(dock);
+    window.addEventListener('resize', update);
+  }
+
   // Initialize all components on DOM ready
   document.addEventListener('DOMContentLoaded', () => {
     loadState();
     renderHud();
     initHudHandlers();
+    initBackupHandlers();
+    initHudLayout();
     initTurnPilot();
     initPlaysFilter();
     initPlayDetailModal();
