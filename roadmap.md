@@ -45,14 +45,24 @@ This document outlines the development lifecycle, delivered capabilities, and fu
 
 ---
 
+### Phase 7: Session Portability, Recovery & Accessibility (Completed)
+- [x] Versioned JSON session backup export and import (`joe-hud-backup` v1) with full schema normalization and boundary validation.
+- [x] Corrupted/malformed storage retention, non-destructive temporary in-memory fallback, and raw stored copy recovery download.
+- [x] Semantic accessible button controls for spell slots and concentration with ARIA state binding (`aria-pressed`, `aria-label`, `aria-live="polite"`).
+- [x] Responsive HUD dock wrapping with dynamic viewport bottom padding compensation (`--hud-dock-height` via `ResizeObserver`).
+- [x] Active Turn Pilot phase persistence across browser sessions and reloads.
+- [x] Native offline test suite (`tests/hud-recovery.test.cjs`) covering 8 state recovery, validation, and sanitization scenarios.
+
+---
+
 ## 🔮 Future Horizons & Enhancements
 
-### Phase 7: Encounter Assistant & Dice Tools
+### Phase 8: Encounter Assistant & Dice Tools
 - [ ] Tabletop dice macro roller for signature plays (*Fireball* `8d6`, *Wand of Magic Missiles* `1d4+1` force, *Toll the Dead* `2d8`/`2d12`).
 - [ ] Spell slot quick-reset presets for Short Rest (Arcane Recovery) and Long Rest.
 - [ ] Combat round elapsed counter with initiative order tracker.
 
-### Phase 8: Offline PWA & Data Portability
+### Phase 9: Progressive Web App & Offline Media
 - [ ] Progressive Web App (PWA) manifest with service worker caching for offline access.
-- [ ] Export/import session state to JSON for post-session archival.
 - [ ] Tabletop PDF cheat-sheet exporter formatted for physical printouts.
+- [ ] Audio cue triggers for high-stakes spell declarations and reaction alerts.

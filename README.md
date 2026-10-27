@@ -14,7 +14,7 @@ Designed specifically for active gameplay at the tabletop—optimizing turn exec
 * **🦉 Cow (Mr. Big) Flight Deck (`/familiar/`):** Fey familiar operating manual detailing Flyby touch spell delivery, Help action timing, 60 ft shared approach/exit movement budget, staying aloft mechanics, and revised 2024 Owl stat block rules.
 * **🔍 Investigation Playbook (`/investigation/`):** Joe’s Four-Step Method distinguishing Search (Perception +3 / Passive 13) from Study (Investigation +10 / Passive 20 display), incorporating skill-based tools (Insight, Survival, Arcana, History) and safe table phrasing.
 * **⚖️ 2024 Rules Arbiter (`/rules/`):** Instant table reference for 2024 rules interactions (One Spell Slot Per Turn constraint, Magic action vs. Utilize, Wand of Magic Missiles 3-charge casting cap and 1d20 destruction risk, Weapon Mastery limitations, Cover rules, Heroic Inspiration rerolls).
-* **📊 Persistent Session HUD:** Client-side local storage tracker for real-time HP, AC states (12/15/17/20), spell slots, wand charges, and active concentration.
+* **📊 Persistent Session HUD:** Client-side local storage tracker for real-time HP, AC states (12/15/17/20), spell slots, wand charges, active concentration, and turn phase—complete with export/import backup validation, corrupted storage recovery, and accessible ARIA reporting.
 
 ---
 
@@ -60,9 +60,11 @@ joe-site/
 ├── data/                 # Static YAML definitions (character stats, actions)
 ├── docs/                 # Architectural specifications & rules arbitration guides
 │   ├── README.md         # Documentation index
-│   └── rules-arbitration.md # 2024 rules-as-written deep dive
+│   ├── rules-arbitration.md # 2024 rules-as-written deep dive
+│   └── session-recovery.md  # Session state, recovery & backup architecture
 ├── layouts/              # Hugo HTML layout templates and partials
 ├── static/               # Generated custom artwork and static assets
+├── tests/                # Automated regression test suites (Node native test runner)
 ├── roadmap.md            # Development roadmap and completed milestones
 ├── spec.md               # Complete architecture & functional specification
 └── README.md             # This file
@@ -91,3 +93,16 @@ This site draws its canonical character statistics, tactical plays, and investig
 * `D&D 5.5e Rules Cheat Sheet.md` — Core numbers and 2024 PHB rulings.
 
 All mechanics adhere strictly to the **2024 D&D 5th Edition Revision (5.5e)** rules as written. For complete arbitration details, refer to [`docs/rules-arbitration.md`](docs/rules-arbitration.md) and [`spec.md`](spec.md).
+
+## Session recovery
+
+The HUD reports whether changes were saved in the browser. Malformed stored text is kept and ordinary
+HUD actions use temporary memory until a checked backup is deliberately imported.
+Use **Download stored copy** to retain the original text, and **Export session** to
+keep current counters and turn phase in a portable, versioned JSON backup (`joe-hud-backup` v1).
+Imports validate their schema before replacement and keep the previous session when storage fails.
+For the complete technical specification, schema details, and error boundaries, see [`docs/session-recovery.md`](docs/session-recovery.md).
+
+Offline synthetic regression command: `node --test tests/hud-recovery.test.cjs`.
+Actual phone/table use, assistive technology, and the backup file round trip still
+require owner review. No campaign or rules approval is implied by these checks.

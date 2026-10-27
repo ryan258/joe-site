@@ -44,10 +44,15 @@ joe-site/
 
 ### System 1: The Combat Cockpit & Turn Pilot (`/`)
 A live turn-by-turn workflow designed to execute Joe's turn in under 30 seconds.
-* **Active Turn Phase Bar:** Step-through tracker for **Start of Turn -> Movement -> Action -> Bonus Action -> Cow Action**.
+* **Active Turn Phase Bar:** Step-through tracker for **Start of Turn -> Movement -> Action -> Bonus Action -> Cow Action** with session-persisted active phase.
 * **Reaction Radar:** Real-time triggers for *Shield* (AC jumps to 17/20), *Counterspell* (60 ft, casting a spell), and Opportunity Attacks.
-* **Concentration Guardian:** Persistent visual indicator of current concentration spell (e.g., *Web*, *Fly*).
-* **Live Session Resource HUD:** HP Tracker, AC State Matrix, Spell Slot Trackers, Wand of Magic Missiles Counter (with 1d20 destruction warning on charge 7), and Arcane Recovery Tracker.
+* **Concentration Guardian:** Persistent visual indicator of current concentration spell (e.g., *Web*, *Fly*) with script-safe text sanitization.
+* **Live Session Resource HUD & Dock:**
+  * HP Tracker, AC State Matrix, Wand of Magic Missiles Counter (with 1d20 destruction warning on charge 7), and Arcane Recovery Tracker.
+  * Semantic, accessible spell slot toggles with `aria-pressed` states and descriptive `aria-label` tags.
+  * Resilient persistence with schema validation (`normalizeState`) and corrupted `localStorage` retention (`savedProtection = 'recovery'`).
+  * Manual recovery pipeline: "Download stored copy" to save corrupted raw bytes, and "Export session" / "Import backup" via versioned JSON schema (`joe-hud-backup` v1).
+  * Polite live status region (`#hud-save-status`) and dynamic bottom viewport padding compensation (`ResizeObserver` updating `--hud-dock-height`).
 
 ### System 2: Tactical Plays Engine (`/plays/`)
 An indexed database of all 250 canonical plays generated from `joes-greatest-hits.md` and `mr-bigs-greatest-hits.md`:
@@ -108,4 +113,6 @@ Instant table dispute settler for 2024 D&D rules:
 | **Search Speed** | **Complete** | Instant filtering across all 250 plays and 29 spells in `< 50ms`. |
 | **Rules Accuracy** | **Complete** | 100% compliant with 2024 PHB rules-as-written and canonical files in `../joe`. |
 | **State Persistence** | **Complete** | Session tracker persists HP, spell slots, wand charges, and concentration in `localStorage`. |
+| **Session Recovery & Portability** | **Complete** | Full schema validation (`normalizeState`), corrupted data protection (`savedProtection`), versioned JSON export/import (`joe-hud-backup` v1), and 8/8 regression tests in `tests/hud-recovery.test.cjs`. |
+| **HUD Accessibility & Ergonomics** | **Complete** | Semantic `<button>` controls with `aria-pressed` / `aria-label`, polite live region save status, and dynamic bottom padding calculation preventing dock occlusion. |
 | **Offline Capability** | **Complete** | Fully functional offline without external network dependencies. |
